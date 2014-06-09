@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Essential theme with the underlying Bootstrap theme.
+ * UT Essential theme with the underlying Bootstrap theme.
  *
  * @package    theme
- * @subpackage Essential
+ * @subpackage UT Essential
  * @author     Julian (@moodleman) Ridden
  * @author     Based on code originally written by G J Barnard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
- class theme_essential_core_renderer extends theme_bootstrapbase_core_renderer {
+ class theme_utessential_core_renderer extends theme_bootstrapbase_core_renderer {
  	
  	/*
      * This renders a notification message.
@@ -49,6 +49,40 @@
         return "<div class=\"$type\">$message</div>";
     } 
     
+    /*
+     * This renders the navbar.
+     * Uses bootstrap compatible html.
+     */
+    public function navbar() {
+        global $COURSE;
+        $items = $this->page->navbar->get_items();
+        $breadcrumbs = array();
+        foreach ($items as $item) {
+            //22.10.2012 - changing logic of navbar
+            $titles_arr = array('Osalemiskontroll', 'General', 'Kursuse üldosa');
+            $keys_arr = array('mycourses', 'courses');
+
+            if ($item->action === null) {
+                continue;
+            }            
+            if ($item->title === '') {
+                continue;
+            }
+            if (in_array($item->title, $titles_arr)) {
+                continue;
+            }
+            if (in_array($item->key, $keys_arr)) {
+                continue;
+            }
+            $item->hideicon = true;
+            $breadcrumbs[] = $this->render($item);
+        }
+        $divider = '<span class="divider">'.get_separator().'</span>';
+        $list_items = '<li>'.join(" $divider</li><li>", $breadcrumbs).'</li>';
+        $title = '<span class="accesshide">'.get_string('pagepath').'</span>';
+        return $title . "<ul class=\"breadcrumb\">$list_items</ul>";
+    }
+    
     /**
      * Outputs the page's footer
      * @return string HTML fragment
@@ -72,7 +106,7 @@
                 error_log("PERF: " . $perf['txt']);
             }
             if (defined('MDL_PERFTOFOOT') || debugging() || $CFG->perfdebug > 7) {
-                $performanceinfo = essential_performance_output($perf);
+                $performanceinfo = utessential_performance_output($perf);
             }
         }
 
@@ -90,6 +124,7 @@
     }
 		
     protected function render_custom_menu(custom_menu $menu) {
+        global $USER, $CFG;
     	/*
     	* This code replaces adds the current enrolled
     	* courses to the custommenu.
@@ -99,13 +134,13 @@
         if (isloggedin() && !isguestuser() && $hasdisplaymycourses) {
         	$mycoursetitle = $this->page->theme->settings->mycoursetitle;
             if ($mycoursetitle == 'module') {
-				$branchtitle = get_string('mymodules', 'theme_essential');
+				$branchtitle = get_string('mymodules', 'theme_utessential');
 			} else if ($mycoursetitle == 'unit') {
-				$branchtitle = get_string('myunits', 'theme_essential');
+				$branchtitle = get_string('myunits', 'theme_utessential');
 			} else if ($mycoursetitle == 'class') {
-				$branchtitle = get_string('myclasses', 'theme_essential');
+				$branchtitle = get_string('myclasses', 'theme_utessential');
 			} else {
-				$branchtitle = get_string('mycourses', 'theme_essential');
+				$branchtitle = get_string('mycourses', 'theme_utessential');
 			}
 			$branchlabel = '<i class="fa fa-briefcase"></i>'.$branchtitle;
             $branchurl   = new moodle_url('/my/index.php');
@@ -119,7 +154,7 @@
  					}
  				}
  			} else {
-                $noenrolments = get_string('noenrolments', 'theme_essential');
+                $noenrolments = get_string('noenrolments', 'theme_utessential');
  				$branch->add('<em>'.$noenrolments.'</em>', new moodle_url('/'), $noenrolments);
  			}
             
@@ -131,9 +166,9 @@
     	*/
         $hasdisplaymydashboard = (empty($this->page->theme->settings->displaymydashboard)) ? false : $this->page->theme->settings->displaymydashboard;
         if (isloggedin() && !isguestuser() && $hasdisplaymydashboard) {
-            $branchlabel = '<i class="fa fa-dashboard"></i>'.get_string('mydashboard', 'theme_essential');
+            $branchlabel = '<i class="fa fa-dashboard"></i>'.get_string('mydashboard', 'theme_utessential');
             $branchurl   = new moodle_url('/my/index.php');
-            $branchtitle = get_string('mydashboard', 'theme_essential');
+            $branchtitle = get_string('mydashboard', 'theme_utessential');
             $branchsort  = 10000;
  
             $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
@@ -156,28 +191,62 @@
                 }
             }
             if (!empty($alternativethemes)) {
-                $branchtitle = get_string('themecolors', 'theme_essential');
+                $branchtitle = get_string('themecolors', 'theme_utessential');
                 $branchlabel = '<i class="fa fa-th-large"></i>' . $branchtitle;
                 $branchurl   = new moodle_url('/my/index.php');
                 $branchsort  = 11000;
                 $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
                 
-                $defaultthemecolorslabel = get_string('defaultcolors', 'theme_essential');
+                $defaultthemecolorslabel = get_string('defaultcolors', 'theme_utessential');
                 $branch->add('<i class="fa fa-square colours-default"></i>' . $defaultthemecolorslabel,
-                        new moodle_url($this->page->url, array('essentialcolours' => 'default')), $defaultthemecolorslabel);
+                        new moodle_url($this->page->url, array('utessentialcolours' => 'default')), $defaultthemecolorslabel);
                 foreach ($alternativethemes as $alternativethemenumber) {
                     if (!empty($this->page->theme->settings->{'alternativethemename' . $alternativethemenumber})) {
                         $alternativethemeslabel = $this->page->theme->settings->{'alternativethemename' . $alternativethemenumber};
                     } else {
-                        $alternativethemeslabel = get_string('alternativecolors', 'theme_essential', $alternativethemenumber);
+                        $alternativethemeslabel = get_string('alternativecolors', 'theme_utessential', $alternativethemenumber);
                     }
                     $branch->add('<i class="fa fa-square colours-alternative' .  $alternativethemenumber . '"></i>' . $alternativethemeslabel,
-                            new moodle_url($this->page->url, array('essentialcolours' => 'alternative' . $alternativethemenumber)), $alternativethemeslabel);
+                            new moodle_url($this->page->url, array('utessentialcolours' => 'alternative' . $alternativethemenumber)), $alternativethemeslabel);
                 }
             }
         }
  
-        return parent::render_custom_menu($menu);
+         // TODO: eliminate this duplicated logic, it belongs in core, not
+        // here. See MDL-39565.
+        $addlangmenu = true;
+        $langs = get_string_manager()->get_list_of_translations();
+        if (count($langs) < 2
+            or empty($CFG->langmenu)
+            or ($this->page->course != SITEID and !empty($this->page->course->lang))) {
+            $addlangmenu = false;
+        }
+
+        if (!$menu->has_children() && $addlangmenu === false) {
+            return '';
+        }
+
+        if ($addlangmenu) {
+            $strlang =  get_string('language');
+            $currentlang = current_language();
+            if (isset($langs[$currentlang])) {
+                $currentlang = $langs[$currentlang];
+            } else {
+                $currentlang = $strlang;
+            }
+            $currentlang = '<i class="fa fa-flag"></i>'.$currentlang;
+            $this->language = $menu->add($currentlang, new moodle_url('#'), $strlang, 10000);
+            foreach ($langs as $langtype => $langname) {
+                $this->language->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
+            }
+        }
+
+        $content = '<ul class="nav">';
+        foreach ($menu->get_children() as $item) {
+            $content .= $this->render_custom_menu_item($item, 1);
+        }
+
+        return $content.'</ul>';
     }
     
  	/*
@@ -241,7 +310,7 @@
     * Written by G J Barnard
     */
     
-    public function essentialblocks($region, $classes = array(), $tag = 'aside') {
+    public function utessentialblocks($region, $classes = array(), $tag = 'aside') {
         $classes = (array)$classes;
         $classes[] = 'block-region';
         $attributes = array(
@@ -277,12 +346,87 @@
         return html_writer::tag('a', html_writer::start_tag('i', array('class' => $icon.' fa fa-fw')).
                html_writer::end_tag('i'), array('href' => $url, 'class' => 'btn '.$btn, 'title' => $title));
     }
+
+    /**
+     * Internal implementation of user image rendering.
+     *
+     * @param user_picture $userpicture
+     * @return string
+     */
+    protected function render_user_picture(user_picture $userpicture) {
+        global $CFG, $DB, $OUTPUT;
+
+        $user = $userpicture->user;
+
+        if ($userpicture->alttext) {
+            if (!empty($user->imagealt)) {
+                $alt = $user->imagealt;
+            } else {
+                $alt = get_string('pictureof', '', fullname($user));
+            }
+        } else {
+            $alt = '';
+        }
+
+        if (empty($userpicture->size)) {
+            $size = 35;
+        } else if ($userpicture->size === true or $userpicture->size == 1) {
+            $size = 100;
+        } else {
+            $size = $userpicture->size;
+        }
+
+        $class = $userpicture->class;
+
+        if ($user->picture == 0) {
+            $class .= ' defaultuserpic';
+        }
+
+        $src = $userpicture->get_url($this->page, $this);
+        //dont show images in development
+        if ($CFG->wwwroot == 'https://moodle2.ut.ee') {
+            $src = $OUTPUT->pix_url('f1', 'theme');            
+        } else {
+            $src = $userpicture->get_url($this->page, $this);
+        }
+        $attributes = array('src'=>$src, 'alt'=>$alt, 'title'=>$alt, 'class'=>$class, 'width'=>$size, 'height'=>$size);
+
+        // get the image html output fisrt
+        $output = html_writer::empty_tag('img', $attributes);
+
+        // then wrap it in link if needed
+        if (!$userpicture->link) {
+            return $output;
+        }
+
+        if (empty($userpicture->courseid)) {
+            $courseid = $this->page->course->id;
+        } else {
+            $courseid = $userpicture->courseid;
+        }
+
+        if ($courseid == SITEID) {
+            $url = new moodle_url('/user/profile.php', array('id' => $user->id));
+        } else {
+            $url = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $courseid));
+        }
+
+        $attributes = array('href'=>$url);
+
+        if ($userpicture->popup) {
+            $id = html_writer::random_id('userpicture');
+            $attributes['id'] = $id;
+            $this->add_action_handler(new popup_action('click', $url), $id);
+        }
+
+        return html_writer::tag('a', $output, $attributes);
+    }
 }
 
-
+/* Topics renderer */
 include_once($CFG->dirroot . "/course/format/topics/renderer.php");
  
-class theme_essential_format_topics_renderer extends format_topics_renderer {
+class theme_utessential_format_topics_renderer extends format_topics_renderer {
     
     protected function get_nav_links($course, $sections, $sectionno) {
         // FIXME: This is really evil and should by using the navigation API.
@@ -305,7 +449,7 @@ class theme_essential_format_topics_renderer extends format_topics_renderer {
                 $previouslink .= html_writer::end_tag('div');
                 $previouslink .= html_writer::start_tag('span', array('class' => 'text'));
                 $previouslink .= html_writer::start_tag('span', array('class' => 'nav_guide'));
-                $previouslink .= get_string('previoussection', 'theme_essential');
+                $previouslink .= get_string('previoussection', 'theme_utessential');
                 $previouslink .= html_writer::end_tag('span');
                 $previouslink .= html_writer::empty_tag('br');
                 $previouslink .= get_section_name($course, $sections[$back]);
@@ -327,7 +471,7 @@ class theme_essential_format_topics_renderer extends format_topics_renderer {
                 $nextlink .= html_writer::end_tag('div');
                 $nextlink .= html_writer::start_tag('span', array('class' => 'text'));
                 $nextlink .= html_writer::start_tag('span', array('class' => 'nav_guide'));
-                $nextlink .= get_string('nextsection', 'theme_essential');
+                $nextlink .= get_string('nextsection', 'theme_utessential');
                 $nextlink .= html_writer::end_tag('span');
                 $nextlink .= html_writer::empty_tag('br');
                 $nextlink .= get_section_name($course, $sections[$forward]);
@@ -420,5 +564,105 @@ class theme_essential_format_topics_renderer extends format_topics_renderer {
         // Close single-section div.
         echo html_writer::end_tag('div');
     }
+}
 
+//Require course renderer
+require_once($CFG->dirroot . '/course/renderer.php');
+
+class theme_utessential_core_course_renderer extends core_course_renderer {
+    /**
+     * Renders html to display a name with the link to the course module on a course page
+     *
+     * If module is unavailable for user but still needs to be displayed
+     * in the list, just the name is returned without a link
+     *
+     * Note, that for course modules that never have separate pages (i.e. labels)
+     * this function return an empty string
+     *
+     * @param cm_info $mod
+     * @param array $displayoptions
+     * @return string
+     */
+    public function course_section_cm_name(cm_info $mod, $displayoptions = array()) {
+        global $CFG;
+        $output = '';
+        if (!$mod->uservisible &&
+                (empty($mod->showavailability) || empty($mod->availableinfo))) {
+            // nothing to be displayed to the user
+            return $output;
+        }
+        $url = $mod->url;
+        if (!$url) {
+            return $output;
+        }
+
+        //Accessibility: for files get description via icon, this is very ugly hack!
+        $instancename = $mod->get_formatted_name();
+        $altname = $mod->modfullname;
+        // Avoid unnecessary duplication: if e.g. a forum name already
+        // includes the word forum (or Forum, etc) then it is unhelpful
+        // to include that in the accessible description that is added.
+        if (false !== strpos(textlib::strtolower($instancename),
+                textlib::strtolower($altname))) {
+            $altname = '';
+        }
+        // File type after name, for alphabetic lists (screen reader).
+        if ($altname) {
+            $altname = get_accesshide(' '.$altname);
+        }
+
+        // For items which are hidden but available to current user
+        // ($mod->uservisible), we show those as dimmed only if the user has
+        // viewhiddenactivities, so that teachers see 'items which might not
+        // be available to some students' dimmed but students do not see 'item
+        // which is actually available to current student' dimmed.
+        $linkclasses = '';
+        $accesstext = '';
+        $textclasses = '';
+        if ($mod->uservisible) {
+            $conditionalhidden = $this->is_cm_conditionally_hidden($mod);
+            $accessiblebutdim = (!$mod->visible || $conditionalhidden) &&
+                has_capability('moodle/course:viewhiddenactivities',
+                        context_course::instance($mod->course));
+            if ($accessiblebutdim) {
+                $linkclasses .= ' dimmed';
+                $textclasses .= ' dimmed_text';
+                if ($conditionalhidden) {
+                    $linkclasses .= ' conditionalhidden';
+                    $textclasses .= ' conditionalhidden';
+                }
+                // Show accessibility note only if user can access the module himself.
+                $accesstext = get_accesshide(get_string('hiddenfromstudents').':'. $mod->modfullname);
+            }
+        } else {
+            $linkclasses .= ' dimmed';
+            $textclasses .= ' dimmed_text';
+        }
+
+        // Get on-click attribute value if specified and decode the onclick - it
+        // has already been encoded for display (puke).
+        $onclick = htmlspecialchars_decode($mod->onclick, ENT_QUOTES);
+
+        $groupinglabel = '';
+        if (!empty($mod->groupingid) && has_capability('moodle/course:managegroups', context_course::instance($mod->course))) {
+            $groupings = groups_get_all_groupings($mod->course);
+            $groupinglabel = html_writer::tag('span', '('.format_string($groupings[$mod->groupingid]->name).')',
+                    array('class' => 'groupinglabel '.$textclasses));
+        }
+
+        // Display link itself.
+        $activitylink = html_writer::empty_tag('img', array('src' => $mod->get_icon_url(),
+                'class' => 'icon activityicon', 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
+                html_writer::tag('span', $instancename . $altname, array('class' => 'instancename'));
+        if ($mod->uservisible) {
+            $output .= html_writer::link($url, $activitylink, array('class' => $linkclasses, 'onclick' => $onclick)) .
+                    $groupinglabel;
+        } else {
+            // We may be displaying this just in order to show information
+            // about visibility, without the actual link ($mod->uservisible)
+            $output .= html_writer::tag('div', $activitylink, array('class' => $textclasses)) .
+                    $groupinglabel;
+        }
+        return $output;
+    }
 }

@@ -1,0 +1,158 @@
+.path-grade-report-grader .graderreportoverlay,
+.path-grade-report-quickgrader .graderreportoverlay {
+    background-color:#fafafa;
+    border:1px solid #ddd;
+    font-size:92%;
+    padding:5px;
+}
+.path-grade-edit .action-icon,.commands a {
+    margin:0 2px;
+}
+#page-grade-grading-manage .definition-preview {
+    width:97%;
+}
+#headingtable, #usercoltable, #userstable {
+    margin-bottom:0px;
+}
+/* Gradebook general styles */
+table#user-grades {
+    border-color:#ddd;
+    border-width:0px;
+}
+table.flexible th, 
+.generaltable th, 
+table.flexible td, .generaltable td {
+    border-left:0px solid #ddd;
+}
+table#user-grades th.item,
+table#user-grades th.categoryitem,
+table#user-grades th.courseitem {
+   border-color:#ddd; 
+}
+table.flexible, .generaltable {
+    border:0px solid #ddd;
+}
+/* Grade edit tree */
+.grade-edit-tree .gradetreebox {
+    overflow:auto;
+    max-height:500px;
+}
+.tabtree .tabrow0 .here a, .tabtree .tabrow0 .here a:hover {
+    background: none repeat scroll 0 0 #FAFAFA;
+}
+.tabtree .tabrow0 .tabrow1 {
+    margin-top:2px;
+}
+.gradetreebox {
+    border:0px solid #ddd;
+}
+.path-grade-edit-tree table.simple {
+    width:100%;
+}
+.path-grade-edit-tree .gradetreebox .simple td.name {
+    width:400px;
+    white-space:normal;
+}
+/* grade report */
+.path-grade-report .nav-tabs>li>a:hover {
+    cursor:pointer;
+    background-color: #2467B4;
+    color:#fff;
+}
+.path-grade-report table.generaltable tr.heading_name_row th a img,
+.path-grade-report table.generaltable tr.heading_name_row th img {
+    max-width:none;
+}
+.path-grade-report table.generaltable tr.heading_name_row th a img.sorticon {
+    padding-left:5px;
+}
+/* Report grader */
+.path-grade-report-grader .right_scroller {
+    overflow-x: auto;
+}
+.path-grade-report-grader .left_scroller #fixed_column th {
+    height: 0;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.path-grade-report-grader .left_scroller {
+     width:280px;
+}
+.path-grade-report-grader div.left_scroller tr, 
+.path-grade-report-grader div.right_scroller tr, 
+.path-grade-report-grader div.left_scroller td, 
+.path-grade-report-grader div.right_scroller td, 
+.path-grade-report-grader div.left_scroller th, 
+.path-grade-report-grader div.right_scroller th {
+    height:5em;
+}
+.path-grade-report-grader .right_scroller table#user-grades td.grade {
+    height:0;
+    border-right:1px solid #ddd;
+}
+.path-grade-report-grader .left_scroller #fixed_column th.user {
+    padding-left:5px;
+    border-left:1px solid #ddd;
+}
+.path-grade-report-grader .left_scroller #fixed_column th.userreport {
+    text-align:center;
+    border-right:1px solid #ddd;
+}
+.path-grade-report-grader table#user-grades tr.avg td.cell {
+    border-right:1px solid #ddd;
+}
+.path-grade-report-grader table#user-grades th.category, 
+.path-grade-report-grader table#user-grades th#studentheader, 
+.path-grade-report-grader table#user-grades th.user {
+    border-right:1px solid #ddd;
+}
+.path-grade-report-grader .left_scroller #fixed_column th#studentheader {
+    height:50px;
+}
+.path-grade-report-grader table#fixed_column td.topleft {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+/* Report quickgrader */
+.path-grade-report-quickgrader table#fixed_column th.range {
+    border-top:0px solid #ddd;
+}
+.path-grade-report-quickgrader table tr.avg td.cell,
+table#user-grades td.controls, 
+.path-grade-report-quickgrader table tr.avg, 
+.path-grade-report-quickgrader table tr.avg td, 
+.path-grade-report-quickgrader table tr.avg th {
+    border-right:1px solid #ddd;
+}
+table#user-grades th.categoryitem, table#user-grades th.courseitem, 
+.path-grade-report-quickgrader table td.topleft {
+    border-color:#ddd;
+}
+.path-grade-report-quickgrader table#fixed_column th#studentheader {
+    border-top:0px solid #eee;
+}
+.path-grade-report-quickgrader .uscroller,
+.path-grade-report-quickgrader .hscroller {
+    max-width:1010px !important;
+}
+
+/* User grade view */
+.user-grade {
+    border: 1px solid #ddd;
+}
+.user-grade td.baggt, .user-grade th.baggt {
+    border-top: 3px double #ddd;
+}
+.user-grade td.b1l, .user-grade td.b2l, .user-grade th.b1l, .user-grade th.b2l,
+.user-grade td.b1b, .user-grade td.b2b, .user-grade th.b1b, .user-grade th.b2b {
+    border-left: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+}
+.user-grade thead {
+    border-bottom: 3px double #ddd;
+}
+.user-grade td.item, .user-grade th.item {
+    border-right: 1px solid #ddd;
+}

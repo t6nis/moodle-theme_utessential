@@ -19,23 +19,23 @@
  * Moodle's new Bootstrap theme engine
  *
  *
- * @package   theme_essential
+ * @package   theme_utessential
  * @copyright 2013 Julian Ridden
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /* Core */
-$string['configtitle'] = 'Essential';
-$string['pluginname'] = 'Essential';
+$string['configtitle'] = 'UT Essential';
+$string['pluginname'] = 'UT Essential';
 $string['choosereadme'] = '
 <div class="clearfix">
 <div class="well">
-<h2>Essential</h2>
-<p><img class=img-polaroid src="essential/pix/screenshot.jpg" /></p>
+<h2>UT Essential</h2>
+<p><img class=img-polaroid src="utessential/pix/screenshot.jpg" /></p>
 </div>
 <div class="well">
-<h3>About Essential</h3>
-<p>Essential is a modified Moodle bootstrap theme which inherits styles and renderers from its parent theme.</p>
+<h3>About UT Essential</h3>
+<p>UT Essential is a modified Moodle bootstrap theme which inherits styles and renderers from its parent theme.</p>
 <h3>Parents</h3>
 <p>This theme is based upon the Bootstrap theme, which was created for Moodle 2.5, with the help of:<br>
 Stuart Lamour, Mark Aberdour, Paul Hibbitts, Mary Evans.</p>
@@ -247,6 +247,7 @@ $string['slide1'] = 'Slide One';
 $string['slide2'] = 'Slide Two';
 $string['slide3'] = 'Slide Three';
 $string['slide4'] = 'Slide Four';
+$string['slide5'] = 'Slide Five';
 
 $string['slidetitle'] = 'Slide Title';
 $string['slidetitledesc'] = 'Enter a descriptive title for your slide';
@@ -323,6 +324,9 @@ $string['instagramdesc'] = 'Enter the URL of your Instagram page. (i.e http://in
 
 $string['website'] = 'Website URL';
 $string['websitedesc'] = 'Enter the URL of your own website. (i.e http://www.pukunui.com)';
+
+$string['sm'] = 'Social Media URL';
+$string['smdesc'] = 'Enter the URL of your Social Media page. (i.e http://social.ut.ee)';
 
 /* Category Icons */
 $string['categoryiconheading'] = 'Icon based Category Display';

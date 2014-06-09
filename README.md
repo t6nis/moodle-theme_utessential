@@ -58,7 +58,7 @@ Cool things to know about the theme.
  - New Frontpage Slideshow settings to allow to display; all the time, only before login, only after login or never.
  - New Marketing Spots settings to allow to display; all the time, only before login, only after login or never.
  - Course Labels are no longer in bold by default
- - Now has a companion Mahara ePorfolio theme so you can keep them looking alike - https://github.com/moodleman/mahara-theme_essential
+ - Now has a companion Mahara ePorfolio theme so you can keep them looking alike - https://github.com/moodleman/mahara-theme_utessential
  - Further minor bug fixes and tidy up.
    
  New in 2.5.4
@@ -120,6 +120,6 @@ If you would like to see it in action, head to this year's iMoot site at [http:/
 Documentation
 =============
 
-As always, documentation is a work in progress. Availbale documentation is available at http://docs.moodle.org/25/en/Essential_theme
+As always, documentation is a work in progress. Availbale documentation is available at http://docs.moodle.org/25/en/utessential_theme
 
 If you have questions you can post them in the official discussion moodle.org forum at https://moodle.org/mod/forum/discuss.php?d=231970

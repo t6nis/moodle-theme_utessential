@@ -19,7 +19,7 @@
  * Moodle's new Bootstrap theme engine
  *
  *
- * @package   theme_essential
+ * @package   theme_utessential
  * @copyright 2013 Julian Ridden
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,6 +31,7 @@ $haslinkedin    = (empty($PAGE->theme->settings->linkedin)) ? false : $PAGE->the
 $hasyoutube     = (empty($PAGE->theme->settings->youtube)) ? false : $PAGE->theme->settings->youtube;
 $hasflickr      = (empty($PAGE->theme->settings->flickr)) ? false : $PAGE->theme->settings->flickr;
 $hasvk          = (empty($PAGE->theme->settings->vk)) ? false : $PAGE->theme->settings->vk;
+$hassm          = (empty($PAGE->theme->settings->sm)) ? false : $PAGE->theme->settings->sm;
 $haspinterest   = (empty($PAGE->theme->settings->pinterest)) ? false : $PAGE->theme->settings->pinterest;
 $hasinstagram   = (empty($PAGE->theme->settings->instagram)) ? false : $PAGE->theme->settings->instagram;
 $hasskype       = (empty($PAGE->theme->settings->skype)) ? false : $PAGE->theme->settings->skype;
@@ -56,7 +57,7 @@ if (!empty($_SERVER['HTTP_USER_AGENT'])) {
 <?php
 // Check if IE7 browser and display message
 if (strpos($checkuseragent, 'MSIE 7')) {
-	echo get_string('ie7message', 'theme_essential');
+	echo get_string('ie7message', 'theme_utessential');
 }?>
 
 <?php
@@ -96,12 +97,9 @@ if (strpos($checkuseragent, 'MSIE 8') || strpos($checkuseragent, 'MSIE 7')) {?>
         </div>
         <?php if (isloggedin() && $hasheaderprofilepic) { ?>
         <div class="span1 pull-right" id="profilepic">
-            <p id="socialheading"><?php echo $USER->firstname; ?></p>
             <ul class="socials unstyled">
                 <li>
-                    <a href="<?php echo $CFG->wwwroot.'/user/profile.php?id='.$USER->id; ?>">
-                        <?php echo $OUTPUT->user_picture($USER); ?>
-                    </a>
+                    <?php echo $OUTPUT->user_picture($USER, array('size' => '60')); ?>
                 </li>
             </ul>            
 
@@ -113,7 +111,6 @@ if (strpos($checkuseragent, 'MSIE 8') || strpos($checkuseragent, 'MSIE 7')) {?>
         if ($hassocialnetworks) {
         ?>
         <div class="span3 pull-right">
-        <p id="socialheading"><?php echo get_string('socialnetworks','theme_essential')?></p>
             <ul class="socials unstyled">
                 <?php if ($hasgoogleplus) { ?>
                 <li>
@@ -171,6 +168,14 @@ if (strpos($checkuseragent, 'MSIE 8') || strpos($checkuseragent, 'MSIE 7')) {?>
                     </button>
                 </li>
                 <?php } ?>
+                <?php if ($hassm) { ?>
+                <li>
+                    <button type="button" ONCLICK="window.location.href='<?php echo $hassm; ?>'" class="socialicon sm">
+                        <i class="fa fa-sm fa-inverse"></i>
+                        <span class="sr-only">Social Media</span>
+                    </button>
+                </li>
+                <?php } ?>
                 <?php if ($hasinstagram) { ?>
                 <li>
                     <button type="button" ONCLICK="window.location.href='<?php echo $hasinstagram; ?>'" class="socialicon instagram">
@@ -212,7 +217,7 @@ if (strpos($checkuseragent, 'MSIE 8') || strpos($checkuseragent, 'MSIE 7')) {?>
         if ($hasmobileapps) {
         ?>
         <div class="span2 pull-right">
-        <p id="socialheading"><?php echo get_string('mobileappsheading','theme_essential')?></p>
+        <p id="socialheading"><?php echo get_string('mobileappsheading','theme_utessential')?></p>
             <ul class="socials unstyled">
                 <?php if ($hasios) { ?>
                 <li>

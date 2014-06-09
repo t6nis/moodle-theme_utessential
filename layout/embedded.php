@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-theme_essential_check_colours_switch();
-theme_essential_initialise_colourswitcher($PAGE);
+theme_utessential_check_colours_switch();
+theme_utessential_initialise_colourswitcher($PAGE);
 
 $bodyclasses = array();
-$bodyclasses[] = 'essential-colours-' . theme_essential_get_colours();
+$bodyclasses[] = 'utessential-colours-' . theme_utessential_get_colours();
  
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>

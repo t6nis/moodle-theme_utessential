@@ -19,7 +19,7 @@
  * Moodle's new Bootstrap theme engine
  *
  *
- * @package   theme_essential
+ * @package   theme_utessential
  * @copyright 2013 Julian Ridden
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,117 +28,118 @@ $settings = null;
 defined('MOODLE_INTERNAL') || die;
 
 
-	$ADMIN->add('themes', new admin_category('theme_essential', 'Essential'));
+	$ADMIN->add('themes', new admin_category('theme_utessential', 'UT Essential'));
 
 	// "geneicsettings" settingpage
-	$temp = new admin_settingpage('theme_essential_generic',  get_string('geneicsettings', 'theme_essential'));
+	$temp = new admin_settingpage('theme_utessential_generic',  get_string('geneicsettings', 'theme_utessential'));
 	
 	// Default Site icon setting.
-    $name = 'theme_essential/siteicon';
-    $title = get_string('siteicon', 'theme_essential');
-    $description = get_string('siteicondesc', 'theme_essential');
+    $name = 'theme_utessential/siteicon';
+    $title = get_string('siteicon', 'theme_utessential');
+    $description = get_string('siteicondesc', 'theme_utessential');
     $default = 'laptop';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $temp->add($setting);
     
     // Include Awesome Font from Bootstrapcdn
-    $name = 'theme_essential/bootstrapcdn';
-    $title = get_string('bootstrapcdn', 'theme_essential');
-    $description = get_string('bootstrapcdndesc', 'theme_essential');
+    $name = 'theme_utessential/bootstrapcdn';
+    $title = get_string('bootstrapcdn', 'theme_utessential');
+    $description = get_string('bootstrapcdndesc', 'theme_utessential');
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 	
     // Logo file setting.
-    $name = 'theme_essential/logo';
-    $title = get_string('logo', 'theme_essential');
-    $description = get_string('logodesc', 'theme_essential');
+    $name = 'theme_utessential/logo';
+    $title = get_string('logo', 'theme_utessential');
+    $description = get_string('logodesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'logo');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Font Selector.
-    $name = 'theme_essential/fontselect';
-    $title = get_string('fontselect' , 'theme_essential');
-    $description = get_string('fontselectdesc', 'theme_essential');
+    $name = 'theme_utessential/fontselect';
+    $title = get_string('fontselect' , 'theme_utessential');
+    $description = get_string('fontselectdesc', 'theme_utessential');
     $default = '1';
     $choices = array(
-    	'1'=>'Oswald & PT Sans', 
-    	'2'=>'Lobster & Cabin', 
-    	'3'=>'Raleway & Goudy', 
-    	'4'=>'Allerta & Crimson Text', 
-    	'5'=>'Arvo & PT Sans',
-    	'6'=>'Dancing Script & Josefin Sans',
-    	'7'=>'Allan & Cardo',
-    	'8'=>'Molengo & Lekton',
-    	'9'=>'Droid Serif & Droid Sans',
-    	'10'=>'Corbin & Nobile',
-    	'11'=>'Ubuntu & Vollkorn',
-    	'12'=>'Bree Serif & Open Sans', 
-    	'13'=>'Bevan & Pontano Sans', 
-    	'14'=>'Abril Fatface & Average', 
-    	'15'=>'Playfair Display and Muli', 
-    	'16'=>'Sansita One & Kameron',
-    	'17'=>'Istok Web & Lora',
-    	'18'=>'Pacifico & Arimo',
-    	'19'=>'Nixie One & Ledger',
-    	'20'=>'Cantata One & Imprima',
-    	'21'=>'Rancho & Gudea',
-    	'22'=>'DISABLE Google Fonts');
+        '1'=>'Open Sans',
+    	'2'=>'Oswald & PT Sans', 
+    	'3'=>'Lobster & Cabin', 
+    	'4'=>'Raleway & Goudy', 
+    	'5'=>'Allerta & Crimson Text', 
+    	'6'=>'Arvo & PT Sans',
+    	'7'=>'Dancing Script & Josefin Sans',
+    	'8'=>'Allan & Cardo',
+    	'9'=>'Molengo & Lekton',
+    	'10'=>'Droid Serif & Droid Sans',
+    	'11'=>'Corbin & Nobile',
+    	'12'=>'Ubuntu & Vollkorn',
+    	'13'=>'Bree Serif & Open Sans', 
+    	'14'=>'Bevan & Pontano Sans', 
+    	'15'=>'Abril Fatface & Average', 
+    	'16'=>'Playfair Display and Muli', 
+    	'17'=>'Sansita One & Kameron',
+    	'18'=>'Istok Web & Lora',
+    	'19'=>'Pacifico & Arimo',
+    	'20'=>'Nixie One & Ledger',
+    	'21'=>'Cantata One & Imprima',
+    	'22'=>'Rancho & Gudea',
+    	'23'=>'DISABLE Google Fonts');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // User picture in header setting.
-    $name = 'theme_essential/headerprofilepic';
-    $title = get_string('headerprofilepic', 'theme_essential');
-    $description = get_string('headerprofilepicdesc', 'theme_essential');
+    $name = 'theme_utessential/headerprofilepic';
+    $title = get_string('headerprofilepic', 'theme_utessential');
+    $description = get_string('headerprofilepicdesc', 'theme_utessential');
     $default = true;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Fixed or Variable Width.
-    $name = 'theme_essential/pagewidth';
-    $title = get_string('pagewidth', 'theme_essential');
-    $description = get_string('pagewidthdesc', 'theme_essential');
+    $name = 'theme_utessential/pagewidth';
+    $title = get_string('pagewidth', 'theme_utessential');
+    $description = get_string('pagewidthdesc', 'theme_utessential');
     $default = 1200;
-    $choices = array(1900=>get_string('fixedwidthwide','theme_essential'), 1200=>get_string('fixedwidthnarrow','theme_essential'), 100=>get_string('variablewidth','theme_essential'));
+    $choices = array(1900=>get_string('fixedwidthwide','theme_utessential'), 1200=>get_string('fixedwidthnarrow','theme_utessential'), 100=>get_string('variablewidth','theme_utessential'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Custom or standard layout.
-    $name = 'theme_essential/layout';
-    $title = get_string('layout', 'theme_essential');
-    $description = get_string('layoutdesc', 'theme_essential');
+    $name = 'theme_utessential/layout';
+    $title = get_string('layout', 'theme_utessential');
+    $description = get_string('layoutdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Use max width for side regions.
-    $name = 'theme_essential/sideregionsmaxwidth';
-    $title = get_string('sideregionsmaxwidth', 'theme_essential');
-    $description = get_string('sideregionsmaxwidthdesc', 'theme_essential');
+    $name = 'theme_utessential/sideregionsmaxwidth';
+    $title = get_string('sideregionsmaxwidth', 'theme_utessential');
+    $description = get_string('sideregionsmaxwidthdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //Include the Editicons css rules
-    $name = 'theme_essential/editicons';
-    $title = get_string('editicons', 'theme_essential');
-    $description = get_string('editiconsdesc', 'theme_essential');
+    $name = 'theme_utessential/editicons';
+    $title = get_string('editicons', 'theme_utessential');
+    $description = get_string('editiconsdesc', 'theme_utessential');
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $temp->add($setting);
     
     // Performance Information Display.
-    $name = 'theme_essential/perfinfo';
-    $title = get_string('perfinfo' , 'theme_essential');
-    $description = get_string('perfinfodesc', 'theme_essential');
-    $perf_max = get_string('perf_max', 'theme_essential');
-    $perf_min = get_string('perf_min', 'theme_essential');
+    $name = 'theme_utessential/perfinfo';
+    $title = get_string('perfinfo' , 'theme_utessential');
+    $description = get_string('perfinfodesc', 'theme_utessential');
+    $perf_max = get_string('perf_max', 'theme_utessential');
+    $perf_min = get_string('perf_min', 'theme_utessential');
     $default = 'min';
     $choices = array('min'=>$perf_min, 'max'=>$perf_max);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -146,15 +147,15 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Navbar Seperator.
-    $name = 'theme_essential/navbarsep';
-    $title = get_string('navbarsep' , 'theme_essential');
-    $description = get_string('navbarsepdesc', 'theme_essential');
-    $nav_thinbracket = get_string('nav_thinbracket', 'theme_essential');
-    $nav_doublebracket = get_string('nav_doublebracket', 'theme_essential');
-    $nav_thickbracket = get_string('nav_thickbracket', 'theme_essential');
-    $nav_slash = get_string('nav_slash', 'theme_essential');
-    $nav_pipe = get_string('nav_pipe', 'theme_essential');
-    $dontdisplay = get_string('dontdisplay', 'theme_essential');
+    $name = 'theme_utessential/navbarsep';
+    $title = get_string('navbarsep' , 'theme_utessential');
+    $description = get_string('navbarsepdesc', 'theme_utessential');
+    $nav_thinbracket = get_string('nav_thinbracket', 'theme_utessential');
+    $nav_doublebracket = get_string('nav_doublebracket', 'theme_utessential');
+    $nav_thickbracket = get_string('nav_thickbracket', 'theme_utessential');
+    $nav_slash = get_string('nav_slash', 'theme_utessential');
+    $nav_pipe = get_string('nav_pipe', 'theme_utessential');
+    $dontdisplay = get_string('dontdisplay', 'theme_utessential');
     $default = '/';
     $choices = array('/'=>$nav_slash, '\f105'=>$nav_thinbracket, '\f101'=>$nav_doublebracket, '\f054'=>$nav_thickbracket, '|'=>$nav_pipe);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -162,102 +163,102 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Copyright setting.
-    $name = 'theme_essential/copyright';
-    $title = get_string('copyright', 'theme_essential');
-    $description = get_string('copyrightdesc', 'theme_essential');
+    $name = 'theme_utessential/copyright';
+    $title = get_string('copyright', 'theme_utessential');
+    $description = get_string('copyrightdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $temp->add($setting);
     
     // Footnote setting.
-    $name = 'theme_essential/footnote';
-    $title = get_string('footnote', 'theme_essential');
-    $description = get_string('footnotedesc', 'theme_essential');
+    $name = 'theme_utessential/footnote';
+    $title = get_string('footnote', 'theme_utessential');
+    $description = get_string('footnotedesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Custom CSS file.
-    $name = 'theme_essential/customcss';
-    $title = get_string('customcss', 'theme_essential');
-    $description = get_string('customcssdesc', 'theme_essential');
+    $name = 'theme_utessential/customcss';
+    $title = get_string('customcss', 'theme_utessential');
+    $description = get_string('customcssdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
     /* Custom Menu Settings */
-    $temp = new admin_settingpage('theme_essential_custommenu', get_string('custommenuheading', 'theme_essential'));
+    $temp = new admin_settingpage('theme_utessential_custommenu', get_string('custommenuheading', 'theme_utessential'));
 	            
     //This is the descriptor for the following Moodle color settings
-    $name = 'theme_essential/mydashboardinfo';
-    $heading = get_string('mydashboardinfo', 'theme_essential');
-    $information = get_string('mydashboardinfodesc', 'theme_essential');
+    $name = 'theme_utessential/mydashboardinfo';
+    $heading = get_string('mydashboardinfo', 'theme_utessential');
+    $information = get_string('mydashboardinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Toggle dashboard display in custommenu.
-    $name = 'theme_essential/displaymydashboard';
-    $title = get_string('displaymydashboard', 'theme_essential');
-    $description = get_string('displaymydashboarddesc', 'theme_essential');
+    $name = 'theme_utessential/displaymydashboard';
+    $title = get_string('displaymydashboard', 'theme_utessential');
+    $description = get_string('displaymydashboarddesc', 'theme_utessential');
     $default = true;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for the following Moodle color settings
-    $name = 'theme_essential/mycoursesinfo';
-    $heading = get_string('mycoursesinfo', 'theme_essential');
-    $information = get_string('mycoursesinfodesc', 'theme_essential');
+    $name = 'theme_utessential/mycoursesinfo';
+    $heading = get_string('mycoursesinfo', 'theme_utessential');
+    $information = get_string('mycoursesinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Toggle courses display in custommenu.
-    $name = 'theme_essential/displaymycourses';
-    $title = get_string('displaymycourses', 'theme_essential');
-    $description = get_string('displaymycoursesdesc', 'theme_essential');
+    $name = 'theme_utessential/displaymycourses';
+    $title = get_string('displaymycourses', 'theme_utessential');
+    $description = get_string('displaymycoursesdesc', 'theme_utessential');
     $default = true;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Set terminology for dropdown course list
-	$name = 'theme_essential/mycoursetitle';
-	$title = get_string('mycoursetitle','theme_essential');
-	$description = get_string('mycoursetitledesc', 'theme_essential');
+	$name = 'theme_utessential/mycoursetitle';
+	$title = get_string('mycoursetitle','theme_utessential');
+	$description = get_string('mycoursetitledesc', 'theme_utessential');
 	$default = 'course';
 	$choices = array(
-		'course' => get_string('mycourses', 'theme_essential'),
-		'unit' => get_string('myunits', 'theme_essential'),
-		'class' => get_string('myclasses', 'theme_essential'),
-		'module' => get_string('mymodules', 'theme_essential')
+		'course' => get_string('mycourses', 'theme_utessential'),
+		'unit' => get_string('myunits', 'theme_utessential'),
+		'class' => get_string('myclasses', 'theme_utessential'),
+		'module' => get_string('mymodules', 'theme_utessential')
 	);
 	$setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
 	$setting->set_updatedcallback('theme_reset_all_caches');
 	$temp->add($setting);
     
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
 	/* Color Settings */
-    $temp = new admin_settingpage('theme_essential_color', get_string('colorheading', 'theme_essential'));
-    $temp->add(new admin_setting_heading('theme_essential_color', get_string('colorheadingsub', 'theme_essential'),
-            format_text(get_string('colordesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_color', get_string('colorheading', 'theme_utessential'));
+    $temp->add(new admin_setting_heading('theme_utessential_color', get_string('colorheadingsub', 'theme_utessential'),
+            format_text(get_string('colordesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
 
     // Background Image.
-    $name = 'theme_essential/pagebackground';
-    $title = get_string('pagebackground', 'theme_essential');
-    $description = get_string('pagebackgrounddesc', 'theme_essential');
+    $name = 'theme_utessential/pagebackground';
+    $title = get_string('pagebackground', 'theme_utessential');
+    $description = get_string('pagebackgrounddesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'pagebackground');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Main theme colour setting.
-    $name = 'theme_essential/themecolor';
-    $title = get_string('themecolor', 'theme_essential');
-    $description = get_string('themecolordesc', 'theme_essential');
+    $name = 'theme_utessential/themecolor';
+    $title = get_string('themecolor', 'theme_utessential');
+    $description = get_string('themecolordesc', 'theme_utessential');
     $default = '#30add1';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -265,9 +266,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
 
     // Main theme Hover colour setting.
-    $name = 'theme_essential/themehovercolor';
-    $title = get_string('themehovercolor', 'theme_essential');
-    $description = get_string('themehovercolordesc', 'theme_essential');
+    $name = 'theme_utessential/themehovercolor';
+    $title = get_string('themehovercolor', 'theme_utessential');
+    $description = get_string('themehovercolordesc', 'theme_utessential');
     $default = '#29a1c4';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -275,16 +276,16 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     //This is the descriptor for the Slideshow
-    $name = 'theme_essential/slidecolorinfo';
-    $heading = get_string('slidecolors', 'theme_essential');
-    $information = get_string('slidecolorsdesc', 'theme_essential');
+    $name = 'theme_utessential/slidecolorinfo';
+    $heading = get_string('slidecolors', 'theme_utessential');
+    $information = get_string('slidecolorsdesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
       // Slide Header colour setting.
-    $name = 'theme_essential/slideheadercolor';
-    $title = get_string('slideheadercolor', 'theme_essential');
-    $description = get_string('slideheadercolordesc', 'theme_essential');
+    $name = 'theme_utessential/slideheadercolor';
+    $title = get_string('slideheadercolor', 'theme_utessential');
+    $description = get_string('slideheadercolordesc', 'theme_utessential');
     $default = '#30add1';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -292,9 +293,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Slide Text colour setting.
-    $name = 'theme_essential/slidecolor';
-    $title = get_string('slidecolor', 'theme_essential');
-    $description = get_string('slidecolordesc', 'theme_essential');
+    $name = 'theme_utessential/slidecolor';
+    $title = get_string('slidecolor', 'theme_utessential');
+    $description = get_string('slidecolordesc', 'theme_utessential');
     $default = '#888';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -302,9 +303,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Slide Button colour setting.
-    $name = 'theme_essential/slidebuttoncolor';
-    $title = get_string('slidebuttoncolor', 'theme_essential');
-    $description = get_string('slidebuttoncolordesc', 'theme_essential');
+    $name = 'theme_utessential/slidebuttoncolor';
+    $title = get_string('slidebuttoncolor', 'theme_utessential');
+    $description = get_string('slidebuttoncolordesc', 'theme_utessential');
     $default = '#30add1';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -312,16 +313,16 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
         //This is the descriptor for the Slideshow
-    $name = 'theme_essential/footercolorinfo';
-    $heading = get_string('footercolors', 'theme_essential');
-    $information = get_string('footercolorsdesc', 'theme_essential');
+    $name = 'theme_utessential/footercolorinfo';
+    $heading = get_string('footercolors', 'theme_utessential');
+    $information = get_string('footercolorsdesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Footer background colour setting.
-    $name = 'theme_essential/footercolor';
-    $title = get_string('footercolor', 'theme_essential');
-    $description = get_string('footercolordesc', 'theme_essential');
+    $name = 'theme_utessential/footercolor';
+    $title = get_string('footercolor', 'theme_utessential');
+    $description = get_string('footercolordesc', 'theme_utessential');
     $default = '#000000';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -329,9 +330,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Footer text colour setting.
-    $name = 'theme_essential/footertextcolor';
-    $title = get_string('footertextcolor', 'theme_essential');
-    $description = get_string('footertextcolordesc', 'theme_essential');
+    $name = 'theme_utessential/footertextcolor';
+    $title = get_string('footertextcolor', 'theme_utessential');
+    $description = get_string('footertextcolordesc', 'theme_utessential');
     $default = '#DDDDDD';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -339,9 +340,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Footer Block Heading colour setting.
-    $name = 'theme_essential/footerheadingcolor';
-    $title = get_string('footerheadingcolor', 'theme_essential');
-    $description = get_string('footerheadingcolordesc', 'theme_essential');
+    $name = 'theme_utessential/footerheadingcolor';
+    $title = get_string('footerheadingcolor', 'theme_utessential');
+    $description = get_string('footerheadingcolordesc', 'theme_utessential');
     $default = '#CCCCCC';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -349,9 +350,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Footer Seperator colour setting.
-    $name = 'theme_essential/footersepcolor';
-    $title = get_string('footersepcolor', 'theme_essential');
-    $description = get_string('footersepcolordesc', 'theme_essential');
+    $name = 'theme_utessential/footersepcolor';
+    $title = get_string('footersepcolor', 'theme_utessential');
+    $description = get_string('footersepcolordesc', 'theme_utessential');
     $default = '#313131';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -359,9 +360,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Footer URL colour setting.
-    $name = 'theme_essential/footerurlcolor';
-    $title = get_string('footerurlcolor', 'theme_essential');
-    $description = get_string('footerurlcolordesc', 'theme_essential');
+    $name = 'theme_utessential/footerurlcolor';
+    $title = get_string('footerurlcolor', 'theme_utessential');
+    $description = get_string('footerurlcolordesc', 'theme_utessential');
     $default = '#BBBBBB';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -369,9 +370,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Footer URL hover colour setting.
-    $name = 'theme_essential/footerhovercolor';
-    $title = get_string('footerhovercolor', 'theme_essential');
-    $description = get_string('footerhovercolordesc', 'theme_essential');
+    $name = 'theme_utessential/footerhovercolor';
+    $title = get_string('footerhovercolor', 'theme_utessential');
+    $description = get_string('footerhovercolordesc', 'theme_utessential');
     $default = '#FFFFFF';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -379,9 +380,9 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
 
     // This is the descriptor for the user theme colors.
-    $name = 'theme_essential/alternativethemecolorsinfo';
-    $heading = get_string('alternativethemecolors', 'theme_essential');
-    $information = get_string('alternativethemecolorsdesc', 'theme_essential');
+    $name = 'theme_utessential/alternativethemecolorsinfo';
+    $heading = get_string('alternativethemecolors', 'theme_utessential');
+    $information = get_string('alternativethemecolorsdesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
 
@@ -391,27 +392,27 @@ defined('MOODLE_INTERNAL') || die;
     foreach (range(1, 3) as $alternativethemenumber) {
 
         // Enables the user to select an alternative colors choice.
-        $name = 'theme_essential/enablealternativethemecolors' . $alternativethemenumber;
-        $title = get_string('enablealternativethemecolors', 'theme_essential', $alternativethemenumber);
-        $description = get_string('enablealternativethemecolorsdesc', 'theme_essential', $alternativethemenumber);
+        $name = 'theme_utessential/enablealternativethemecolors' . $alternativethemenumber;
+        $title = get_string('enablealternativethemecolors', 'theme_utessential', $alternativethemenumber);
+        $description = get_string('enablealternativethemecolorsdesc', 'theme_utessential', $alternativethemenumber);
         $default = false;
         $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $temp->add($setting);
         
         // User theme colour name.
-        $name = 'theme_essential/alternativethemename' . $alternativethemenumber;
-        $title = get_string('alternativethemename', 'theme_essential', $alternativethemenumber);
-        $description = get_string('alternativethemenamedesc', 'theme_essential', $alternativethemenumber);
-        $default = get_string('alternativecolors', 'theme_essential', $alternativethemenumber);
+        $name = 'theme_utessential/alternativethemename' . $alternativethemenumber;
+        $title = get_string('alternativethemename', 'theme_utessential', $alternativethemenumber);
+        $description = get_string('alternativethemenamedesc', 'theme_utessential', $alternativethemenumber);
+        $default = get_string('alternativecolors', 'theme_utessential', $alternativethemenumber);
         $setting = new admin_setting_configtext($name, $title, $description, $default);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $temp->add($setting);
   
         // User theme colour setting.
-        $name = 'theme_essential/alternativethemecolor' . $alternativethemenumber;
-        $title = get_string('alternativethemecolor', 'theme_essential', $alternativethemenumber);
-        $description = get_string('alternativethemecolordesc', 'theme_essential', $alternativethemenumber);
+        $name = 'theme_utessential/alternativethemecolor' . $alternativethemenumber;
+        $title = get_string('alternativethemecolor', 'theme_utessential', $alternativethemenumber);
+        $description = get_string('alternativethemecolordesc', 'theme_utessential', $alternativethemenumber);
         $default = $defaultalternativethemecolors[$alternativethemenumber - 1];
         $previewconfig = null;
         $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -419,9 +420,9 @@ defined('MOODLE_INTERNAL') || die;
         $temp->add($setting);
 
         // User theme hover colour setting.
-        $name = 'theme_essential/alternativethemehovercolor' . $alternativethemenumber;
-        $title = get_string('alternativethemehovercolor', 'theme_essential', $alternativethemenumber);
-        $description = get_string('alternativethemehovercolordesc', 'theme_essential', $alternativethemenumber);
+        $name = 'theme_utessential/alternativethemehovercolor' . $alternativethemenumber;
+        $title = get_string('alternativethemehovercolor', 'theme_utessential', $alternativethemenumber);
+        $description = get_string('alternativethemehovercolordesc', 'theme_utessential', $alternativethemenumber);
         $default = $defaultalternativethemehovercolors[$alternativethemenumber - 1];
         $previewconfig = null;
         $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
@@ -429,22 +430,22 @@ defined('MOODLE_INTERNAL') || die;
         $temp->add($setting);
     }
 
- 	$ADMIN->add('theme_essential', $temp);
+ 	$ADMIN->add('theme_utessential', $temp);
  
  
     /* Slideshow Widget Settings */
-    $temp = new admin_settingpage('theme_essential_slideshow', get_string('slideshowheading', 'theme_essential'));
-    $temp->add(new admin_setting_heading('theme_essential_slideshow', get_string('slideshowheadingsub', 'theme_essential'),
-            format_text(get_string('slideshowdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_slideshow', get_string('slideshowheading', 'theme_utessential'));
+    $temp->add(new admin_setting_heading('theme_utessential_slideshow', get_string('slideshowheadingsub', 'theme_utessential'),
+            format_text(get_string('slideshowdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
     
     // Toggle Slideshow.
-    $name = 'theme_essential/toggleslideshow';
-    $title = get_string('toggleslideshow' , 'theme_essential');
-    $description = get_string('toggleslideshowdesc', 'theme_essential');
-    $alwaysdisplay = get_string('alwaysdisplay', 'theme_essential');
-    $displaybeforelogin = get_string('displaybeforelogin', 'theme_essential');
-    $displayafterlogin = get_string('displayafterlogin', 'theme_essential');
-    $dontdisplay = get_string('dontdisplay', 'theme_essential');
+    $name = 'theme_utessential/toggleslideshow';
+    $title = get_string('toggleslideshow' , 'theme_utessential');
+    $description = get_string('toggleslideshowdesc', 'theme_utessential');
+    $alwaysdisplay = get_string('alwaysdisplay', 'theme_utessential');
+    $displaybeforelogin = get_string('displaybeforelogin', 'theme_utessential');
+    $displayafterlogin = get_string('displayafterlogin', 'theme_utessential');
+    $dontdisplay = get_string('dontdisplay', 'theme_utessential');
     $default = 'alwaysdisplay';
     $choices = array('1'=>$alwaysdisplay, '2'=>$displaybeforelogin, '3'=>$displayafterlogin, '0'=>$dontdisplay);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -452,11 +453,11 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Hide slideshow on phones.
-    $name = 'theme_essential/hideonphone';
-    $title = get_string('hideonphone' , 'theme_essential');
-    $description = get_string('hideonphonedesc', 'theme_essential');
-    $display = get_string('alwaysdisplay', 'theme_essential');
-    $dontdisplay = get_string('dontdisplay', 'theme_essential');
+    $name = 'theme_utessential/hideonphone';
+    $title = get_string('hideonphone' , 'theme_utessential');
+    $description = get_string('hideonphonedesc', 'theme_utessential');
+    $display = get_string('alwaysdisplay', 'theme_utessential');
+    $dontdisplay = get_string('dontdisplay', 'theme_utessential');
     $default = 'display';
     $choices = array(''=>$display, 'hidden-phone'=>$dontdisplay);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -464,11 +465,11 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Slideshow Design Picker.
-    $name = 'theme_essential/slideshowvariant';
-    $title = get_string('slideshowvariant' , 'theme_essential');
-    $description = get_string('slideshowvariantdesc', 'theme_essential');
-    $slideshow1 = get_string('slideshow1', 'theme_essential');
-    $slideshow2 = get_string('slideshow2', 'theme_essential');
+    $name = 'theme_utessential/slideshowvariant';
+    $title = get_string('slideshowvariant' , 'theme_utessential');
+    $description = get_string('slideshowvariantdesc', 'theme_utessential');
+    $slideshow1 = get_string('slideshow1', 'theme_utessential');
+    $slideshow2 = get_string('slideshow2', 'theme_utessential');
     $default = 'slideshow1';
     $choices = array('1'=>$slideshow1, '2'=>$slideshow2);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -480,41 +481,41 @@ defined('MOODLE_INTERNAL') || die;
      */
      
     //This is the descriptor for Slide One
-    $name = 'theme_essential/slide1info';
-    $heading = get_string('slide1', 'theme_essential');
-    $information = get_string('slideinfodesc', 'theme_essential');
+    $name = 'theme_utessential/slide1info';
+    $heading = get_string('slide1', 'theme_utessential');
+    $information = get_string('slideinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
 
     // Title.
-    $name = 'theme_essential/slide1';
-    $title = get_string('slidetitle', 'theme_essential');
-    $description = get_string('slidetitledesc', 'theme_essential');
+    $name = 'theme_utessential/slide1';
+    $title = get_string('slidetitle', 'theme_utessential');
+    $description = get_string('slidetitledesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Image.
-    $name = 'theme_essential/slide1image';
-    $title = get_string('slideimage', 'theme_essential');
-    $description = get_string('slideimagedesc', 'theme_essential');
+    $name = 'theme_utessential/slide1image';
+    $title = get_string('slideimage', 'theme_utessential');
+    $description = get_string('slideimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide1image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Caption.
-    $name = 'theme_essential/slide1caption';
-    $title = get_string('slidecaption', 'theme_essential');
-    $description = get_string('slidecaptiondesc', 'theme_essential');
+    $name = 'theme_utessential/slide1caption';
+    $title = get_string('slidecaption', 'theme_utessential');
+    $description = get_string('slidecaptiondesc', 'theme_utessential');
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // URL.
-    $name = 'theme_essential/slide1url';
-    $title = get_string('slideurl', 'theme_essential');
-    $description = get_string('slideurldesc', 'theme_essential');
+    $name = 'theme_utessential/slide1url';
+    $title = get_string('slideurl', 'theme_utessential');
+    $description = get_string('slideurldesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -524,41 +525,41 @@ defined('MOODLE_INTERNAL') || die;
      */
      
     //This is the descriptor for Slide Two
-    $name = 'theme_essential/slide2info';
-    $heading = get_string('slide2', 'theme_essential');
-    $information = get_string('slideinfodesc', 'theme_essential');
+    $name = 'theme_utessential/slide2info';
+    $heading = get_string('slide2', 'theme_utessential');
+    $information = get_string('slideinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
 
     // Title.
-    $name = 'theme_essential/slide2';
-    $title = get_string('slidetitle', 'theme_essential');
-    $description = get_string('slidetitledesc', 'theme_essential');
+    $name = 'theme_utessential/slide2';
+    $title = get_string('slidetitle', 'theme_utessential');
+    $description = get_string('slidetitledesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Image.
-    $name = 'theme_essential/slide2image';
-    $title = get_string('slideimage', 'theme_essential');
-    $description = get_string('slideimagedesc', 'theme_essential');
+    $name = 'theme_utessential/slide2image';
+    $title = get_string('slideimage', 'theme_utessential');
+    $description = get_string('slideimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide2image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Caption.
-    $name = 'theme_essential/slide2caption';
-    $title = get_string('slidecaption', 'theme_essential');
-    $description = get_string('slidecaptiondesc', 'theme_essential');
+    $name = 'theme_utessential/slide2caption';
+    $title = get_string('slidecaption', 'theme_utessential');
+    $description = get_string('slidecaptiondesc', 'theme_utessential');
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // URL.
-    $name = 'theme_essential/slide2url';
-    $title = get_string('slideurl', 'theme_essential');
-    $description = get_string('slideurldesc', 'theme_essential');
+    $name = 'theme_utessential/slide2url';
+    $title = get_string('slideurl', 'theme_utessential');
+    $description = get_string('slideurldesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -568,41 +569,41 @@ defined('MOODLE_INTERNAL') || die;
      */
 
     //This is the descriptor for Slide Three
-    $name = 'theme_essential/slide3info';
-    $heading = get_string('slide3', 'theme_essential');
-    $information = get_string('slideinfodesc', 'theme_essential');
+    $name = 'theme_utessential/slide3info';
+    $heading = get_string('slide3', 'theme_utessential');
+    $information = get_string('slideinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Title.
-    $name = 'theme_essential/slide3';
-    $title = get_string('slidetitle', 'theme_essential');
-    $description = get_string('slidetitledesc', 'theme_essential');
+    $name = 'theme_utessential/slide3';
+    $title = get_string('slidetitle', 'theme_utessential');
+    $description = get_string('slidetitledesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Image.
-    $name = 'theme_essential/slide3image';
-    $title = get_string('slideimage', 'theme_essential');
-    $description = get_string('slideimagedesc', 'theme_essential');
+    $name = 'theme_utessential/slide3image';
+    $title = get_string('slideimage', 'theme_utessential');
+    $description = get_string('slideimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide3image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Caption.
-    $name = 'theme_essential/slide3caption';
-    $title = get_string('slidecaption', 'theme_essential');
-    $description = get_string('slidecaptiondesc', 'theme_essential');
+    $name = 'theme_utessential/slide3caption';
+    $title = get_string('slidecaption', 'theme_utessential');
+    $description = get_string('slidecaptiondesc', 'theme_utessential');
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // URL.
-    $name = 'theme_essential/slide3url';
-    $title = get_string('slideurl', 'theme_essential');
-    $description = get_string('slideurldesc', 'theme_essential');
+    $name = 'theme_utessential/slide3url';
+    $title = get_string('slideurl', 'theme_utessential');
+    $description = get_string('slideurldesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -612,76 +613,119 @@ defined('MOODLE_INTERNAL') || die;
      */
      
     //This is the descriptor for Slide Four
-    $name = 'theme_essential/slide4info';
-    $heading = get_string('slide4', 'theme_essential');
-    $information = get_string('slideinfodesc', 'theme_essential');
+    $name = 'theme_utessential/slide4info';
+    $heading = get_string('slide4', 'theme_utessential');
+    $information = get_string('slideinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
 
     // Title.
-    $name = 'theme_essential/slide4';
-    $title = get_string('slidetitle', 'theme_essential');
-    $description = get_string('slidetitledesc', 'theme_essential');
+    $name = 'theme_utessential/slide4';
+    $title = get_string('slidetitle', 'theme_utessential');
+    $description = get_string('slidetitledesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Image.
-    $name = 'theme_essential/slide4image';
-    $title = get_string('slideimage', 'theme_essential');
-    $description = get_string('slideimagedesc', 'theme_essential');
+    $name = 'theme_utessential/slide4image';
+    $title = get_string('slideimage', 'theme_utessential');
+    $description = get_string('slideimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide4image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Caption.
-    $name = 'theme_essential/slide4caption';
-    $title = get_string('slidecaption', 'theme_essential');
-    $description = get_string('slidecaptiondesc', 'theme_essential');
+    $name = 'theme_utessential/slide4caption';
+    $title = get_string('slidecaption', 'theme_utessential');
+    $description = get_string('slidecaptiondesc', 'theme_utessential');
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // URL.
-    $name = 'theme_essential/slide4url';
-    $title = get_string('slideurl', 'theme_essential');
-    $description = get_string('slideurldesc', 'theme_essential');
+    $name = 'theme_utessential/slide4url';
+    $title = get_string('slideurl', 'theme_utessential');
+    $description = get_string('slideurldesc', 'theme_utessential');
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
+    /*
+     * Slide 5
+     */
+     
+    //This is the descriptor for Slide Four
+    $name = 'theme_utessential/slide5info';
+    $heading = get_string('slide5', 'theme_utessential');
+    $information = get_string('slideinfodesc', 'theme_utessential');
+    $setting = new admin_setting_heading($name, $heading, $information);
+    $temp->add($setting);
+
+    // Title.
+    $name = 'theme_utessential/slide5';
+    $title = get_string('slidetitle', 'theme_utessential');
+    $description = get_string('slidetitledesc', 'theme_utessential');
+    $setting = new admin_setting_configtext($name, $title, $description, '');
+    $default = '';
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+
+    // Image.
+    $name = 'theme_utessential/slide5image';
+    $title = get_string('slideimage', 'theme_utessential');
+    $description = get_string('slideimagedesc', 'theme_utessential');
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide5image');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+
+    // Caption.
+    $name = 'theme_utessential/slide5caption';
+    $title = get_string('slidecaption', 'theme_utessential');
+    $description = get_string('slidecaptiondesc', 'theme_utessential');
+    $setting = new admin_setting_configtextarea($name, $title, $description, '');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+
+    // URL.
+    $name = 'theme_utessential/slide5url';
+    $title = get_string('slideurl', 'theme_utessential');
+    $description = get_string('slideurldesc', 'theme_utessential');
+    $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
     
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
-    $temp = new admin_settingpage('theme_essential_frontcontent', get_string('frontcontentheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_frontcontent', get_string('frontcontentheadingsub', 'theme_essential'),
-            format_text(get_string('frontcontentdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_frontcontent', get_string('frontcontentheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_frontcontent', get_string('frontcontentheadingsub', 'theme_utessential'),
+            format_text(get_string('frontcontentdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
     
     // Enable Frontpage Content
-    $name = 'theme_essential/usefrontcontent';
-    $title = get_string('usefrontcontent', 'theme_essential');
-    $description = get_string('usefrontcontentdesc', 'theme_essential');
+    $name = 'theme_utessential/usefrontcontent';
+    $title = get_string('usefrontcontent', 'theme_utessential');
+    $description = get_string('usefrontcontentdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Frontpage Content
-    $name = 'theme_essential/frontcontentarea';
-    $title = get_string('frontcontentarea', 'theme_essential');
-    $description = get_string('frontcontentareadesc', 'theme_essential');
+    $name = 'theme_utessential/frontcontentarea';
+    $title = get_string('frontcontentarea', 'theme_utessential');
+    $description = get_string('frontcontentareadesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Frontpage Block alignment.
-    $name = 'theme_essential/frontpageblocks';
-    $title = get_string('frontpageblocks' , 'theme_essential');
-    $description = get_string('frontpageblocksdesc', 'theme_essential');
-    $left = get_string('left', 'theme_essential');
-    $right = get_string('right', 'theme_essential');
+    $name = 'theme_utessential/frontpageblocks';
+    $title = get_string('frontpageblocks' , 'theme_utessential');
+    $description = get_string('frontpageblocksdesc', 'theme_utessential');
+    $left = get_string('left', 'theme_utessential');
+    $right = get_string('right', 'theme_utessential');
     $default = 'left';
     $choices = array('1'=>$left, '0'=>$right);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -689,35 +733,35 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Toggle Frontpage Middle Blocks
-    $name = 'theme_essential/frontpagemiddleblocks';
-    $title = get_string('frontpagemiddleblocks' , 'theme_essential');
-    $description = get_string('frontpagemiddleblocksdesc', 'theme_essential');
-    $alwaysdisplay = get_string('alwaysdisplay', 'theme_essential');
-    $displaybeforelogin = get_string('displaybeforelogin', 'theme_essential');
-    $displayafterlogin = get_string('displayafterlogin', 'theme_essential');
-    $dontdisplay = get_string('dontdisplay', 'theme_essential');
+    $name = 'theme_utessential/frontpagemiddleblocks';
+    $title = get_string('frontpagemiddleblocks' , 'theme_utessential');
+    $description = get_string('frontpagemiddleblocksdesc', 'theme_utessential');
+    $alwaysdisplay = get_string('alwaysdisplay', 'theme_utessential');
+    $displaybeforelogin = get_string('displaybeforelogin', 'theme_utessential');
+    $displayafterlogin = get_string('displayafterlogin', 'theme_utessential');
+    $dontdisplay = get_string('dontdisplay', 'theme_utessential');
     $default = 'display';
     $choices = array('1'=>$alwaysdisplay, '2'=>$displaybeforelogin, '3'=>$displayafterlogin, '0'=>$dontdisplay);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
         
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
 
 	/* Marketing Spot Settings */
-	$temp = new admin_settingpage('theme_essential_marketing', get_string('marketingheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_marketing', get_string('marketingheadingsub', 'theme_essential'),
-            format_text(get_string('marketingdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+	$temp = new admin_settingpage('theme_utessential_marketing', get_string('marketingheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_marketing', get_string('marketingheadingsub', 'theme_utessential'),
+            format_text(get_string('marketingdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
 	
 	// Toggle Marketing Spots.
-    $name = 'theme_essential/togglemarketing';
-    $title = get_string('togglemarketing' , 'theme_essential');
-    $description = get_string('togglemarketingdesc', 'theme_essential');
-    $alwaysdisplay = get_string('alwaysdisplay', 'theme_essential');
-    $displaybeforelogin = get_string('displaybeforelogin', 'theme_essential');
-    $displayafterlogin = get_string('displayafterlogin', 'theme_essential');
-    $dontdisplay = get_string('dontdisplay', 'theme_essential');
+    $name = 'theme_utessential/togglemarketing';
+    $title = get_string('togglemarketing' , 'theme_utessential');
+    $description = get_string('togglemarketingdesc', 'theme_utessential');
+    $alwaysdisplay = get_string('alwaysdisplay', 'theme_utessential');
+    $displaybeforelogin = get_string('displaybeforelogin', 'theme_utessential');
+    $displayafterlogin = get_string('displayafterlogin', 'theme_utessential');
+    $dontdisplay = get_string('dontdisplay', 'theme_utessential');
     $default = 'display';
     $choices = array('1'=>$alwaysdisplay, '2'=>$displaybeforelogin, '3'=>$displayafterlogin, '0'=>$dontdisplay);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -725,307 +769,317 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Marketing Spot Image Height
-	$name = 'theme_essential/marketingheight';
-	$title = get_string('marketingheight','theme_essential');
-	$description = get_string('marketingheightdesc', 'theme_essential');
+	$name = 'theme_utessential/marketingheight';
+	$title = get_string('marketingheight','theme_utessential');
+	$description = get_string('marketingheightdesc', 'theme_utessential');
 	$default = 100;
 	$choices = array(50, 100, 150, 200, 250, 300);
 	$setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
 	$temp->add($setting);
 	
 	//This is the descriptor for Marketing Spot One
-    $name = 'theme_essential/marketing1info';
-    $heading = get_string('marketing1', 'theme_essential');
-    $information = get_string('marketinginfodesc', 'theme_essential');
+    $name = 'theme_utessential/marketing1info';
+    $heading = get_string('marketing1', 'theme_utessential');
+    $information = get_string('marketinginfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
 	
 	//Marketing Spot One.
-	$name = 'theme_essential/marketing1';
-    $title = get_string('marketingtitle', 'theme_essential');
-    $description = get_string('marketingtitledesc', 'theme_essential');
+	$name = 'theme_utessential/marketing1';
+    $title = get_string('marketingtitle', 'theme_utessential');
+    $description = get_string('marketingtitledesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing1icon';
-    $title = get_string('marketingicon', 'theme_essential');
-    $description = get_string('marketingicondesc', 'theme_essential');
+    $name = 'theme_utessential/marketing1icon';
+    $title = get_string('marketingicon', 'theme_utessential');
+    $description = get_string('marketingicondesc', 'theme_utessential');
     $default = 'star';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing1image';
-    $title = get_string('marketingimage', 'theme_essential');
-    $description = get_string('marketingimagedesc', 'theme_essential');
+    $name = 'theme_utessential/marketing1image';
+    $title = get_string('marketingimage', 'theme_utessential');
+    $description = get_string('marketingimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'marketing1image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing1content';
-    $title = get_string('marketingcontent', 'theme_essential');
-    $description = get_string('marketingcontentdesc', 'theme_essential');
+    $name = 'theme_utessential/marketing1content';
+    $title = get_string('marketingcontent', 'theme_utessential');
+    $description = get_string('marketingcontentdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing1buttontext';
-    $title = get_string('marketingbuttontext', 'theme_essential');
-    $description = get_string('marketingbuttontextdesc', 'theme_essential');
+    $name = 'theme_utessential/marketing1buttontext';
+    $title = get_string('marketingbuttontext', 'theme_utessential');
+    $description = get_string('marketingbuttontextdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing1buttonurl';
-    $title = get_string('marketingbuttonurl', 'theme_essential');
-    $description = get_string('marketingbuttonurldesc', 'theme_essential');
+    $name = 'theme_utessential/marketing1buttonurl';
+    $title = get_string('marketingbuttonurl', 'theme_utessential');
+    $description = get_string('marketingbuttonurldesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for Marketing Spot Two
-    $name = 'theme_essential/marketing2info';
-    $heading = get_string('marketing2', 'theme_essential');
-    $information = get_string('marketinginfodesc', 'theme_essential');
+    $name = 'theme_utessential/marketing2info';
+    $heading = get_string('marketing2', 'theme_utessential');
+    $information = get_string('marketinginfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     //Marketing Spot Two.
-	$name = 'theme_essential/marketing2';
-    $title = get_string('marketingtitle', 'theme_essential');
-    $description = get_string('marketingtitledesc', 'theme_essential');
+	$name = 'theme_utessential/marketing2';
+    $title = get_string('marketingtitle', 'theme_utessential');
+    $description = get_string('marketingtitledesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing2icon';
-    $title = get_string('marketingicon', 'theme_essential');
-    $description = get_string('marketingicondesc', 'theme_essential');
+    $name = 'theme_utessential/marketing2icon';
+    $title = get_string('marketingicon', 'theme_utessential');
+    $description = get_string('marketingicondesc', 'theme_utessential');
     $default = 'star';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing2image';
-    $title = get_string('marketingimage', 'theme_essential');
-    $description = get_string('marketingimagedesc', 'theme_essential');
+    $name = 'theme_utessential/marketing2image';
+    $title = get_string('marketingimage', 'theme_utessential');
+    $description = get_string('marketingimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'marketing2image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing2content';
-    $title = get_string('marketingcontent', 'theme_essential');
-    $description = get_string('marketingcontentdesc', 'theme_essential');
+    $name = 'theme_utessential/marketing2content';
+    $title = get_string('marketingcontent', 'theme_utessential');
+    $description = get_string('marketingcontentdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing2buttontext';
-    $title = get_string('marketingbuttontext', 'theme_essential');
-    $description = get_string('marketingbuttontextdesc', 'theme_essential');
+    $name = 'theme_utessential/marketing2buttontext';
+    $title = get_string('marketingbuttontext', 'theme_utessential');
+    $description = get_string('marketingbuttontextdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing2buttonurl';
-    $title = get_string('marketingbuttonurl', 'theme_essential');
-    $description = get_string('marketingbuttonurldesc', 'theme_essential');
+    $name = 'theme_utessential/marketing2buttonurl';
+    $title = get_string('marketingbuttonurl', 'theme_utessential');
+    $description = get_string('marketingbuttonurldesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for Marketing Spot Three
-    $name = 'theme_essential/marketing3info';
-    $heading = get_string('marketing3', 'theme_essential');
-    $information = get_string('marketinginfodesc', 'theme_essential');
+    $name = 'theme_utessential/marketing3info';
+    $heading = get_string('marketing3', 'theme_utessential');
+    $information = get_string('marketinginfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     //Marketing Spot Three.
-	$name = 'theme_essential/marketing3';
-    $title = get_string('marketingtitle', 'theme_essential');
-    $description = get_string('marketingtitledesc', 'theme_essential');
+	$name = 'theme_utessential/marketing3';
+    $title = get_string('marketingtitle', 'theme_utessential');
+    $description = get_string('marketingtitledesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing3icon';
-    $title = get_string('marketingicon', 'theme_essential');
-    $description = get_string('marketingicondesc', 'theme_essential');
+    $name = 'theme_utessential/marketing3icon';
+    $title = get_string('marketingicon', 'theme_utessential');
+    $description = get_string('marketingicondesc', 'theme_utessential');
     $default = 'star';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing3image';
-    $title = get_string('marketingimage', 'theme_essential');
-    $description = get_string('marketingimagedesc', 'theme_essential');
+    $name = 'theme_utessential/marketing3image';
+    $title = get_string('marketingimage', 'theme_utessential');
+    $description = get_string('marketingimagedesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'marketing3image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing3content';
-    $title = get_string('marketingcontent', 'theme_essential');
-    $description = get_string('marketingcontentdesc', 'theme_essential');
+    $name = 'theme_utessential/marketing3content';
+    $title = get_string('marketingcontent', 'theme_utessential');
+    $description = get_string('marketingcontentdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing3buttontext';
-    $title = get_string('marketingbuttontext', 'theme_essential');
-    $description = get_string('marketingbuttontextdesc', 'theme_essential');
+    $name = 'theme_utessential/marketing3buttontext';
+    $title = get_string('marketingbuttontext', 'theme_utessential');
+    $description = get_string('marketingbuttontextdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $name = 'theme_essential/marketing3buttonurl';
-    $title = get_string('marketingbuttonurl', 'theme_essential');
-    $description = get_string('marketingbuttonurldesc', 'theme_essential');
+    $name = 'theme_utessential/marketing3buttonurl';
+    $title = get_string('marketingbuttonurl', 'theme_utessential');
+    $description = get_string('marketingbuttonurldesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, '', PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
 
 	
 	/* Social Network Settings */
-	$temp = new admin_settingpage('theme_essential_social', get_string('socialheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_social', get_string('socialheadingsub', 'theme_essential'),
-            format_text(get_string('socialdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+	$temp = new admin_settingpage('theme_utessential_social', get_string('socialheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_social', get_string('socialheadingsub', 'theme_utessential'),
+            format_text(get_string('socialdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
 	
     // Website url setting.
-    $name = 'theme_essential/website';
-    $title = get_string('website', 'theme_essential');
-    $description = get_string('websitedesc', 'theme_essential');
+    $name = 'theme_utessential/website';
+    $title = get_string('website', 'theme_utessential');
+    $description = get_string('websitedesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Facebook url setting.
-    $name = 'theme_essential/facebook';
-    $title = get_string(    	'facebook', 'theme_essential');
-    $description = get_string(    	'facebookdesc', 'theme_essential');
+    $name = 'theme_utessential/facebook';
+    $title = get_string(    	'facebook', 'theme_utessential');
+    $description = get_string(    	'facebookdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Flickr url setting.
-    $name = 'theme_essential/flickr';
-    $title = get_string('flickr', 'theme_essential');
-    $description = get_string('flickrdesc', 'theme_essential');
+    $name = 'theme_utessential/flickr';
+    $title = get_string('flickr', 'theme_utessential');
+    $description = get_string('flickrdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Twitter url setting.
-    $name = 'theme_essential/twitter';
-    $title = get_string('twitter', 'theme_essential');
-    $description = get_string('twitterdesc', 'theme_essential');
+    $name = 'theme_utessential/twitter';
+    $title = get_string('twitter', 'theme_utessential');
+    $description = get_string('twitterdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // Google+ url setting.
-    $name = 'theme_essential/googleplus';
-    $title = get_string('googleplus', 'theme_essential');
-    $description = get_string('googleplusdesc', 'theme_essential');
+    $name = 'theme_utessential/googleplus';
+    $title = get_string('googleplus', 'theme_utessential');
+    $description = get_string('googleplusdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
     // LinkedIn url setting.
-    $name = 'theme_essential/linkedin';
-    $title = get_string('linkedin', 'theme_essential');
-    $description = get_string('linkedindesc', 'theme_essential');
+    $name = 'theme_utessential/linkedin';
+    $title = get_string('linkedin', 'theme_utessential');
+    $description = get_string('linkedindesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Pinterest url setting.
-    $name = 'theme_essential/pinterest';
-    $title = get_string('pinterest', 'theme_essential');
-    $description = get_string('pinterestdesc', 'theme_essential');
+    $name = 'theme_utessential/pinterest';
+    $title = get_string('pinterest', 'theme_utessential');
+    $description = get_string('pinterestdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Instagram url setting.
-    $name = 'theme_essential/instagram';
-    $title = get_string('instagram', 'theme_essential');
-    $description = get_string('instagramdesc', 'theme_essential');
+    $name = 'theme_utessential/instagram';
+    $title = get_string('instagram', 'theme_utessential');
+    $description = get_string('instagramdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // YouTube url setting.
-    $name = 'theme_essential/youtube';
-    $title = get_string('youtube', 'theme_essential');
-    $description = get_string('youtubedesc', 'theme_essential');
+    $name = 'theme_utessential/youtube';
+    $title = get_string('youtube', 'theme_utessential');
+    $description = get_string('youtubedesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Skype url setting.
-    $name = 'theme_essential/skype';
-    $title = get_string('skype', 'theme_essential');
-    $description = get_string('skypedesc', 'theme_essential');
+    $name = 'theme_utessential/skype';
+    $title = get_string('skype', 'theme_utessential');
+    $description = get_string('skypedesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
  
     // VKontakte url setting.
-    $name = 'theme_essential/vk';
-    $title = get_string('vk', 'theme_essential');
-    $description = get_string('vkdesc', 'theme_essential');
+    $name = 'theme_utessential/vk';
+    $title = get_string('vk', 'theme_utessential');
+    $description = get_string('vkdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting); 
     
-    $ADMIN->add('theme_essential', $temp);
+    // Social Media url setting.
+    $name = 'theme_utessential/sm';
+    
+    $title = get_string('sm', 'theme_utessential');
+    $description = get_string('smdesc', 'theme_utessential');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);   
+    
+    $ADMIN->add('theme_utessential', $temp);
     
      /* Category Settings */
-    $temp = new admin_settingpage('theme_essential_categoryicon', get_string('categoryiconheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_categoryicon', get_string('categoryiconheadingsub', 'theme_essential'),
-            format_text(get_string('categoryicondesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_categoryicon', get_string('categoryiconheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_categoryicon', get_string('categoryiconheadingsub', 'theme_utessential'),
+            format_text(get_string('categoryicondesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
     
     // Enable Category Icon Styling
-    $name = 'theme_essential/usecategoryicon';
-    $title = get_string('usecategoryicon', 'theme_essential');
-    $description = get_string('usecategoryicondesc', 'theme_essential');
+    $name = 'theme_utessential/usecategoryicon';
+    $title = get_string('usecategoryicon', 'theme_utessential');
+    $description = get_string('usecategoryicondesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Default Icon Selector.
-    $name = 'theme_essential/defaultcategoryicon';
-    $title = get_string('defaultcategoryicon' , 'theme_essential');
-    $description = get_string('defaultcategoryicondesc', 'theme_essential');
+    $name = 'theme_utessential/defaultcategoryicon';
+    $title = get_string('defaultcategoryicon' , 'theme_utessential');
+    $description = get_string('defaultcategoryicondesc', 'theme_utessential');
     $default = 'f07c';
     $choices = array(
         'f000' => 'fa-glass',
@@ -1395,23 +1449,24 @@ defined('MOODLE_INTERNAL') || die;
         'f192' => 'fa-dot-circle-o',
         'f193' => 'fa-wheelchair',
         'f194' => 'fa-vimeo-square',
-        'f195' => 'fa-try'
+        'f195' => 'fa-try',
+        'e600' => 'fa-sm'
     );
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for Category Icons
-    $name = 'theme_essential/categoryiconinfo';
-    $heading = get_string('categoryiconinfo', 'theme_essential');
-    $information = get_string('categoryiconinfodesc', 'theme_essential');
+    $name = 'theme_utessential/categoryiconinfo';
+    $heading = get_string('categoryiconinfo', 'theme_utessential');
+    $information = get_string('categoryiconinfodesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Category Icons.
-    $name = 'theme_essential/categoryicon';
-    $title = get_string('categoryicon' , 'theme_essential');
-    $description = get_string('categoryicondesc', 'theme_essential');
+    $name = 'theme_utessential/categoryicon';
+    $title = get_string('categoryicon' , 'theme_utessential');
+    $description = get_string('categoryicondesc', 'theme_utessential');
     $choices = array_merge(array('' => 'Use Default'), $choices);
 
     foreach (range(1, 20) as $categorynumber) {
@@ -1421,97 +1476,97 @@ defined('MOODLE_INTERNAL') || die;
         $temp->add($setting);
     }
 
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
-    $temp = new admin_settingpage('theme_essential_mobileapps', get_string('mobileappsheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_mobileapps', get_string('mobileappsheadingsub', 'theme_essential'),
-            format_text(get_string('mobileappsdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_mobileapps', get_string('mobileappsheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_mobileapps', get_string('mobileappsheadingsub', 'theme_utessential'),
+            format_text(get_string('mobileappsdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
     // Android App url setting.
-    $name = 'theme_essential/android';
-    $title = get_string('android', 'theme_essential');
-    $description = get_string('androiddesc', 'theme_essential');
+    $name = 'theme_utessential/android';
+    $title = get_string('android', 'theme_utessential');
+    $description = get_string('androiddesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // iOS App url setting.
-    $name = 'theme_essential/ios';
-    $title = get_string('ios', 'theme_essential');
-    $description = get_string('iosdesc', 'theme_essential');
+    $name = 'theme_utessential/ios';
+    $title = get_string('ios', 'theme_utessential');
+    $description = get_string('iosdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for iOS Icons
-    $name = 'theme_essential/iosiconinfo';
-    $heading = get_string('iosicon', 'theme_essential');
-    $information = get_string('iosicondesc', 'theme_essential');
+    $name = 'theme_utessential/iosiconinfo';
+    $heading = get_string('iosicon', 'theme_utessential');
+    $information = get_string('iosicondesc', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // iPhone Icon.
-    $name = 'theme_essential/iphoneicon';
-    $title = get_string('iphoneicon', 'theme_essential');
-    $description = get_string('iphoneicondesc', 'theme_essential');
+    $name = 'theme_utessential/iphoneicon';
+    $title = get_string('iphoneicon', 'theme_utessential');
+    $description = get_string('iphoneicondesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'iphoneicon');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // iPhone Retina Icon.
-    $name = 'theme_essential/iphoneretinaicon';
-    $title = get_string('iphoneretinaicon', 'theme_essential');
-    $description = get_string('iphoneretinaicondesc', 'theme_essential');
+    $name = 'theme_utessential/iphoneretinaicon';
+    $title = get_string('iphoneretinaicon', 'theme_utessential');
+    $description = get_string('iphoneretinaicondesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'iphoneretinaicon');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // iPad Icon.
-    $name = 'theme_essential/ipadicon';
-    $title = get_string('ipadicon', 'theme_essential');
-    $description = get_string('ipadicondesc', 'theme_essential');
+    $name = 'theme_utessential/ipadicon';
+    $title = get_string('ipadicon', 'theme_utessential');
+    $description = get_string('ipadicondesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'ipadicon');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // iPad Retina Icon.
-    $name = 'theme_essential/ipadretinaicon';
-    $title = get_string('ipadretinaicon', 'theme_essential');
-    $description = get_string('ipadretinaicondesc', 'theme_essential');
+    $name = 'theme_utessential/ipadretinaicon';
+    $title = get_string('ipadretinaicon', 'theme_utessential');
+    $description = get_string('ipadretinaicondesc', 'theme_utessential');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'ipadretinaicon');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
     /* User Alerts */
-    $temp = new admin_settingpage('theme_essential_alerts', get_string('alertsheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_alerts', get_string('alertsheadingsub', 'theme_essential'),
-            format_text(get_string('alertsdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_alerts', get_string('alertsheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_alerts', get_string('alertsheadingsub', 'theme_utessential'),
+            format_text(get_string('alertsdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
     
     //This is the descriptor for Alert One
-    $name = 'theme_essential/alert1info';
-    $heading = get_string('alert1', 'theme_essential');
+    $name = 'theme_utessential/alert1info';
+    $heading = get_string('alert1', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Enable Alert
-    $name = 'theme_essential/enable1alert';
-    $title = get_string('enablealert', 'theme_essential');
-    $description = get_string('enablealertdesc', 'theme_essential');
+    $name = 'theme_utessential/enable1alert';
+    $title = get_string('enablealert', 'theme_utessential');
+    $description = get_string('enablealertdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Alert Type.
-    $name = 'theme_essential/alert1type';
-    $title = get_string('alerttype' , 'theme_essential');
-    $description = get_string('alerttypedesc', 'theme_essential');
-    $alert_info = get_string('alert_info', 'theme_essential');
-    $alert_warning = get_string('alert_warning', 'theme_essential');
-    $alert_general = get_string('alert_general', 'theme_essential');
+    $name = 'theme_utessential/alert1type';
+    $title = get_string('alerttype' , 'theme_utessential');
+    $description = get_string('alerttypedesc', 'theme_utessential');
+    $alert_info = get_string('alert_info', 'theme_utessential');
+    $alert_warning = get_string('alert_warning', 'theme_utessential');
+    $alert_general = get_string('alert_general', 'theme_utessential');
     $default = 'info';
     $choices = array('info'=>$alert_info, 'error'=>$alert_warning, 'success'=>$alert_general);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -1519,45 +1574,45 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Alert Title.
-    $name = 'theme_essential/alert1title_'.current_language();
-    $title = get_string('alerttitle', 'theme_essential');
-    $description = get_string('alerttitledesc', 'theme_essential');
+    $name = 'theme_utessential/alert1title_'.current_language();
+    $title = get_string('alerttitle', 'theme_utessential');
+    $description = get_string('alerttitledesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Alert Text.
-    $name = 'theme_essential/alert1text_'.current_language();
-    $title = get_string('alerttext', 'theme_essential');
-    $description = get_string('alerttextdesc', 'theme_essential');
+    $name = 'theme_utessential/alert1text_'.current_language();
+    $title = get_string('alerttext', 'theme_utessential');
+    $description = get_string('alerttextdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for Alert Two
-    $name = 'theme_essential/alert2info';
-    $heading = get_string('alert2', 'theme_essential');
+    $name = 'theme_utessential/alert2info';
+    $heading = get_string('alert2', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Enable Alert
-    $name = 'theme_essential/enable2alert';
-    $title = get_string('enablealert', 'theme_essential');
-    $description = get_string('enablealertdesc', 'theme_essential');
+    $name = 'theme_utessential/enable2alert';
+    $title = get_string('enablealert', 'theme_utessential');
+    $description = get_string('enablealertdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Alert Type.
-    $name = 'theme_essential/alert2type';
-    $title = get_string('alerttype' , 'theme_essential');
-    $description = get_string('alerttypedesc', 'theme_essential');
-    $alert_info = get_string('alert_info', 'theme_essential');
-    $alert_warning = get_string('alert_warning', 'theme_essential');
-    $alert_general = get_string('alert_general', 'theme_essential');
+    $name = 'theme_utessential/alert2type';
+    $title = get_string('alerttype' , 'theme_utessential');
+    $description = get_string('alerttypedesc', 'theme_utessential');
+    $alert_info = get_string('alert_info', 'theme_utessential');
+    $alert_warning = get_string('alert_warning', 'theme_utessential');
+    $alert_general = get_string('alert_general', 'theme_utessential');
     $default = 'info';
     $choices = array('info'=>$alert_info, 'error'=>$alert_warning, 'success'=>$alert_general);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -1565,45 +1620,45 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Alert Title.
-    $name = 'theme_essential/alert2title_'.current_language();
-    $title = get_string('alerttitle', 'theme_essential');
-    $description = get_string('alerttitledesc', 'theme_essential');
+    $name = 'theme_utessential/alert2title_'.current_language();
+    $title = get_string('alerttitle', 'theme_utessential');
+    $description = get_string('alerttitledesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Alert Text.
-    $name = 'theme_essential/alert2text_'.current_language();
-    $title = get_string('alerttext', 'theme_essential');
-    $description = get_string('alerttextdesc', 'theme_essential');
+    $name = 'theme_utessential/alert2text_'.current_language();
+    $title = get_string('alerttext', 'theme_utessential');
+    $description = get_string('alerttextdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     //This is the descriptor for Alert Three
-    $name = 'theme_essential/alert3info';
-    $heading = get_string('alert3', 'theme_essential');
+    $name = 'theme_utessential/alert3info';
+    $heading = get_string('alert3', 'theme_utessential');
     $setting = new admin_setting_heading($name, $heading, $information);
     $temp->add($setting);
     
     // Enable Alert
-    $name = 'theme_essential/enable3alert';
-    $title = get_string('enablealert', 'theme_essential');
-    $description = get_string('enablealertdesc', 'theme_essential');
+    $name = 'theme_utessential/enable3alert';
+    $title = get_string('enablealert', 'theme_utessential');
+    $description = get_string('enablealertdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Alert Type.
-    $name = 'theme_essential/alert3type';
-    $title = get_string('alerttype' , 'theme_essential');
-    $description = get_string('alerttypedesc', 'theme_essential');
-    $alert_info = get_string('alert_info', 'theme_essential');
-    $alert_warning = get_string('alert_warning', 'theme_essential');
-    $alert_general = get_string('alert_general', 'theme_essential');
+    $name = 'theme_utessential/alert3type';
+    $title = get_string('alerttype' , 'theme_utessential');
+    $description = get_string('alerttypedesc', 'theme_utessential');
+    $alert_info = get_string('alert_info', 'theme_utessential');
+    $alert_warning = get_string('alert_warning', 'theme_utessential');
+    $alert_general = get_string('alert_general', 'theme_utessential');
     $default = 'info';
     $choices = array('info'=>$alert_info, 'error'=>$alert_warning, 'success'=>$alert_general);
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
@@ -1611,57 +1666,57 @@ defined('MOODLE_INTERNAL') || die;
     $temp->add($setting);
     
     // Alert Title.
-    $name = 'theme_essential/alert3title_'.current_language();
-    $title = get_string('alerttitle', 'theme_essential');
-    $description = get_string('alerttitledesc', 'theme_essential');
+    $name = 'theme_utessential/alert3title_'.current_language();
+    $title = get_string('alerttitle', 'theme_utessential');
+    $description = get_string('alerttitledesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Alert Text.
-    $name = 'theme_essential/alert3text_'.current_language();
-    $title = get_string('alerttext', 'theme_essential');
-    $description = get_string('alerttextdesc', 'theme_essential');
+    $name = 'theme_utessential/alert3text_'.current_language();
+    $title = get_string('alerttext', 'theme_utessential');
+    $description = get_string('alerttextdesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
             
     
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
     
     /* Analytics Settings */
-    $temp = new admin_settingpage('theme_essential_analytics', get_string('analyticsheading', 'theme_essential'));
-	$temp->add(new admin_setting_heading('theme_essential_analytics', get_string('analyticsheadingsub', 'theme_essential'),
-            format_text(get_string('analyticsdesc' , 'theme_essential'), FORMAT_MARKDOWN)));
+    $temp = new admin_settingpage('theme_utessential_analytics', get_string('analyticsheading', 'theme_utessential'));
+	$temp->add(new admin_setting_heading('theme_utessential_analytics', get_string('analyticsheadingsub', 'theme_utessential'),
+            format_text(get_string('analyticsdesc' , 'theme_utessential'), FORMAT_MARKDOWN)));
     
     // Enable Analytics
-    $name = 'theme_essential/useanalytics';
-    $title = get_string('useanalytics', 'theme_essential');
-    $description = get_string('useanalyticsdesc', 'theme_essential');
+    $name = 'theme_utessential/useanalytics';
+    $title = get_string('useanalytics', 'theme_utessential');
+    $description = get_string('useanalyticsdesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Google Analytics ID
-    $name = 'theme_essential/analyticsid';
-    $title = get_string('analyticsid', 'theme_essential');
-    $description = get_string('analyticsiddesc', 'theme_essential');
+    $name = 'theme_utessential/analyticsid';
+    $title = get_string('analyticsid', 'theme_utessential');
+    $description = get_string('analyticsiddesc', 'theme_utessential');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
     // Clean Analytics URL
-    $name = 'theme_essential/analyticsclean';
-    $title = get_string('analyticsclean', 'theme_essential');
-    $description = get_string('analyticscleandesc', 'theme_essential');
+    $name = 'theme_utessential/analyticsclean';
+    $title = get_string('analyticsclean', 'theme_utessential');
+    $description = get_string('analyticscleandesc', 'theme_utessential');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
         
-    $ADMIN->add('theme_essential', $temp);
+    $ADMIN->add('theme_utessential', $temp);
 

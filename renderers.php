@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Essential theme with the underlying Bootstrap theme.
+ * UT Essential theme with the underlying Bootstrap theme.
  *
  * @package    theme
- * @subpackage Essential
+ * @subpackage UT Essential
  * @author     Julian (@moodleman) Ridden
  * @author     Based on code originally written by G J Bernard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

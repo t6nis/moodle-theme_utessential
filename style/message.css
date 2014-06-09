@@ -1,0 +1,31 @@
+.message .messagearea .messagehistory .left {
+background-color:#BEF781;
+width:auto;
+border:1px solid #ddd;
+-moz-border-radius:8px;
+border-radius:8px;
+margin:5px;
+padding:5px 20px;
+}
+
+.message .messagearea .messagehistory .right {
+background-color:#E6E6E6;
+width:auto;
+border:1px solid #ddd;
+-moz-border-radius:8px;
+border-radius:8px;
+margin:5px;
+padding:5px 20px;
+}
+
+.message div.contactselector fieldset {
+    border:0px;
+    margin-top:10px;
+}
+.message div.contactselector .paging {
+    word-wrap: break-word;
+    margin-bottom:10px;
+}
+.message .deletemessage img:hover {
+    cursor:pointer;
+}

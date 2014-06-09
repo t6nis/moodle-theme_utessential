@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The Essential theme is built upon the Bootstrapbase theme.
+ * The UT Essential theme is built upon the Bootstrapbase theme.
  *
  * @package    theme
- * @subpackage Essential
+ * @subpackage UT Essential
  * @author     Julian (@moodleman) Ridden
  * @author     Based on code originally written by G J Bernard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,11 +28,11 @@ $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasboringlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->theme->settings->layout;
 $hasanalytics = (empty($PAGE->theme->settings->useanalytics)) ? false : $PAGE->theme->settings->useanalytics;
 
-theme_essential_check_colours_switch();
-theme_essential_initialise_colourswitcher($PAGE);
+theme_utessential_check_colours_switch();
+theme_utessential_initialise_colourswitcher($PAGE);
 
 $bodyclasses = array();
-$bodyclasses[] = 'essential-colours-' . theme_essential_get_colours();
+$bodyclasses[] = 'utessential-colours-' . theme_utessential_get_colours();
  
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
@@ -90,7 +90,7 @@ echo $OUTPUT->doctype() ?>
     </div>
     <!-- End Main Regions -->
 
-    <footer id="page-footer" class="container-fluid">
+    <footer id="page-footer-space" class="container-fluid">
             <?php echo $OUTPUT->standard_footer_html() ;?>     
     </footer>
 
@@ -104,25 +104,5 @@ echo $OUTPUT->doctype() ?>
 <?php } ?>
 <!-- End Google Analytics -->
 
-<script type="text/javascript">
-jQuery(document).ready(function() {
-    var offset = 220;
-    var duration = 500;
-    jQuery(window).scroll(function() {
-        if (jQuery(this).scrollTop() > offset) {
-            jQuery('.back-to-top').fadeIn(duration);
-        } else {
-            jQuery('.back-to-top').fadeOut(duration);
-        }
-    });
-    
-    jQuery('.back-to-top').click(function(event) {
-        event.preventDefault();
-        jQuery('html, body').animate({scrollTop: 0}, duration);
-        return false;
-    })
-});
-</script>
-<a href="#top" class="back-to-top" title="<?php print_string('backtotop', 'theme_essential'); ?>"><i class="fa fa-angle-up "></i></a>
 </body>
 </html>

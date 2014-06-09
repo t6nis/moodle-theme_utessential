@@ -10,7 +10,7 @@
                 <p><?php echo $slide1caption ?></p>
             <?php } ?>
             <?php if ($hasslide1url) { ?>
-                <a href="<?php echo $slide1url ?>" class="da-link" target="_blank"><?php echo get_string('readmore','theme_utessential')?></a>
+                <a href="<?php echo $slide1url ?>" class="da-link"><?php echo get_string('readmore','theme_utessential')?></a>
             <?php } ?>
             <?php if ($hasslide1image) { ?>
             <div class="da-img"><img src="<?php echo $slide1image ?>" alt="<?php echo $slide1 ?>"></div>
@@ -26,7 +26,7 @@
                 <p><?php echo $slide2caption ?></p>
             <?php } ?>
             <?php if ($hasslide2url) { ?>
-                <a href="<?php echo $slide2url ?>" class="da-link" target="_blank"><?php echo get_string('readmore','theme_utessential')?></a>
+                <a href="<?php echo $slide2url ?>" class="da-link"><?php echo get_string('readmore','theme_utessential')?></a>
             <?php } ?>
             <?php if ($hasslide2image) { ?>
             <div class="da-img"><img src="<?php echo $slide2image ?>" alt="<?php echo $slide2 ?>"></div>
@@ -42,7 +42,7 @@
                 <p><?php echo $slide3caption ?></p>
             <?php } ?>
             <?php if ($hasslide3url) { ?>
-                <a href="<?php echo $slide3url ?>" class="da-link" target="_blank"><?php echo get_string('readmore','theme_utessential')?></a>
+                <a href="<?php echo $slide3url ?>" class="da-link"><?php echo get_string('readmore','theme_utessential')?></a>
             <?php } ?>
             <?php if ($hasslide3image) { ?>
             <div class="da-img"><img src="<?php echo $slide3image ?>" alt="<?php echo $slide3 ?>"></div>
@@ -58,7 +58,7 @@
                 <p><?php echo $slide4caption ?></p>
             <?php } ?>
             <?php if ($hasslide4url) { ?>
-                <a href="<?php echo $slide4url ?>" class="da-link" target="_blank"><?php echo get_string('readmore','theme_utessential')?></a>
+                <a href="<?php echo $slide4url ?>" class="da-link"><?php echo get_string('readmore','theme_utessential')?></a>
             <?php } ?>
             <?php if ($hasslide4image) { ?>
             <div class="da-img"><img src="<?php echo $slide4image ?>" alt="<?php echo $slide4 ?>"></div>

@@ -1,45 +1,45 @@
-body.essential-colours-alternative3 {
+body.utessential-colours-alternative3 {
     border-top-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 a,
-.essential-colours-alternative3 a:visited {
+.utessential-colours-alternative3 a,
+.utessential-colours-alternative3 a:visited {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 a:hover {
+.utessential-colours-alternative3 a:hover {
     color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .color {
+.utessential-colours-alternative3 .color {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 h1#title {
+.utessential-colours-alternative3 h1#title {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #headerlogo {
+.utessential-colours-alternative3 #headerlogo {
     border-right-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .breadcrumb-button input[type="submit"] {
+.utessential-colours-alternative3 .breadcrumb-button input[type="submit"] {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .breadcrumb-button input[type="submit"]:hover {
+.utessential-colours-alternative3 .breadcrumb-button input[type="submit"]:hover {
     background: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 a.website:hover,
-.essential-colours-alternative3 a.website:focus {
+.utessential-colours-alternative3 a.website:hover,
+.utessential-colours-alternative3 a.website:focus {
     background-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .dropdown-menu > li > a:hover,
-.essential-colours-alternative3 .dropdown-menu > li > a:focus,
-.essential-colours-alternative3 .dropdown-submenu:hover > a,
-.essential-colours-alternative3 .dropdown-submenu:focus > a {
+.utessential-colours-alternative3 .dropdown-menu > li > a:hover,
+.utessential-colours-alternative3 .dropdown-menu > li > a:focus,
+.utessential-colours-alternative3 .dropdown-submenu:hover > a,
+.utessential-colours-alternative3 .dropdown-submenu:focus > a {
     background-color: [[setting:alternativethemecolor3]];
     background-image: -moz-linear-gradient(top, [[setting:alternativethemecolor3]], [[setting:alternativethemehovercolor3]]);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from([[setting:alternativethemecolor3]]), to([[setting:alternativethemehovercolor3]]));
@@ -48,201 +48,201 @@ body.essential-colours-alternative3 {
     background-image: linear-gradient(to bottom, [[setting:alternativethemecolor3]], [[setting:alternativethemehovercolor3]]);
 }
     
-.essential-colours-alternative3 .navbar-inner {
+.utessential-colours-alternative3 .navbar-inner {
     border-top-color: [[setting:alternativethemehovercolor3]] !important;
     border-bottom: 1px solid [[setting:alternativethemehovercolor3]] !important;
     background-color: [[setting:alternativethemecolor3]] !important;
 }
 
-.essential-colours-alternative3 .navbar .nav {
+.utessential-colours-alternative3 .navbar .nav {
     border-right-color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .navbar .nav > li > a {
+.utessential-colours-alternative3 .navbar .nav > li > a {
     border-left-color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .navbar .nav > li > a:hover {
+.utessential-colours-alternative3 .navbar .nav > li > a:hover {
     background: [[setting:alternativethemehovercolor3]] !important;
 }
 
-.essential-colours-alternative3 .navbar .nav .active > a,
-.essential-colours-alternative3 .navbar .nav .active > a:hover,
-.essential-colours-alternative3 .navbar .nav .active > a:focus,
-.essential-colours-alternative3 .navbar .nav li.dropdown.open > .dropdown-toggle,
-.essential-colours-alternative3 .navbar .nav li.dropdown.active > .dropdown-toggle,
-.essential-colours-alternative3 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+.utessential-colours-alternative3 .navbar .nav .active > a,
+.utessential-colours-alternative3 .navbar .nav .active > a:hover,
+.utessential-colours-alternative3 .navbar .nav .active > a:focus,
+.utessential-colours-alternative3 .navbar .nav li.dropdown.open > .dropdown-toggle,
+.utessential-colours-alternative3 .navbar .nav li.dropdown.active > .dropdown-toggle,
+.utessential-colours-alternative3 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background: [[setting:alternativethemecolor3]] !important;
 }
 
-.essential-colours-alternative3 .navbar .nav > li > a {
+.utessential-colours-alternative3 .navbar .nav > li > a {
     border-left-color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .course-content ul.topics li.section.main.clearfix.current {
+.utessential-colours-alternative3 .course-content ul.topics li.section.main.clearfix.current {
     box-shadow: 0 0 10px [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .firstword {
+.utessential-colours-alternative3 .firstword {
     color: [[setting:alternativethemecolor3]] !important;
 }
     
-.essential-colours-alternative3 .forumpost .picture img {
+.utessential-colours-alternative3 .forumpost .picture img {
     box-shadow: 0 0 3px [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .forumpost .subject {
+.utessential-colours-alternative3 .forumpost .subject {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .button a,
-.essential-colours-alternative3 .button a:visited {
+.utessential-colours-alternative3 .button a,
+.utessential-colours-alternative3 .button a:visited {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 a#button,
-.essential-colours-alternative3 a#button:visited {
+.utessential-colours-alternative3 a#button,
+.utessential-colours-alternative3 a#button:visited {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 a#button:hover {
+.utessential-colours-alternative3 a#button:hover {
     background: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .da-slider {
+.utessential-colours-alternative3 .da-slider {
 	border-top-color: [[setting:alternativethemecolor3]];
 	border-bottom-color:  [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .block .header .title h2:before {
+.utessential-colours-alternative3 .block .header .title h2:before {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .block_rss_client .footer a {
+.utessential-colours-alternative3 .block_rss_client .footer a {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .block_rss_client .footer a:hover {
+.utessential-colours-alternative3 .block_rss_client .footer a:hover {
     background: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .block_login .footer a {
+.utessential-colours-alternative3 .block_login .footer a {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .block_login .footer a:hover {
+.utessential-colours-alternative3 .block_login .footer a:hover {
     background: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 #page-site-index h2.headingblock:before {
+.utessential-colours-alternative3 #page-site-index h2.headingblock:before {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .service i {
+.utessential-colours-alternative3 .service i {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #page-footer {
+.utessential-colours-alternative3 #page-footer {
     border-top-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #page-footer .footnote a,
-.essential-colours-alternative3 #page-footer .footnote a:visited {
+.utessential-colours-alternative3 #page-footer .footnote a,
+.utessential-colours-alternative3 #page-footer .footnote a:visited {
     color: [[setting:alternativethemecolor3]] !important;
 }
 
-.essential-colours-alternative3 #page-footer .block_html ul li:before,
-.essential-colours-alternative3 #greyboxright ul li:before {
+.utessential-colours-alternative3 #page-footer .block_html ul li:before,
+.utessential-colours-alternative3 #greyboxright ul li:before {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #page-footer .tree_item.branch:before {
+.utessential-colours-alternative3 #page-footer .tree_item.branch:before {
     color: [[setting:alternativethemecolor3]];
 }
     
-.essential-colours-alternative3 #page-footer .block_login input[type="submit"] {
+.utessential-colours-alternative3 #page-footer .block_login input[type="submit"] {
     background: [[setting:alternativethemecolor3]];
 }
     
-.essential-colours-alternative3 #page-footer .block_login input[type="submit"]:hover {
+.utessential-colours-alternative3 #page-footer .block_login input[type="submit"]:hover {
     background: [[setting:alternativethemehovercolor3]];
 }
     
-.essential-colours-alternative3 #page-footer .block_rss_client .content a {
+.utessential-colours-alternative3 #page-footer .block_rss_client .content a {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .afeature:hover {
+.utessential-colours-alternative3 .afeature:hover {
     border-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .afmatter i {
+.utessential-colours-alternative3 .afmatter i {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .myprofileitem.picture:hover {
+.utessential-colours-alternative3 .myprofileitem.picture:hover {
     border-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .socials img:hover {
+.utessential-colours-alternative3 .socials img:hover {
     -webkit-box-shadow: 0 0 10px 0 [[setting:alternativethemecolor3]];
     -moz-box-shadow: 0 0 10px 0 [[setting:alternativethemecolor3]];
     box-shadow: 0 0 10px 0 [[setting:alternativethemecolor3]];
 }
  
-.essential-colours-alternative3 .nav-tabs > li > a {
+.utessential-colours-alternative3 .nav-tabs > li > a {
     background-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .nav-tabs > li > a:hover {
+.utessential-colours-alternative3 .nav-tabs > li > a:hover {
     background-color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .nav-collapse {
+.utessential-colours-alternative3 .nav-collapse {
     border-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .performanceinfo var {
+.utessential-colours-alternative3 .performanceinfo var {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .performanceinfo h2:before {
+.utessential-colours-alternative3 .performanceinfo h2:before {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #page-mod-quiz-edit .questionbankwindow.block div.header {
+.utessential-colours-alternative3 #page-mod-quiz-edit .questionbankwindow.block div.header {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 table#user-grades th.item,
-.essential-colours-alternative3 table#user-grades th.categoryitem,
-.essential-colours-alternative3 table#user-grades th.courseitem {
+.utessential-colours-alternative3 table#user-grades th.item,
+.utessential-colours-alternative3 table#user-grades th.categoryitem,
+.utessential-colours-alternative3 table#user-grades th.courseitem {
     border-bottom-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 table#user-grades td.controls,
-.essential-colours-alternative3 .path-grade-report-grader table tr.avg .cell,
-.essential-colours-alternative3 .path-grade-report-grader table tr.range .cell {
+.utessential-colours-alternative3 table#user-grades td.controls,
+.utessential-colours-alternative3 .path-grade-report-grader table tr.avg .cell,
+.utessential-colours-alternative3 .path-grade-report-grader table tr.range .cell {
     background-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .path-grade-report-grader table#fixed_column th {
+.utessential-colours-alternative3 .path-grade-report-grader table#fixed_column th {
      border-right-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .back-to-top {
+.utessential-colours-alternative3 .back-to-top {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .course_category_tree .category[data-categoryid]:hover {
+.utessential-colours-alternative3 .course_category_tree .category[data-categoryid]:hover {
     background: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .course_category_tree .category[data-categoryid] > .info > .categoryname a:before {
+.utessential-colours-alternative3 .course_category_tree .category[data-categoryid] > .info > .categoryname a:before {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #dock {
+.utessential-colours-alternative3 #dock {
     background: [[setting:alternativethemecolor3]];
 }
 
@@ -250,39 +250,39 @@ body.essential-colours-alternative3 {
     background-color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #dock .dockedtitle:hover,
-.essential-colours-alternative3 #dock .dockedtitle:focus,
-.essential-colours-alternative3 #dock .dockedtitle:active,
-.essential-colours-alternative3 #dock .dockedtitle.active,
-.essential-colours-alternative3 #dock .dockedtitle.disabled,
-.essential-colours-alternative3 #dock .dockedtitle[disabled] {
+.utessential-colours-alternative3 #dock .dockedtitle:hover,
+.utessential-colours-alternative3 #dock .dockedtitle:focus,
+.utessential-colours-alternative3 #dock .dockedtitle:active,
+.utessential-colours-alternative3 #dock .dockedtitle.active,
+.utessential-colours-alternative3 #dock .dockedtitle.disabled,
+.utessential-colours-alternative3 #dock .dockedtitle[disabled] {
     background-color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .commands {
+.utessential-colours-alternative3 .commands {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .commands a:hover {
+.utessential-colours-alternative3 .commands a:hover {
     color: [[setting:alternativethemehovercolor3]];
 }
 
-.essential-colours-alternative3 .drag-handle::before {
+.utessential-colours-alternative3 .drag-handle::before {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .drag-handle a {
+.utessential-colours-alternative3 .drag-handle a {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 #section_footer {
+.utessential-colours-alternative3 #section_footer {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .nav_icon {
+.utessential-colours-alternative3 .nav_icon {
     color: [[setting:alternativethemecolor3]];
 }
 
-.essential-colours-alternative3 .nav_icon:hover {
+.utessential-colours-alternative3 .nav_icon:hover {
     color: [[setting:alternativethemehovercolor3]];
 }

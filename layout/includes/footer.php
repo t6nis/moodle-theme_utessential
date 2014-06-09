@@ -19,7 +19,7 @@
  * Moodle's new Bootstrap theme engine
  *
  *
- * @package   theme_essential
+ * @package   theme_utessential
  * @copyright 2013 Julian Ridden
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,17 +37,16 @@ $hasfooterright = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->re
 ?>
 	<div class="row-fluid">
 		<?php
-            		echo $OUTPUT->essentialblocks($footerl, 'span4');
+            		echo $OUTPUT->utessentialblocks($footerl, 'span4');
 
-            		echo $OUTPUT->essentialblocks($footerm, 'span4');
+            		echo $OUTPUT->utessentialblocks($footerm, 'span4');
 
-            		echo $OUTPUT->essentialblocks($footerr, 'span4');
+            		echo $OUTPUT->utessentialblocks($footerr, 'span4');
 		?>
  	</div>
 
 	<div class="footerlinks row-fluid">
     	<hr>
-    	<p class="helplink"><?php echo page_doc_link(get_string('moodledocslink')); ?></p>
     <?php if ($hascopyright) {
         echo '<p class="copy">&copy; '.date("Y").' '.$hascopyright.'</p>';
     } ?>

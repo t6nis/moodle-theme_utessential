@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The Essential theme is built upon the Bootstrapbase theme.
+ * The UT Essential theme is built upon the Bootstrapbase theme.
  *
  * @package    theme
- * @subpackage Essential
+ * @subpackage UT Essential
  * @author     Julian (@moodleman) Ridden
  * @author     Based on code originally written by G J Bernard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,12 +29,12 @@ $hasboringlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->them
 $hasanalytics = (empty($PAGE->theme->settings->useanalytics)) ? false : $PAGE->theme->settings->useanalytics;
 $sideregionsmaxwidth = (!empty($PAGE->theme->settings->sideregionsmaxwidth));
 
-theme_essential_check_colours_switch();
-theme_essential_initialise_colourswitcher($PAGE);
+theme_utessential_check_colours_switch();
+theme_utessential_initialise_colourswitcher($PAGE);
 
 $bodyclasses = array();
 $bodyclasses[] = 'three-column';
-$bodyclasses[] = 'essential-colours-' . theme_essential_get_colours();
+$bodyclasses[] = 'utessential-colours-' . theme_utessential_get_colours();
 if ($sideregionsmaxwidth) {
     $bodyclasses[] = 'side-regions-with-max-width';
 }
@@ -86,29 +86,21 @@ echo $OUTPUT->doctype() ?>
 
 <!-- Start Main Regions -->
 <div id="page" class="container-fluid">
-    <div id="page-content" class="row-fluid">
+    <div id="page-content" class="row-fluid">        
         <div id="<?php echo $regionbsid ?>" class="span9">
             <div class="row-fluid">
-            	<?php if ($hasboringlayout) { ?>
-                <section id="region-main" class="span8 pull-right">
-                <?php } else { ?>
-                <section id="region-main" class="span8 desktop-first-column">
-                <?php } ?>
+                <section id="region-main" class="span9 pull-right">
                 	<div id="page-navbar" class="clearfix">
-            			<nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
-            			<div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
-        			</div>
+                            <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
+                            <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
+                        </div>
                     <?php
                     echo $OUTPUT->course_content_header();
                     echo $OUTPUT->main_content();
                     echo $OUTPUT->course_content_footer();
                     ?>
                 </section>
-                <?php if ($hasboringlayout) { ?>
-                <?php echo $OUTPUT->blocks('side-pre', 'span4 desktop-first-column'); ?>
-                <?php } else { ?>
-                <?php echo $OUTPUT->blocks('side-pre', 'span4 pull-right'); ?>
-                <?php } ?>
+                <?php echo $OUTPUT->blocks('side-pre', 'span3 desktop-first-column'); ?>
             </div>
         </div>
         <?php echo $OUTPUT->blocks('side-post', 'span3'); ?>
@@ -116,8 +108,8 @@ echo $OUTPUT->doctype() ?>
     
     <!-- End Main Regions -->
 
-	<footer id="page-footer" class="container-fluid">
-		<?php require_once(dirname(__FILE__).'/includes/footer.php'); ?>
+	<footer id="page-footer-space" class="container-fluid">
+		<?php //require_once(dirname(__FILE__).'/includes/footer.php'); ?>
 	</footer>
 
     <?php echo $OUTPUT->standard_end_of_body_html() ?>
@@ -130,25 +122,5 @@ echo $OUTPUT->doctype() ?>
 <?php } ?>
 <!-- End Google Analytics -->
 
-<script type="text/javascript">
-jQuery(document).ready(function() {
-    var offset = 220;
-    var duration = 500;
-    jQuery(window).scroll(function() {
-        if (jQuery(this).scrollTop() > offset) {
-            jQuery('.back-to-top').fadeIn(duration);
-        } else {
-            jQuery('.back-to-top').fadeOut(duration);
-        }
-    });
-    
-    jQuery('.back-to-top').click(function(event) {
-        event.preventDefault();
-        jQuery('html, body').animate({scrollTop: 0}, duration);
-        return false;
-    })
-});
-</script>
-<a href="#top" class="back-to-top" title="<?php print_string('backtotop', 'theme_essential'); ?>"><i class="fa fa-angle-up "></i></a>
 </body>
 </html>

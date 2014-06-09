@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The Essential theme is built upon the Bootstrapbase theme.
+ * The UT Essential theme is built upon the Bootstrapbase theme.
  *
  * @package    theme
- * @subpackage Essential
+ * @subpackage UT Essential
  * @author     Julian (@moodleman) Ridden
  * @author     Based on code originally written by G J Bernard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -42,7 +42,11 @@ $hasslide4 = (!empty($PAGE->theme->settings->slide4));
 $hasslide4image = (!empty($PAGE->theme->settings->slide4image));
 $hasslide4caption = (!empty($PAGE->theme->settings->slide4caption));
 $hasslide4url = (!empty($PAGE->theme->settings->slide4url));
-$hasslideshow = ($hasslide1||$hasslide2||$hasslide3||$hasslide4);
+$hasslide5 = (!empty($PAGE->theme->settings->slide5));
+$hasslide5image = (!empty($PAGE->theme->settings->slide5image));
+$hasslide5caption = (!empty($PAGE->theme->settings->slide5caption));
+$hasslide5url = (!empty($PAGE->theme->settings->slide5url));
+$hasslideshow = ($hasslide1||$hasslide2||$hasslide3||$hasslide4||$hasslide5);
 $hasanalytics = (empty($PAGE->theme->settings->useanalytics)) ? false : $PAGE->theme->settings->useanalytics;
 
 $hasalert1 = (empty($PAGE->theme->settings->enable1alert)) ? false : $PAGE->theme->settings->enable1alert;
@@ -119,12 +123,26 @@ if ($hasslide4url) {
     $slide4url = $PAGE->theme->settings->slide4url;
 }
 
-theme_essential_check_colours_switch();
-theme_essential_initialise_colourswitcher($PAGE);
+/* slide5 settings */
+if ($hasslide5) {
+    $slide5 = $PAGE->theme->settings->slide5;
+}
+if ($hasslide5image) {
+    $slide5image = $PAGE->theme->setting_file_url('slide5image', 'slide5image');
+}
+if ($hasslide5caption) {
+    $slide5caption = $PAGE->theme->settings->slide5caption;
+}
+if ($hasslide5url) {
+    $slide5url = $PAGE->theme->settings->slide5url;
+}
+
+theme_utessential_check_colours_switch();
+theme_utessential_initialise_colourswitcher($PAGE);
 
 $bodyclasses = array();
 $bodyclasses[] = 'two-column';
-$bodyclasses[] = 'essential-colours-' . theme_essential_get_colours();
+$bodyclasses[] = 'utessential-colours-' . theme_utessential_get_colours();
 if ($sideregionsmaxwidth) {
     $bodyclasses[] = 'side-regions-with-max-width';
 }
@@ -307,9 +325,9 @@ echo $OUTPUT->doctype() ?>
     <?php if (is_siteadmin()) { ?>
 	<div class="hidden-blocks">
     	<div class="row-fluid">
-        	<h4><?php echo get_string('visibleadminonly', 'theme_essential') ?></h4>
+        	<h4><?php echo get_string('visibleadminonly', 'theme_utessential') ?></h4>
             <?php
-                echo $OUTPUT->essentialblocks('hidden-dock');
+                echo $OUTPUT->utessentialblocks('hidden-dock');
             ?>
     	</div>
 	</div>
@@ -328,26 +346,6 @@ echo $OUTPUT->doctype() ?>
 	<?php require_once(dirname(__FILE__).'/includes/analytics.php'); ?>
 <?php } ?>
 <!-- End Google Analytics -->
-
-<script type="text/javascript">
-jQuery(document).ready(function() {
-    var offset = 220;
-    var duration = 500;
-    jQuery(window).scroll(function() {
-        if (jQuery(this).scrollTop() > offset) {
-            jQuery('.back-to-top').fadeIn(duration);
-        } else {
-            jQuery('.back-to-top').fadeOut(duration);
-        }
-    });
-    
-    jQuery('.back-to-top').click(function(event) {
-        event.preventDefault();
-        jQuery('html, body').animate({scrollTop: 0}, duration);
-        return false;
-    })
-});
-</script>
 
 </body>
 </html>
