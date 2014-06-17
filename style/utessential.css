@@ -445,3 +445,9 @@ img.userpicture {
     position: relative;
     margin-right:3px;
 }
+.section .activity .contentwithoutlink, .section .activity .activityinstance {
+    min-height:20px;
+}
+.moodle-actionmenu[data-enhanced].show .menu a {
+    padding:2px 1em 2px 14px;
+}

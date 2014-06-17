@@ -570,6 +570,360 @@ class theme_utessential_format_topics_renderer extends format_topics_renderer {
 require_once($CFG->dirroot . '/course/renderer.php');
 
 class theme_utessential_core_course_renderer extends core_course_renderer {
+    
+    //Check if module exists in course_modules
+    private function check_course_module_exists($cmid) {
+        global $DB;
+
+        if ($DB->record_exists('course_modules', array('id' => $cmid))) {
+            return true;
+        } else {            
+            return false;
+        }
+    }
+    
+    /**
+     * Renders HTML to display a list of course modules in a course section
+     * Also displays "move here" controls in Javascript-disabled mode
+     *
+     * This function calls {@link core_course_renderer::course_section_cm()}
+     *
+     * @param stdClass $course course object
+     * @param int|stdClass|section_info $section relative section number or section object
+     * @param int $sectionreturn section number to return to
+     * @param int $displayoptions
+     * @return void
+     */
+    public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
+        global $USER, $DB;
+
+        $output = '';
+        $modinfo = get_fast_modinfo($course);
+        if (is_object($section)) {
+            $section = $modinfo->get_section_info($section->section);
+        } else {
+            $section = $modinfo->get_section_info($section);
+        }
+        $completioninfo = new completion_info($course);
+
+        // check if we are currently in the process of moving a module with JavaScript disabled
+        $ismoving = $this->page->user_is_editing() && ismoving($course->id);
+        if ($ismoving) {
+            $movingpix = new pix_icon('movehere', get_string('movehere'), 'moodle', array('class' => 'movetarget'));
+            $strmovefull = strip_tags(get_string("movefull", "", "'$USER->activitycopyname'"));
+        }
+
+        // Get the list of modules visible to user (excluding the module being moved if there is one)
+        $moduleshtml = array();
+        //Itemlist hack...
+        //* 13.03.2012 custom code start *//  
+        $sectionmods = explode(",", $section->sequence);
+        $cmarr = $sectionmods;
+        $temp_vals = array();
+        $listmap = array();
+        
+        if (isset($modinfo->instances['itemslist'])) {
+            foreach ($modinfo->instances['itemslist'] as $key => $value) {
+                $cm = get_coursemodule_from_instance('itemslist', $key, $course->id);
+                $modsection = $DB->get_record('course_sections', array('id' => $cm->section));
+                $listmap[$cm->id] = $key;                
+                
+                if ($section->section == $modsection->section) {
+                    $all_items = $DB->get_record('itemslist', array('id' => $key), 'id, items');                    
+                    if (!empty($all_items->items)) {
+                        $items = explode(',', $all_items->items);    
+                        $all_lists[$modsection->section][$all_items->id] = $items;
+                        foreach ($items as $key1 => $value1) {
+                            if ($this->check_course_module_exists($value1)) {
+                                $key2 = array_search($value1, $cmarr);
+                                $temp_vals[$cm->id][$key2] = $value1;
+                                unset($cmarr[$key2]);     
+                            }
+                        }
+                    }
+                }                
+            }    
+
+            $order = '';
+
+            $xi1 = 0;
+            $maxxi1 = count($cmarr); 
+            $farr = array();
+
+            foreach ($cmarr as $key1 => $value1) {
+                $xi1++;
+                if (array_key_exists($value1, $temp_vals)) {
+                    
+                    $order .= $value1.($xi1 < $maxxi1 ? ',' : '');
+                    $farr[] = $value1;
+                    $xi2 = 0;
+                    $maxxi2 = count($temp_vals[$value1]);
+                    ksort($temp_vals[$value1]);
+                    $listorder = '';
+                    foreach ($temp_vals[$value1] as $key2 => $value2) {
+                        $xi2++;
+                        $order .= $value2.(($xi2 < $maxxi2) || ($xi1 < $maxxi1) ? ',' : '');
+                        $listorder .= $value2.($xi2 < $maxxi2 ? ',' : '');
+                        $farr[] = $value2;
+                    }
+        
+                    $itemobject = new object();
+                    $itemobject->id = $listmap[$value1];
+                    $itemobject->course = $course->id;
+                    $itemobject->listsection = $section->section;
+                    $itemobject->items = $listorder;
+                    //
+                    $DB->update_record('itemslist', $itemobject);    
+                    
+                } else {                    
+                    $order .= $value1.($xi1 < $maxxi1 ? ',' : '');
+                    $farr[] = $value1;
+                }
+            }
+            $cmarr = $farr;
+            $reorder = implode(',', $cmarr);
+            $section->sequence = $reorder;
+            $sectionmods = $cmarr;
+
+        }
+        //* custom code end */
+        //custom vars
+        $cmod = '';
+        $critems = array();
+
+        if (!empty($modinfo->sections[$section->section])) {
+            
+            foreach ($sectionmods as $modnumber) {
+                $mod = $modinfo->cms[$modnumber];
+
+                if ($ismoving and $mod->id == $USER->activitycopy) {
+                    // do not display moving mod
+                    continue;
+                }
+
+                //21.11.2012 - itemslist improvement
+                if ($mod->modname == 'itemslist') {
+                    $cmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id); 
+                    if (!empty($all_lists)) {
+                        $critems = $all_lists[$section->section][$cmod->instance];
+                    }
+                }
+                
+                $modcontext = context_module::instance($mod->id);
+                $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
+                
+                if (!$canviewhidden && !empty($cmod)) {                    
+                    /*25.03.2013 if itemslist is totally hidden skip continuing processes*/
+                    if (!$cmod->visible) {
+                        continue;
+                    }
+                }
+                //Code end
+
+                if ($modulehtml = $this->course_section_cm($course,
+                        $completioninfo, $mod, $sectionreturn, $displayoptions, $modcontext, $canviewhidden, $cmod, $critems)) {
+                    $moduleshtml[$modnumber] = $modulehtml;
+                }
+            }
+        }
+
+        if (!empty($moduleshtml) || $ismoving) {
+
+            $output .= html_writer::start_tag('ul', array('class' => 'section img-text'));
+
+            foreach ($moduleshtml as $modnumber => $modulehtml) {
+                if ($ismoving) {
+                    $movingurl = new moodle_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
+                    $output .= html_writer::tag('li', html_writer::link($movingurl, $this->output->render($movingpix)),
+                            array('class' => 'movehere', 'title' => $strmovefull));
+                }
+
+                $mod = $modinfo->cms[$modnumber];
+                
+                //Code start
+                $modcontext = context_module::instance($mod->id);
+                $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
+                
+                if (!$canviewhidden && !empty($cmod)) {
+                    if (!$cmod->visible && in_array($mod->id, $critems)) {
+                        $output .= html_writer::end_tag('li');
+                        continue;
+                    }
+                }
+                //Code end
+                
+                $modclasses = 'activity '. $mod->modname. ' modtype_'.$mod->modname. ' '. $mod->extraclasses;
+                $output .= html_writer::start_tag('li', array('class' => $modclasses, 'id' => 'module-'. $mod->id));
+                $output .= $modulehtml;
+                
+                //* Code Start 13.03.2012 *//           
+                if ($mod->modname == 'itemslist') {
+                    $cm = get_coursemodule_from_id('itemslist', $mod->id);
+                    $asd = $DB->get_record('itemslist', array('id' => $cm->instance));
+                    if (!empty($asd->items)) {
+                        $items = explode(',', $asd->items);
+                    } else {
+                        continue;
+                    }
+                }
+
+                if ((!$ismoving && !empty($items) && end($items) == $mod->id)) {   
+                    $output .= html_writer::end_tag('ul');
+                }
+
+                if (!$ismoving && !empty($items) && $mod->modname == 'itemslist') {
+                    $output .= html_writer::start_tag('ul', array('class' => 'itemlistcount', 'id' => 'itemlist-'.$mod->id));
+                    continue;
+                }
+                //* Code End *//
+                $output .= html_writer::end_tag('li');
+            }
+
+            if ($ismoving) {
+                $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
+                $output .= html_writer::tag('li', html_writer::link($movingurl, $this->output->render($movingpix)),
+                        array('class' => 'movehere', 'title' => $strmovefull));
+            }
+
+            $output .= html_writer::end_tag('ul'); // .section
+        }
+
+        return $output;
+    }
+
+    /**
+     * Renders HTML to display one course module in a course section
+     *
+     * This includes link, content, availability, completion info and additional information
+     * that module type wants to display (i.e. number of unread forum posts)
+     *
+     * This function calls:
+     * {@link core_course_renderer::course_section_cm_name()}
+     * {@link cm_info::get_after_link()}
+     * {@link core_course_renderer::course_section_cm_text()}
+     * {@link core_course_renderer::course_section_cm_availability()}
+     * {@link core_course_renderer::course_section_cm_completion()}
+     * {@link course_get_cm_edit_actions()}
+     * {@link core_course_renderer::course_section_cm_edit_actions()}
+     *
+     * @param stdClass $course
+     * @param completion_info $completioninfo
+     * @param cm_info $mod
+     * @param int|null $sectionreturn
+     * @param array $displayoptions
+     * @return string
+     */
+    public function course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array(), $modcontext = '', $canviewhidden = '', $cmod = '', $critems = '') {
+        $output = '';
+        // We return empty string (because course module will not be displayed at all)
+        // if:
+        // 1) The activity is not visible to users
+        // and
+        // 2a) The 'showavailability' option is not set (if that is set,
+        //     we need to display the activity so we can show
+        //     availability info)
+        // or
+        // 2b) The 'availableinfo' is empty, i.e. the activity was
+        //     hidden in a way that leaves no info, such as using the
+        //     eye icon.
+
+        if (!$mod->uservisible &&
+            (empty($mod->showavailability) || empty($mod->availableinfo))) {
+            //21.11.2012 - custom code
+            if (!$canviewhidden && !empty($cmod)) {                          
+                if (isset($critems) && in_array($mod->id, $critems) && end($critems) == $mod->id) {
+                    $output = html_writer::end_tag('li');
+                    return $output;
+                }
+            }
+            //code end
+            return $output;
+        }
+
+        $indentclasses = 'mod-indent';
+        if (!empty($mod->indent)) {
+            $indentclasses .= ' mod-indent-'.$mod->indent;
+            if ($mod->indent > 15) {
+                $indentclasses .= ' mod-indent-huge';
+            }
+        }
+        $output .= html_writer::start_tag('div');
+
+        if ($this->page->user_is_editing()) {
+            $output .= course_get_cm_move($mod, $sectionreturn);
+        }
+
+        $output .= html_writer::start_tag('div', array('class' => 'mod-indent-outer'));
+
+        // This div is used to indent the content.
+        $output .= html_writer::div('', $indentclasses);
+
+        // Start a wrapper for the actual content to keep the indentation consistent
+        $output .= html_writer::start_tag('div');
+
+        // Display the link to the module (or do nothing if module has no url)
+        $cmname = $this->course_section_cm_name($mod, $displayoptions);
+
+        if (!empty($cmname)) {
+            // Start the div for the activity title, excluding the edit icons.
+            $output .= html_writer::start_tag('div', array('class' => 'activityinstance'));
+            $output .= $cmname;
+
+
+            if ($this->page->user_is_editing()) {
+                $output .= ' ' . course_get_cm_rename_action($mod, $sectionreturn);
+            }
+
+            // Module can put text after the link (e.g. forum unread)
+            $output .= $mod->afterlink;
+
+            // Closing the tag which contains everything but edit icons. Content part of the module should not be part of this.
+            $output .= html_writer::end_tag('div'); // .activityinstance
+        }
+
+        // If there is content but NO link (eg label), then display the
+        // content here (BEFORE any icons). In this case cons must be
+        // displayed after the content so that it makes more sense visually
+        // and for accessibility reasons, e.g. if you have a one-line label
+        // it should work similarly (at least in terms of ordering) to an
+        // activity.
+        $contentpart = $this->course_section_cm_text($mod, $displayoptions);
+        $url = $mod->url;
+        if (empty($url)) {
+            $output .= $contentpart;
+        }
+
+        $modicons = '';
+        if ($this->page->user_is_editing()) {
+            $editactions = course_get_cm_edit_actions($mod, $mod->indent, $sectionreturn);
+            $modicons .= ' '. $this->course_section_cm_edit_actions($editactions, $mod, $displayoptions);
+            $modicons .= $mod->afterediticons;
+        }
+
+        $modicons .= $this->course_section_cm_completion($course, $completioninfo, $mod, $displayoptions);
+
+        if (!empty($modicons)) {
+            $output .= html_writer::span($modicons, 'actions');
+        }
+
+        // If there is content AND a link, then display the content here
+        // (AFTER any icons). Otherwise it was displayed before
+        if (!empty($url)) {
+            $output .= $contentpart;
+        }
+
+        // show availability info (if module is not available)
+        $output .= $this->course_section_cm_availability($mod, $displayoptions);
+
+        $output .= html_writer::end_tag('div'); // $indentclasses
+
+        // End of indentation div.
+        $output .= html_writer::end_tag('div');
+
+        $output .= html_writer::end_tag('div');
+        return $output;
+    }
+
     /**
      * Renders html to display a name with the link to the course module on a course page
      *
@@ -586,8 +940,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
     public function course_section_cm_name(cm_info $mod, $displayoptions = array()) {
         global $CFG;
         $output = '';
-        if (!$mod->uservisible &&
-                (empty($mod->showavailability) || empty($mod->availableinfo))) {
+        if (!$mod->uservisible && empty($mod->availableinfo)) {
             // nothing to be displayed to the user
             return $output;
         }
@@ -602,8 +955,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         // Avoid unnecessary duplication: if e.g. a forum name already
         // includes the word forum (or Forum, etc) then it is unhelpful
         // to include that in the accessible description that is added.
-        if (false !== strpos(textlib::strtolower($instancename),
-                textlib::strtolower($altname))) {
+        if (false !== strpos(core_text::strtolower($instancename),
+                core_text::strtolower($altname))) {
             $altname = '';
         }
         // File type after name, for alphabetic lists (screen reader).
@@ -655,8 +1008,14 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 'class' => 'icon activityicon', 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
                 html_writer::tag('span', $instancename . $altname, array('class' => 'instancename'));
         if ($mod->uservisible) {
-            $output .= html_writer::link($url, $activitylink, array('class' => $linkclasses, 'onclick' => $onclick)) .
-                    $groupinglabel;
+            //17.06.2014 - Itemslist
+            if ($mod->modname == 'itemslist') {
+                $output .= html_writer::link('javascript:void(0);', $activitylink, array('id' => $mod->id, 'class' => 'itemslistaction '.$linkclasses, 'onclick' => $onclick)) .
+                        $groupinglabel;
+            } else {
+                $output .= html_writer::link($url, $activitylink, array('class' => $linkclasses, 'onclick' => $onclick)) .
+                        $groupinglabel;
+            }
         } else {
             // We may be displaying this just in order to show information
             // about visibility, without the actual link ($mod->uservisible)
