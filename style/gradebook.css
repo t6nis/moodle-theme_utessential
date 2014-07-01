@@ -78,6 +78,10 @@ table.flexible, .generaltable {
 }
 .path-grade-report-grader .left_scroller {
      width:280px;
+     padding-top:22px;
+}
+.path-grade-report-grader .topscroll {
+    height:18px;
 }
 .path-grade-report-grader div.left_scroller tr, 
 .path-grade-report-grader div.right_scroller tr, 
@@ -85,7 +89,17 @@ table.flexible, .generaltable {
 .path-grade-report-grader div.right_scroller td, 
 .path-grade-report-grader div.left_scroller th, 
 .path-grade-report-grader div.right_scroller th {
-    height:5em;
+    height:3em;
+    font-size:12px;
+}
+.path-grade-report-quickgrader div.left_scroller tr, 
+.path-grade-report-quickgrader div.right_scroller tr, 
+.path-grade-report-quickgrader div.left_scroller td, 
+.path-grade-report-quickgrader div.right_scroller td, 
+.path-grade-report-quickgrader div.left_scroller th, 
+.path-grade-report-quickgrader div.right_scroller th {
+    height:3em;
+    font-size:12px;
 }
 .path-grade-report-grader .right_scroller table#user-grades td.grade {
     height:0;
@@ -101,6 +115,14 @@ table.flexible, .generaltable {
 }
 .path-grade-report-grader table#user-grades tr.avg td.cell {
     border-right:1px solid #ddd;
+    padding:8px;
+}
+.path-grade-report-grader table#user-grades td.grade {
+    padding-right:5px;
+}
+.path-grade-report-grader table#user-grades select, input[type="file"],
+.path-grade-report-quickgrader table#user-grades select, input[type="file"] {
+    height:20px;
 }
 .path-grade-report-grader table#user-grades th.category, 
 .path-grade-report-grader table#user-grades th#studentheader, 
@@ -108,13 +130,26 @@ table.flexible, .generaltable {
     border-right:1px solid #ddd;
 }
 .path-grade-report-grader .left_scroller #fixed_column th#studentheader {
-    height:50px;
+    height:36px;
+}
+.path-grade-report-quickgrader .editing .left_scroller #fixed_column th#studentheader {
+    height:45px;
+}
+.path-grade-report-grader .editing .left_scroller #fixed_column th#studentheader {
+    height:49px;
 }
 .path-grade-report-grader table#fixed_column td.topleft {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
 }
-
+table#user-grades td.controls,
+.path-grade-report-grader table tr.avg .cell, 
+.path-grade-report-grader table tr.range .cell {
+    background-color:#f3ead8;
+}
+table#fixed_column td.controls {
+    padding-top:2px;
+}
 /* Report quickgrader */
 .path-grade-report-quickgrader table#fixed_column th.range {
     border-top:0px solid #ddd;
@@ -137,7 +172,27 @@ table#user-grades th.categoryitem, table#user-grades th.courseitem,
 .path-grade-report-quickgrader .hscroller {
     max-width:1010px !important;
 }
-
+.path-grade-report-quickgrader table#user-grades {
+    margin-top:0px;
+}
+.path-grade-report-quickgrader .generaltable th {
+    padding:0px 5px 0px 5px;
+}
+.path-grade-report-quickgrader .gradeparent.editing table#fixed_column #studentheader {
+    height:3em;
+}
+.path-grade-report-quickgrader .gradeparent.editing table#fixed_column th {
+    height: 6em;
+}
+.path-grade-report-quickgrader .gradeparent.editing table#fixed_column td.controls {
+    padding-top:0px;
+}
+.path-grade-report-grader .gradeparent.editing table#fixed_column th {
+    height:4.9em;
+}
+table.flexible th, .generaltable th, table.flexible td, .generaltable td {
+    padding:5px;
+}
 /* User grade view */
 .user-grade {
     border: 1px solid #ddd;

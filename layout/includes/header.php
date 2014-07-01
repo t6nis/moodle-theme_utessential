@@ -113,100 +113,40 @@ if (strpos($checkuseragent, 'MSIE 8') || strpos($checkuseragent, 'MSIE 7')) {?>
         <div class="span3 pull-right">
             <ul class="socials unstyled">
                 <?php if ($hasgoogleplus) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasgoogleplus; ?>'" class="socialicon googleplus">
-                        <i class="fa fa-google-plus fa-inverse"></i>
-                        <span class="sr-only">Follow us on Google Plus</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasgoogleplus; ?>" class="googleplus" target="_blank"><i class="fa fa-google-plus-square"></i></a></li>
                 <?php } ?>
                 <?php if ($hastwitter) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hastwitter; ?>'" class="socialicon twitter">
-                        <i class="fa fa-twitter fa-inverse"></i>
-                        <span class="sr-only">Follow us on Twitter</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hastwitter; ?>" class="twitter" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
                 <?php } ?>
                 <?php if ($hasfacebook) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasfacebook; ?>'" class="socialicon facebook">
-                        <i class="fa fa-facebook fa-inverse"></i>
-                        <span class="sr-only">Like us on Facebook</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasfacebook; ?>" class="facebook" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
                 <?php } ?>
                 <?php if ($haslinkedin) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $haslinkedin; ?>'" class="socialicon linkedin">
-                        <i class="fa fa-linkedin fa-inverse"></i>
-                        <span class="sr-only">Visit us on LinkedIn</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $haslinkedin; ?>" class="linkedin" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
                 <?php } ?>
                 <?php if ($hasyoutube) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasyoutube; ?>'" class="socialicon youtube">
-                        <i class="fa fa-youtube fa-inverse"></i>
-                        <span class="sr-only">Watch us on Youtube</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasyoutube; ?>" class="youtube" target="_blank"><i class="fa fa-youtube-square"></i></a></li>
                 <?php } ?>
                 <?php if ($hasflickr) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasflickr; ?>'" class="socialicon flickr">
-                        <i class="fa fa-flickr fa-inverse"></i>
-                        <span class="sr-only">See us on Flickr</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasflickr; ?>" class="flickr" target="_blank"><i class="fa fa-flickr"></i></a></li>
                 <?php } ?>
                 <?php if ($haspinterest) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $haspinterest; ?>'" class="socialicon pinterest">
-                        <i class="fa fa-pinterest fa-inverse"></i>
-                        <span class="sr-only">Pin us on Pinterest</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $haspinterest; ?>" class="pinterest" target="_blank"><i class="fa fa-pinterest-square"></i></a></li>
                 <?php } ?>
                 <?php if ($hassm) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hassm; ?>'" class="socialicon sm">
-                        <i class="fa fa-sm fa-inverse"></i>
-                        <span class="sr-only">Social Media</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hassm; ?>" class="sm" target="_blank"><i class="fa fa-sm"></i></a></li>
                 <?php } ?>
                 <?php if ($hasinstagram) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasinstagram; ?>'" class="socialicon instagram">
-                        <i class="fa fa-instagram fa-inverse"></i>
-                        <span class="sr-only">Follow us on Instagram</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasinstagram; ?>" class="instagram" target="_blank"><span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"></i></span></a></li>
                 <?php } ?>
                 <?php if ($hasvk) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasvk; ?>'" class="socialicon vk">
-                        <i class="fa fa-vk fa-inverse"></i>
-                        <span class="sr-only">Follow us on VK</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasvk; ?>" class="vk" target="_blank"><span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"></i></span></a></li>
                 <?php } ?>
                 <?php if ($hasskype) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $hasskype; ?>'" class="socialicon skype">
-                        <i class="fa fa-skype fa-inverse"></i>
-                        <span class="sr-only">Contact us on Skype</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $hasskype; ?>" class="skype" target="_blank"><span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-skype fa-stack-1x fa-inverse"></i></span></a></li>
                 <?php } ?>
                 <?php if ($haswebsite) { ?>
-                <li>
-                    <button type="button" ONCLICK="window.location.href='<?php echo $haswebsite; ?>'" class="socialicon website">
-                        <i class="fa fa-globe fa-inverse"></i>
-                        <span class="sr-only">Visit our website</span>
-                    </button>
-                </li>
+                <li><a href="<?php echo $haswebsite; ?>" class="website" target="_blank"><i class="fa fa-share-square"></i></a></li>
                 <?php } ?>
 	    </ul>
         </div>

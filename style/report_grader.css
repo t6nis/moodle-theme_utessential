@@ -1,0 +1,76 @@
+/* Gradebook general styles */
+table#user-grades {
+    border-color:#ddd;
+    border-width:0px;
+}
+.path-grade-report-grader div.left_scroller tr,
+.path-grade-report-grader div.right_scroller tr,
+.path-grade-report-grader div.left_scroller td,
+.path-grade-report-grader div.right_scroller td,
+.path-grade-report-grader div.left_scroller th,
+.path-grade-report-grader div.right_scroller th,
+.ie.path-grade-report-grader table#fixed_column th,
+.ie.path-grade-report-grader div.left_scroller td {
+    height: 2.5em;
+    font-size: 12px;
+}
+.path-grade-report-grader div.gradeparent.editing div.left_scroller tr,
+.path-grade-report-grader div.gradeparent.editing div.right_scroller tr,
+.path-grade-report-grader div.gradeparent.editing div.left_scroller td,
+.path-grade-report-grader div.gradeparent.editing div.right_scroller td,
+.path-grade-report-grader div.gradeparent.editing div.left_scroller th,
+.path-grade-report-grader div.gradeparent.editing div.right_scroller th {
+    font-size: 12px;
+    height:4.5em;
+}
+.path-grade-report-grader .left_scroller {
+    padding-top: 22px;
+}
+.path-grade-report-grader select, 
+.path-grade-report-grader input[type="file"] {
+    height: auto;
+}
+.path-grade-report-grader .right_scroller td select {
+    font-size:100%;
+}
+.path-grade-report-grader select, 
+.path-grade-report-grader textarea, 
+.path-grade-report-grader input[type="text"], 
+.path-grade-report-grader input[type="password"], 
+.path-grade-report-grader input[type="datetime"], 
+.path-grade-report-grader input[type="datetime-local"], 
+.path-grade-report-grader input[type="date"], 
+.path-grade-report-grader input[type="month"], 
+.path-grade-report-grader input[type="time"], 
+.path-grade-report-grader input[type="week"], 
+.path-grade-report-grader input[type="number"], 
+.path-grade-report-grader input[type="email"], 
+.path-grade-report-grader input[type="url"], 
+.path-grade-report-grader input[type="search"], 
+.path-grade-report-grader input[type="tel"], 
+.path-grade-report-grader input[type="color"], 
+.path-grade-report-grader .uneditable-input {
+    margin-bottom:0px;
+}
+.path-grade-report-grader td input.text {
+    max-width:100px;
+}
+.path-grade-report-grader table#fixed_column th.lastcol {
+    border-right-color: #ddd;
+}
+.path-grade-report-grader .gradeparent.editing table#fixed_column th.lastcol {
+    height:4.5em !important;  
+}
+.path-grade-report-grader table#user-grades th.item, 
+.path-grade-report-grader table#user-grades th.categoryitem, 
+.path-grade-report-grader table#user-grades th.courseitem {
+    border-bottom-color: #ddd;
+}
+.path-grade-report-grader table#user-grades td.controls, 
+.path-grade-report-grader table tr.avg .cell, 
+.path-grade-report-grader table tr.range .cell {
+    background-color: #eee;
+}
+.path-grade-report-grader .firstinitial {
+    margin-top:0px;
+}

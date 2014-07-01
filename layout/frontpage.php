@@ -276,6 +276,8 @@ echo $OUTPUT->doctype() ?>
 
 <!-- Start Middle Blocks -->
 <?php 
+    //20.06.2014 - dont show placeholders if not logged in
+    if (isloggedin()) {
 	if($PAGE->theme->settings->frontpagemiddleblocks==1) {
 		require_once(dirname(__FILE__).'/includes/middleblocks.php');
 	} else if($PAGE->theme->settings->frontpagemiddleblocks==2 && !isloggedin()) {
@@ -283,6 +285,7 @@ echo $OUTPUT->doctype() ?>
 	} else if($PAGE->theme->settings->frontpagemiddleblocks==3 && isloggedin()) {
 		require_once(dirname(__FILE__).'/includes/middleblocks.php');
 	} 
+    }
 ?>
 <!-- End Middle Blocks -->
 
@@ -292,9 +295,8 @@ echo $OUTPUT->doctype() ?>
 	?>
 	<div class="bor" style="margin-top: 10px;"></div>	
 <?php }?>
-<!-- End Frontpage Content -->
-
-
+        
+    <!-- End Frontpage Content -->
     <div id="page-content" class="row-fluid">
     	<?php if ($hasfrontpageblocks==1) { ?>
         <section id="region-main" class="span8 pull-right">
@@ -319,7 +321,6 @@ echo $OUTPUT->doctype() ?>
         }
         ?>
     </div>
-    
     <!-- End Main Regions -->
 
     <?php if (is_siteadmin()) { ?>
@@ -333,7 +334,7 @@ echo $OUTPUT->doctype() ?>
 	</div>
 	<?php } ?>
 
-	<footer id="page-footer" class="container-fluid">
+	<footer id="page-footer" class="container-fluid" style="margin-top:-20px;">
 		<?php require_once(dirname(__FILE__).'/includes/footer.php'); ?>
 	</footer>
 

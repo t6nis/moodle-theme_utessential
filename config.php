@@ -33,11 +33,11 @@ $THEME->name = 'utessential';
 $THEME->doctype = 'html5';
 $THEME->yuicssmodules = array();
 $THEME->parents = array('bootstrapbase');
-$THEME->sheets = array('slides', 'categories', 'font-awesome.min', 'essential', 'alternative1', 'alternative2', 'alternative3', 'utessential', 'settings', 'gradebook', 'message');
+$THEME->sheets = array('slides', 'categories', 'font-awesome.min', 'essential', 'utessential', 'settings', 'report_grader', 'report_quickgrader', 'message');
 $THEME->supportscssoptimisation = false;
 $THEME->enable_dock = false;
 
-$THEME->editor_sheets = array();
+$THEME->editor_sheets = array('editor');
 
 $THEME->plugins_exclude_sheets = array(
     'block' => array(
@@ -69,7 +69,7 @@ $THEME->layouts = array(
     'course' => array(
         'file' => 'columns3.php',
         'regions' => array('side-pre', 'side-post', 'footer-left', 'footer-middle', 'footer-right'),
-        'defaultregion' => 'side-post',
+        'defaultregion' => 'side-pre',
         'options' => array('langmenu'=>true),
     ),
     'coursecategory' => array(
@@ -81,7 +81,7 @@ $THEME->layouts = array(
     'incourse' => array(
         'file' => 'columns3.php',
         'regions' => array('side-pre', 'side-post', 'footer-left', 'footer-middle', 'footer-right'),
-        'defaultregion' => 'side-post',
+        'defaultregion' => 'side-pre',
     ),
     // Server administration scripts.
     'admin' => array(

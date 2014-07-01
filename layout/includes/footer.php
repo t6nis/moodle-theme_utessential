@@ -46,7 +46,7 @@ $hasfooterright = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->re
  	</div>
 
 	<div class="footerlinks row-fluid">
-    	<hr>
+    	
     <?php if ($hascopyright) {
         echo '<p class="copy">&copy; '.date("Y").' '.$hascopyright.'</p>';
     } ?>

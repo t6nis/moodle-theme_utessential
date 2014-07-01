@@ -24,9 +24,9 @@ body{
     font-weight: [[setting:bodyweight]];
 }
 
-a, a:visited{
+/*a, a:visited{
     color: [[setting:themecolor]];
-}
+}*/
 
 a:hover{
     color:[[setting:themehovercolor]];

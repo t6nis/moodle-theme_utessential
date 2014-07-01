@@ -23,6 +23,7 @@
  * @author     Based on code originally written by G J Barnard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+ include_once($CFG->libdir . '/coursecatlib.php');
  
  class theme_utessential_core_renderer extends theme_bootstrapbase_core_renderer {
  	
@@ -124,7 +125,7 @@
     }
 		
     protected function render_custom_menu(custom_menu $menu) {
-        global $USER, $CFG;
+        global $USER, $CFG, $PAGE, $OUTPUT;
     	/*
     	* This code replaces adds the current enrolled
     	* courses to the custommenu.
@@ -239,13 +240,43 @@
             foreach ($langs as $langtype => $langname) {
                 $this->language->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
             }
+            
         }
-
+        
+        //20.06.2014 - Categories dropdown
+        if (!isloggedin()) {
+            //Category list
+            $categories = coursecat::get(0)->get_children();  // Parent = 0   ie top-level categories only
+            $icon = '<img src="' . $OUTPUT->pix_url('i/course') . '" class="icon" alt="" />';
+            if ($categories) {   //Check we have categories
+                if (count($categories) > 1 || (count($categories) == 1)) {     // Just print top level category links
+                    $this->categories = $menu->add(get_string('categories'));
+                    foreach ($categories as $category) {
+                        $categoryname = $category->get_formatted_name();
+                        $linkcss = $category->visible ? "" : " class=\"dimmed\" ";
+                        $this->categories->add($icon.$categoryname, new moodle_url('/course/index.php', array('categoryid' => $category->id)));
+                        //"<a $linkcss href=\"$CFG->wwwroot/course/index.php?categoryid=$category->id\">".$icon . $categoryname . "</a>";
+                    }
+                }
+            }
+        }
+        
         $content = '<ul class="nav">';
         foreach ($menu->get_children() as $item) {
             $content .= $this->render_custom_menu_item($item, 1);
         }
-
+        
+        //20.06.2014 - Navbar course search
+        if (!isloggedin()) {
+            //Course search
+            $sform = html_writer::start_tag('form', array('id' => 'navbarcoursesearch', 'action' => new moodle_url('/course/search.php'), 'method' => 'get'));
+            $sform .= html_writer::empty_tag('input', array('type' => 'text', 'id' => 'navsearchbox',
+                'size' => 20, 'name' => 'search', 'value' => '', 'placeholder' => get_string('searchcourses')));
+            $sform .= '<button class="fa fa-search"></button>';
+            $sform .= html_writer::end_tag('form');
+            $content .= '<li>'.$sform.'</li>';
+        }
+            
         return $content.'</ul>';
     }
     
@@ -827,8 +858,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         //     hidden in a way that leaves no info, such as using the
         //     eye icon.
 
-        if (!$mod->uservisible &&
-            (empty($mod->showavailability) || empty($mod->availableinfo))) {
+        if (!$mod->uservisible && (empty($mod->availableinfo))) {
             //21.11.2012 - custom code
             if (!$canviewhidden && !empty($cmod)) {                          
                 if (isset($critems) && in_array($mod->id, $critems) && end($critems) == $mod->id) {

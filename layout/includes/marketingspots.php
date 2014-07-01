@@ -9,7 +9,7 @@
             <?php } ?>
             
             <?php echo $PAGE->theme->settings->marketing1content ?>
-            <p align="right"><a href="<?php echo $PAGE->theme->settings->marketing1buttonurl ?>" id="button"><?php echo $PAGE->theme->settings->marketing1buttontext ?></a></p>
+            <p align="right"><a href="<?php echo $PAGE->theme->settings->marketing1buttonurl ?>" id="button" target="_blank"><?php echo $PAGE->theme->settings->marketing1buttontext ?></a></p>
         </div>
     </div>
     
@@ -23,7 +23,7 @@
             <?php } ?>
             
             <?php echo $PAGE->theme->settings->marketing2content ?>
-            <p align="right"><a href="<?php echo $PAGE->theme->settings->marketing2buttonurl ?>" id="button"><?php echo $PAGE->theme->settings->marketing2buttontext ?></a></p>
+            <p align="right"><a href="<?php echo $PAGE->theme->settings->marketing2buttonurl ?>" id="button" target="_blank"><?php echo $PAGE->theme->settings->marketing2buttontext ?></a></p>
         </div>
     </div>
     
@@ -37,7 +37,7 @@
             <?php } ?>
             
             <?php echo $PAGE->theme->settings->marketing3content ?>
-            <p align="right"><a href="<?php echo $PAGE->theme->settings->marketing3buttonurl ?>" id="button"><?php echo $PAGE->theme->settings->marketing3buttontext ?></a></p>
+            <p align="right"><a href="<?php echo $PAGE->theme->settings->marketing3buttonurl ?>" id="button" target="_blank"><?php echo $PAGE->theme->settings->marketing3buttontext ?></a></p>
         </div>
     </div>
 </div>

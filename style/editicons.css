@@ -14,7 +14,7 @@
 
 #page-mod-glossary-view .commands img,
 #page-calendar-view .commands img {
-	display: inline;
+    /*display: inline;*/
 }
 
 .commands a {
@@ -64,11 +64,12 @@
 	padding-right: 5px;
 }
 
+/*
 .moodle-actionmenu ul .editing_moveright::before,
 .moodle-actionmenu ul .editing_moveleft::before {
 	content: none;
 }
-
+*/
 .section-modchooser-link img {
 	display: none;
 }

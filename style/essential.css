@@ -1560,6 +1560,8 @@ img.profilepicture
 }
 
 .nav-tabs>li>a {
+    padding-top:5px;
+    padding-bottom:5px;
     color: #fff;
     cursor: default;
     border: 1px solid #ddd;
@@ -1695,7 +1697,7 @@ img.profilepicture
 .mform .fitem div.fitemtitle,
 .userprofile dl.list dt,
 .form-horizontal .control-label {
-    width: 140px;
+    width: 160px;
 }
 
 .form-item .form-setting,

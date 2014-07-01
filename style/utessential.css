@@ -43,7 +43,13 @@
         width:80.358974%;
     }*/
     .userprofile dl.list dd {
-        margin-left: 150px;
+        margin-left: 170px;
+    }
+    .row-fluid .span4 {
+        width: 32.6239%;
+    }
+    #page-header #profilepic ul {
+        text-align:center;
     }
 }
 @media (min-width: 980px) and (max-width: 1199px) {
@@ -82,7 +88,13 @@
         width:76.358974%;
     }*/
     .userprofile dl.list dd {
-        margin-left: 150px;
+        margin-left: 170px;
+    }
+    .row-fluid .span4 {
+        width: 32.6239%;
+    }
+    #page-header #profilepic ul {
+        text-align:center;
     }
 }
 
@@ -116,7 +128,10 @@
         width:73.358974%;
     }*/
     .userprofile dl.list dd {
-        margin-left: 150px;
+        margin-left: 170px;
+    }
+    nav .nav-collapse .nav > li > a, nav .nav-collapse .dropdown-menu a {
+        color: #fff;
     }
 }
 body {
@@ -127,6 +142,25 @@ body {
 }
 th,td {
     padding:.5em;
+}
+a, a:visited {
+  color: #0070a8;
+}
+code, pre {
+    font-family: "OpenSans",Arial,Helvetica,sans-serif;
+    font-size:14px;
+}
+.block .content {
+    padding:4px 5px;
+}
+.block .header .block_action {
+    padding:1px 0px;
+}
+.block .header .commands {
+    padding:3px 0px;
+}
+.comment-list .comment-message {
+    font-size:12px;
 }
 /*blockquote, ul, ol, dl {
     margin: 1em;
@@ -148,6 +182,9 @@ table#user-grades .catlevel1,
 }
 .mform fieldset.collapsible legend a.fheader {
     margin-left:0px;
+}
+.form-item, .mform .fitem {
+    margin-bottom:0px;
 }
 .path-user .userprofile .profilepicture {
     width: 120px;
@@ -249,6 +286,10 @@ div.feedback_item_box_left, div.feedback_item_box_right {
 .navbar ul.nav li ul.dropdown-menu li [class^="fa fa-"] {
     color:#033E83;
 }
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+    color: #fff;
+}
 .breadcrumb-nav .breadcrumb {
     /*border-top:2px solid #ddd;
     border-bottom: 2px solid #ddd;*/
@@ -312,7 +353,16 @@ legend {
 table.flexible, .generaltable {
     border: 1px solid #ddd;
 }
-label, input, button, select, textarea {
+.mform label, 
+.mform input, 
+.mform button,
+.mform select, 
+.mform textarea,
+.mform a,
+.{
+    font-size:13px;
+}
+.submissionsummarytable input {
     font-size:13px;
 }
 #grade_edit_tree_table .lastrow {
@@ -450,4 +500,62 @@ img.userpicture {
 }
 .moodle-actionmenu[data-enhanced].show .menu a {
     padding:2px 1em 2px 14px;
+}
+.path-mod-choice .expired {
+    font-weight:bold;
+    text-align:center;
+    font-size:16px;
+    color:#CC4216;
+}
+#page-footer .block_rss_client ul {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+#page-footer .block_rss_client .content .title,
+#page-footer .block_rss_client .content .footer {
+    text-align:center;
+}
+#page-footer .block_rss_client ul li:before {
+    content: "\f105";
+    color: #fff;
+    font-family: FontAwesome;
+    display:inline-block;
+    width:8px;
+    height:13px;
+    margin-right:5px;
+}
+#page-footer .block_rss_client ul li {
+    border: 0px;
+}
+#page-footer .block_rss_client ul li .link {
+    display:inline;
+}
+#page-footer .block_rss_client .content a {
+    color:#fff !important;
+}
+#navbarcoursesearch {
+    padding:8px 15px;
+}
+#navbarcoursesearch input {
+    padding:2px;
+    margin:0px;
+    vertical-align: top;
+    height:17px;
+    font-size:12px;
+}
+#navbarcoursesearch button {
+    margin-bottom:0px;
+}
+.course-content .moodle-actionmenu .editing_assign,
+.section .filler {
+    display:none;
+}
+ul.socials a.youtube:hover {
+    color:#ff0000;
+}
+ul.socials a.facebook:hover {
+    color: #033E83;
+}
+ul.socials a.twitter:hover {
+    color: #08c;
 }
