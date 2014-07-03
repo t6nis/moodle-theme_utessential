@@ -249,6 +249,23 @@ $string['slide3'] = 'Slide Three';
 $string['slide4'] = 'Slide Four';
 $string['slide5'] = 'Slide Five';
 
+//03.07.2014 - slider captions translations
+$string['slide1title'] = 'Title 1';
+$string['slide1caption'] = 'Slide 1';
+$string['slide1url'] = 'http://';
+$string['slide2title'] = 'Title 2';
+$string['slide2caption'] = 'Slide 2';
+$string['slide2url'] = 'http://';
+$string['slide3title'] = 'Title 3';
+$string['slide3caption'] = 'Slide 3';
+$string['slide3url'] = 'http://';
+$string['slide4title'] = 'Title 4';
+$string['slide4caption'] = 'Slide 4';
+$string['slide4url'] = 'http://';
+$string['slide5title'] = 'Title 5';
+$string['slide5caption'] = 'Slide 5';
+$string['slide5url'] = 'http://';
+
 $string['slidetitle'] = 'Slide Title';
 $string['slidetitledesc'] = 'Enter a descriptive title for your slide';
 $string['slideimage'] = 'Slide Image';
@@ -273,6 +290,23 @@ $string['togglemarketingdesc'] = 'Choose if you wish to hide or show the three M
 $string['marketing1'] = 'Marketing Spot One';
 $string['marketing2'] = 'Marketing Spot Two';
 $string['marketing3'] = 'Marketing Spot Three';
+
+//03.07.2014 - Marketing spots strings
+//1
+$string['marketing1title'] = 'Marketingspot 1 title';
+$string['marketing1content'] = 'Marketingspot 1 content';
+$string['marketing1url'] = 'http://';
+$string['marketing1button'] = 'Read more';
+//2
+$string['marketing2title'] = 'Marketingspot 2 title';
+$string['marketing2content'] = 'Marketingspot 2 content';
+$string['marketing2url'] = 'http://';
+$string['marketing2button'] = 'Read more';
+//3
+$string['marketing3title'] = 'Marketingspot 3 title';
+$string['marketing3content'] = 'Marketingspot 3 content';
+$string['marketing3url'] = 'http://';
+$string['marketing3button'] = 'Read more';
 
 $string['marketingtitle'] = 'Title';
 $string['marketingtitledesc'] = 'Title to show in this marketing spot';
