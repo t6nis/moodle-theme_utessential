@@ -33,15 +33,15 @@ $(function() {
             var quizblockwidth = $('#mod_quiz_navblock').width();
             window.setTimeout(showNotice, 3000);        
             $(window).scroll(function (event) {            
-              var y = $(this).scrollTop();  
+              var y = $(this).scrollTop();
               if (y >= top) {
-                $('#page-content #region-pre').css('overflow', 'visible');
-                $('#mod_quiz_navblock').addClass('fixed').css({'position':'absolute', 'top':y-(top-77), 'z-index':'100', 'width' : quizblockwidth});
+                $('#page-content #block-region-side-pre').css('overflow', 'visible');
+                $('#mod_quiz_navblock').addClass('fixed').css({'position':'absolute', 'top':y+10, 'z-index':'100', 'width' : quizblockwidth});
               } else {
                 if ($('#mod_quiz_navblock').hasClass('fixed')) {
-                    $('.block_settings').css('margin-top', (quizblockheight+77)); 
+                    $('.block_settings').css('margin-top', (quizblockheight+(top/2)+10)); 
                 }  
-                $('#mod_quiz_navblock').removeClass('fixed').css({'top': '72px', 'width' : quizblockwidth});                      
+                $('#mod_quiz_navblock').removeClass('fixed').css({'top': top, 'width' : quizblockwidth});                      
               } 
             });
         }
