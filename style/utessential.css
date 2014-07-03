@@ -133,6 +133,23 @@
     nav .nav-collapse .nav > li > a, nav .nav-collapse .dropdown-menu a {
         color: #fff;
     }
+    .navbar ul.nav li ul.dropdown-menu li [class^="fa fa-"] {
+        color: #fff !important;
+    }
+    .navbar ul.nav li ul.dropdown-menu li:hover [class^="fa fa-"]  {
+        color: #033E83 !important;
+    }
+}
+@media (max-width: 767px) {
+    nav .nav-collapse .nav > li > a, nav .nav-collapse .dropdown-menu a {
+        color: #fff;
+    }
+    .navbar ul.nav li ul.dropdown-menu li [class^="fa fa-"] {
+        color: #fff !important;
+    }
+    .navbar ul.nav li ul.dropdown-menu li:hover [class^="fa fa-"]  {
+        color: #033E83 !important;
+    }
 }
 body {
     background:none !important;
