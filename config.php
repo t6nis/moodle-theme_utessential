@@ -33,7 +33,7 @@ $THEME->name = 'utessential';
 $THEME->doctype = 'html5';
 $THEME->yuicssmodules = array();
 $THEME->parents = array('bootstrapbase');
-$THEME->sheets = array('slides', 'categories', 'font-awesome.min', 'essential', 'utessential', 'settings', 'report_grader', 'report_quickgrader', 'message');
+$THEME->sheets = array('slides', 'categories', 'font-awesome.min', 'essential', 'utessential', 'settings', 'report_grader', 'report_quickgrader', 'report_user', 'message');
 $THEME->supportscssoptimisation = false;
 $THEME->enable_dock = false;
 
@@ -67,7 +67,7 @@ $THEME->layouts = array(
     ),
     // Main course page.
     'course' => array(
-        'file' => 'columns3.php',
+        'file' => 'incourse.php',
         'regions' => array('side-pre', 'side-post', 'footer-left', 'footer-middle', 'footer-right'),
         'defaultregion' => 'side-pre',
         'options' => array('langmenu'=>true),

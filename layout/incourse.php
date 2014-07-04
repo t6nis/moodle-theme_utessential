@@ -93,12 +93,13 @@ echo $OUTPUT->doctype() ?>
                 	<div id="page-navbar" class="clearfix">
                             <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
                             <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
-                        </div>                        
+                        </div>
+                        <span class="course-name"><?php echo $PAGE->heading ?></span>
                     <?php
                     echo $OUTPUT->course_content_header();
                     echo $OUTPUT->main_content();
-                    echo $OUTPUT->course_content_footer();
-                    ?>
+                    echo $OUTPUT->course_content_footer();                    ?>
+                    
                 </section>
                 <?php echo $OUTPUT->blocks('side-pre', 'span3 desktop-first-column'); ?>
             </div>

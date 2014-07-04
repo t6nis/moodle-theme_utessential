@@ -244,7 +244,7 @@
         }
         
         //20.06.2014 - Categories dropdown
-        if (!isloggedin()) {
+        if (!isloggedin() || isguestuser()) {
             //Category list
             $categories = coursecat::get(0)->get_children();  // Parent = 0   ie top-level categories only
             $icon = '<img src="' . $OUTPUT->pix_url('i/course') . '" class="icon" alt="" />';
@@ -267,7 +267,7 @@
         }
         
         //20.06.2014 - Navbar course search
-        if (!isloggedin()) {
+        if (!isloggedin() || isguestuser()) {
             //Course search
             $sform = html_writer::start_tag('form', array('id' => 'navbarcoursesearch', 'action' => new moodle_url('/course/search.php'), 'method' => 'get'));
             $sform .= html_writer::empty_tag('input', array('type' => 'text', 'id' => 'navsearchbox',
