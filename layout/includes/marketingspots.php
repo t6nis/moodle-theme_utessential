@@ -9,7 +9,7 @@
             <?php } ?>
             
             <?php echo get_string('marketing1content', 'theme_utessential'); ?>
-            <p align="right"><a href="<?php echo get_string('marketing1url', 'theme_utessential'); ?>" id="button" target="_blank"><?php echo get_string('marketing1button', 'theme_utessential'); ?></a></p>
+            <p class="marketing-button"><a href="<?php echo get_string('marketing1url', 'theme_utessential'); ?>" id="button" target="_blank"><?php echo get_string('marketing1button', 'theme_utessential'); ?></a></p>
         </div>
     </div>
     
@@ -23,7 +23,7 @@
             <?php } ?>
             
             <?php echo get_string('marketing2content', 'theme_utessential'); ?>
-            <p align="right"><a href="<?php echo get_string('marketing2url', 'theme_utessential'); ?>" id="button" target="_blank"><?php echo get_string('marketing3button', 'theme_utessential'); ?></a></p>
+            <p class="marketing-button"><a href="<?php echo get_string('marketing2url', 'theme_utessential'); ?>" id="button" target="_blank"><?php echo get_string('marketing3button', 'theme_utessential'); ?></a></p>
         </div>
     </div>
     
@@ -37,7 +37,7 @@
             <?php } ?>
             
             <?php echo get_string('marketing3content', 'theme_utessential'); ?>
-            <p align="right"><a href="<?php echo get_string('marketing3url', 'theme_utessential'); ?>" id="button" target="_blank"><?php echo get_string('marketing3button', 'theme_utessential'); ?></a></p>
+            <p class="marketing-button"><a href="<?php echo get_string('marketing3url', 'theme_utessential'); ?>" id="button" target="_blank"><?php echo get_string('marketing3button', 'theme_utessential'); ?></a></p>
         </div>
     </div>
 </div>

@@ -330,6 +330,9 @@ div.feedback_item_box_left, div.feedback_item_box_right {
     padding-left:7px;
     padding-right:7px;
 }
+.breadcrumb-nav {
+    margin-bottom:3px;
+}
 .breadcrumb-button a:visited {
     color:#fff;
 }
@@ -484,6 +487,9 @@ img.userpicture {
     font-family: "Oswald", sans-serif;
     font-size:16px;
 }
+#middle-blocks .service .marketing-button {
+    text-align:right;
+}
 #middle-blocks .span4:first-child a#button {
     background-color:#E87E04 !important;
 }
@@ -614,4 +620,5 @@ ul.socials a.twitter:hover {
     margin-left: 7px; 
     text-transform: uppercase; 
     color: #0070a8;
+    line-height:27px;
 }
