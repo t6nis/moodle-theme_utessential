@@ -14,7 +14,7 @@
 
 #page-mod-glossary-view .commands img,
 #page-calendar-view .commands img {
-    /*display: inline;*/
+    display: inline;
 }
 
 .commands a {
