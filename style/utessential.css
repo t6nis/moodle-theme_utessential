@@ -272,6 +272,9 @@ table#user-grades .catlevel1,
 .path-mod-quiz div.feedback {
     color:#000;
 }
+#page-mod-quiz-edit .box.generalbox.questionbank {
+    overflow-x:scroll;
+}
 .path-mod-glossary .glossarypost {
     border: 1px dotted #ddd;
     padding:5px;

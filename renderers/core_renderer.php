@@ -1035,7 +1035,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
         // Display link itself.
         $activitylink = html_writer::empty_tag('img', array('src' => $mod->get_icon_url(),
-                'class' => 'icon activityicon', 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
+                'class' => 'icon activityicon', 'id' => 'image-itemlist-'.$mod->id, 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
                 html_writer::tag('span', $instancename . $altname, array('class' => 'instancename'));
         if ($mod->uservisible) {
             //17.06.2014 - Itemslist
