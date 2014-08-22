@@ -646,37 +646,35 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
         // Get the list of modules visible to user (excluding the module being moved if there is one)
         $moduleshtml = array();
-        //Itemlist hack...
-        //* 13.03.2012 custom code start *//  
-        $sectionmods = explode(",", $section->sequence);
-        $cmarr = $sectionmods;
-        $temp_vals = array();
-        $listmap = array();
+        // Itemlist hack...
+        //* 13.03.2012 Custom code start *//  
+        $sectionmods = explode(',', $section->sequence);
+        $cmarr = $sectionmods; // Course modules array
+        $temp_vals = array(); // Temporary array for manipulation
+        $listmap = array(); // Mapping purpose
         
         if (isset($modinfo->instances['itemslist'])) {
             foreach ($modinfo->instances['itemslist'] as $key => $value) {
                 $cm = get_coursemodule_from_instance('itemslist', $key, $course->id);
                 $modsection = $DB->get_record('course_sections', array('id' => $cm->section));
                 $listmap[$cm->id] = $key;                
-                
                 if ($section->section == $modsection->section) {
-                    $all_items = $DB->get_record('itemslist', array('id' => $key), 'id, items');                    
+                    $all_items = $DB->get_record('itemslist', array('id' => $key), 'id, items');
                     if (!empty($all_items->items)) {
-                        $items = explode(',', $all_items->items);    
+                        $items = explode(',', $all_items->items);
                         $all_lists[$modsection->section][$all_items->id] = $items;
                         foreach ($items as $key1 => $value1) {
                             if ($this->check_course_module_exists($value1)) {
                                 $key2 = array_search($value1, $cmarr);
                                 $temp_vals[$cm->id][$key2] = $value1;
-                                unset($cmarr[$key2]);     
+                                unset($cmarr[$key2]);
                             }
                         }
                     }
                 }                
-            }    
+            }
 
             $order = '';
-
             $xi1 = 0;
             $maxxi1 = count($cmarr); 
             $farr = array();
@@ -691,6 +689,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                     $maxxi2 = count($temp_vals[$value1]);
                     ksort($temp_vals[$value1]);
                     $listorder = '';
+                    
                     foreach ($temp_vals[$value1] as $key2 => $value2) {
                         $xi2++;
                         $order .= $value2.(($xi2 < $maxxi2) || ($xi1 < $maxxi1) ? ',' : '');
@@ -703,9 +702,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                     $itemobject->course = $course->id;
                     $itemobject->listsection = $section->section;
                     $itemobject->items = $listorder;
-                    //
-                    $DB->update_record('itemslist', $itemobject);    
-                    
+                    $DB->update_record('itemslist', $itemobject);                    
                 } else {                    
                     $order .= $value1.($xi1 < $maxxi1 ? ',' : '');
                     $farr[] = $value1;
@@ -715,11 +712,10 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
             $reorder = implode(',', $cmarr);
             $section->sequence = $reorder;
             $sectionmods = $cmarr;
-
         }
-        //* custom code end */
-        //custom vars
-        $cmod = '';
+        //* Custom code end */
+        
+        // Custom vars
         $critems = array();
 
         if (!empty($modinfo->sections[$section->section])) {
@@ -734,25 +730,24 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
                 //21.11.2012 - itemslist improvement
                 if ($mod->modname == 'itemslist') {
-                    $cmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id); 
-                    if (!empty($all_lists)) {
-                        $critems = $all_lists[$section->section][$cmod->instance];
+                    if (!empty($all_lists) && in_array($mod->instance, $all_lists[$section->section])) {
+                        $critems = $all_lists[$section->section][$mod->instance];
                     }
                 }
                 
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
                 
-                if (!$canviewhidden && !empty($cmod)) {                    
+                if (!$canviewhidden && !empty($mod)) {                    
                     /*25.03.2013 if itemslist is totally hidden skip continuing processes*/
-                    if (!$cmod->visible) {
+                    if (!$mod->visible) {
                         continue;
                     }
                 }
                 //Code end
 
                 if ($modulehtml = $this->course_section_cm($course,
-                        $completioninfo, $mod, $sectionreturn, $displayoptions, $modcontext, $canviewhidden, $cmod, $critems)) {
+                        $completioninfo, $mod, $sectionreturn, $displayoptions, $modcontext, $canviewhidden, $mod, $critems)) {
                     $moduleshtml[$modnumber] = $modulehtml;
                 }
             }
@@ -775,8 +770,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
                 
-                if (!$canviewhidden && !empty($cmod)) {
-                    if (!$cmod->visible && in_array($mod->id, $critems)) {
+                if (!$canviewhidden && !empty($mod)) {
+                    if (!$mod->visible && in_array($mod->id, $critems)) {
                         $output .= html_writer::end_tag('li');
                         continue;
                     }
@@ -1035,11 +1030,15 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
         // Display link itself.
         $activitylink = html_writer::empty_tag('img', array('src' => $mod->get_icon_url(),
-                'class' => 'icon activityicon', 'id' => 'image-itemlist-'.$mod->id, 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
+                'class' => 'icon activityicon', 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
                 html_writer::tag('span', $instancename . $altname, array('class' => 'instancename'));
         if ($mod->uservisible) {
             //17.06.2014 - Itemslist
             if ($mod->modname == 'itemslist') {
+        // Display link itself.
+                $activitylink = html_writer::empty_tag('img', array('src' => $mod->get_icon_url(),
+                        'class' => 'icon activityicon', 'id' => 'image-itemlist-'.$mod->id, 'alt' => ' ', 'role' => 'presentation')) . $accesstext .
+                        html_writer::tag('span', $instancename . $altname, array('class' => 'instancename'));
                 $output .= html_writer::link('javascript:void(0);', $activitylink, array('id' => $mod->id, 'class' => 'itemslistaction '.$linkclasses, 'onclick' => $onclick)) .
                         $groupinglabel;
             } else {

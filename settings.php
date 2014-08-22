@@ -1450,7 +1450,7 @@ defined('MOODLE_INTERNAL') || die;
         'f193' => 'fa-wheelchair',
         'f194' => 'fa-vimeo-square',
         'f195' => 'fa-try',
-        'e600' => 'fa-sm'
+        'e601' => 'fa-sm'
     );
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');

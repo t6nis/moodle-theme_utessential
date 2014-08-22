@@ -4,18 +4,17 @@ $(function() {
             return '<span class="firstword">' + match + '</span>';
         });
     });
-	
+
     $('#da-slider').cslider({
         autoplay : true,
         interval : 6000
     });
-        
+
     //Define paths
     var basepath = window.location.protocol+'//'+window.location.hostname+'/';
 
     $('.itemslistaction').click(function(){
         var id = this.id;
-
         if ($('#itemlist-'+id).css('display') == 'none') {
             $('#image-itemlist-'+id).attr('src', basepath+'/theme/image.php?theme=utessential&image=switch_minus&component=itemslist');
             $('#itemlist-'+id).css('display', 'block');
@@ -25,7 +24,7 @@ $(function() {
         }
     });
 
-    //floating quiz_navblock
+    // Floating quiz_navblock.
     if ($('#page-mod-quiz-attempt').length > 0 && $(window).width() > 780) {        
         var top = $('#mod_quiz_navblock').offset().top - parseFloat($('#mod_quiz_navblock').css('margin-top').replace(/auto/, 0));
         var quizblockheight = $('#mod_quiz_navblock').height();    
@@ -44,10 +43,25 @@ $(function() {
           } 
         });
     }
-
+    // Floating quiz notice
     function showNotice() {       
         if ($('#mod_quiz_navblock .othernav #quiz-timer #quiz-time-left').html().length > 0) {
             $('#mod_quiz_navblock .othernav').append("<span style=\"font-weight:bold; color:#CC0033;\">NB! Esita enne aja lõppemist!</span>");
         }        
     }
+    
+    // Nasty hack for group command change icon on click.
+    $('a.menu-action[href*="groupmode"]').click(function(){
+        var imgsrc = $(this).find('img').attr('src');
+        if (imgsrc.search('groupn') != -1) {
+            $(this).removeClass('editing_groupsnone');
+            $(this).addClass('editing_groupsseparate');
+        } else if (imgsrc.search('groups') != -1) {
+            $(this).removeClass('editing_groupsseparate');
+            $(this).addClass('editing_groupsvisible');
+        } else if (imgsrc.search('groupv') != -1) {
+            $(this).removeClass('editing_groupsvisible');
+            $(this).addClass('editing_groupsnone');
+        }
+    });
 });

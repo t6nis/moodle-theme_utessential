@@ -250,6 +250,8 @@ table#user-grades .catlevel1,
 .forumpost .options .commands, .forumpost .content .attachments, .forumpost .options .footer, .forumpost .options .link {
     font-family: "Open Sans", sans-serif;
 }
+.mod-data-default-template .controls {text-align:left;}
+.mod-data-default-template .comment-area .fd {text-align:left;}
 .path-mod-page .modified {
     font-size: 12px;
     font-style: italic;
@@ -274,6 +276,13 @@ table#user-grades .catlevel1,
 }
 #page-mod-quiz-edit .box.generalbox.questionbank {
     overflow-x:scroll;
+}
+#page-mod-quiz-edit div.question div.content div.points {
+    right:70px;
+    width:13.5em;
+}
+#page-mod-quiz-edit div.question div.content div.questioncontrols {
+    width:65px;
 }
 .path-mod-glossary .glossarypost {
     border: 1px dotted #ddd;
@@ -624,4 +633,7 @@ ul.socials a.twitter:hover {
     text-transform: uppercase; 
     color: #0070a8;
     line-height:27px;
+}
+div[role=listbox].mceListBoxMenu div[role=presentation].mceMenu.mceListBoxMenu.moodleSkin {
+    height:190px !important;
 }

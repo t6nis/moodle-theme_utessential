@@ -261,7 +261,13 @@ echo $OUTPUT->doctype() ?>
 	} 
 ?>
 <!-- End Slideshow -->
-
+<!-- Start Frontpage Content -->
+<?php if($PAGE->theme->settings->usefrontcontent == 1) { 
+	echo $PAGE->theme->settings->frontcontentarea;
+	?>
+	<div class="bor" style="margin-top: 10px;"></div>	
+<?php }?>
+<!-- End Frontpage Content -->
 <!-- Start Marketing Spots -->
 <?php 
 	if($PAGE->theme->settings->togglemarketing==1) {
@@ -289,14 +295,6 @@ echo $OUTPUT->doctype() ?>
 ?>
 <!-- End Middle Blocks -->
 
-<!-- Start Frontpage Content -->
-<?php if($PAGE->theme->settings->usefrontcontent ==1) { 
-	echo $PAGE->theme->settings->frontcontentarea;
-	?>
-	<div class="bor" style="margin-top: 10px;"></div>	
-<?php }?>
-        
-    <!-- End Frontpage Content -->
     <div id="page-content" class="row-fluid">
     	<?php if ($hasfrontpageblocks==1) { ?>
         <section id="region-main" class="span8 pull-right">
