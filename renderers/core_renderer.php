@@ -717,7 +717,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         
         // Custom vars
         $critems = array();
-
+        $itemslistmod = '';
+        
         if (!empty($modinfo->sections[$section->section])) {
             
             foreach ($sectionmods as $modnumber) {
@@ -730,24 +731,25 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
                 //21.11.2012 - itemslist improvement
                 if ($mod->modname == 'itemslist') {
-                    if (!empty($all_lists) && in_array($mod->instance, $all_lists[$section->section])) {
-                        $critems = $all_lists[$section->section][$mod->instance];
+                    $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id); 
+                    if (!empty($all_lists)) {
+                        $critems = $all_lists[$section->section][$itemslistmod->instance];
                     }
                 }
                 
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
                 
-                if (!$canviewhidden && !empty($mod)) {                    
-                    /*25.03.2013 if itemslist is totally hidden skip continuing processes*/
-                    if (!$mod->visible) {
+                if (!$canviewhidden && !empty($itemslistmod)) {                    
+                    // 25.03.2013 if itemslist is totally hidden skip continuing processes.
+                    if (!$itemslistmod->visible) {
                         continue;
                     }
                 }
                 //Code end
 
                 if ($modulehtml = $this->course_section_cm($course,
-                        $completioninfo, $mod, $sectionreturn, $displayoptions, $modcontext, $canviewhidden, $mod, $critems)) {
+                        $completioninfo, $mod, $sectionreturn, $displayoptions, $modcontext, $canviewhidden, $itemslistmod, $critems)) {
                     $moduleshtml[$modnumber] = $modulehtml;
                 }
             }
@@ -770,8 +772,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
                 
-                if (!$canviewhidden && !empty($mod)) {
-                    if (!$mod->visible && in_array($mod->id, $critems)) {
+                if (!$canviewhidden && !empty($itemslistmod)) {
+                    if (!$itemslistmod->visible && in_array($mod->id, $critems)) {
                         $output .= html_writer::end_tag('li');
                         continue;
                     }
