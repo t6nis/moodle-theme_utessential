@@ -637,3 +637,6 @@ ul.socials a.twitter:hover {
 div[role=listbox].mceListBoxMenu div[role=presentation].mceMenu.mceListBoxMenu.moodleSkin {
     height:190px !important;
 }
+th, td {
+    padding: .5em;
+}

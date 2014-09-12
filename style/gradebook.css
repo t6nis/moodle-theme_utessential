@@ -78,7 +78,7 @@ table.flexible, .generaltable {
 }
 .path-grade-report-grader .left_scroller {
      width:280px;
-     padding-top:22px;
+     padding-top:0px;
 }
 .path-grade-report-grader .topscroll {
     height:18px;

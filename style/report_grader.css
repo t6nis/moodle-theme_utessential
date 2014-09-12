@@ -24,7 +24,7 @@ table#user-grades {
     height:4.5em;
 }
 .path-grade-report-grader .left_scroller {
-    padding-top: 22px;
+    padding-top: 0px;
 }
 .path-grade-report-grader select, 
 .path-grade-report-grader input[type="file"] {
