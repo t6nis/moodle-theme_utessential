@@ -395,6 +395,10 @@ h2.pagetitle span {
     margin-right: -5px;
 }
 
+#page-mod-journal-view .feedbackbox .left.side {
+    display:block;
+    background-color: transparent !important;
+}
 .left.side {
     display: none;
 }

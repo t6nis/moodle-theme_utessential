@@ -147,12 +147,22 @@ if ($sideregionsmaxwidth) {
     $bodyclasses[] = 'side-regions-with-max-width';
 }
 
+// 13.10.2014 - Meta description update.
+if (current_language() == 'en') {
+    $title = 'University of Tartu Moodle environment';
+    $description = 'University of Tartu Moodle environment.';
+} else {
+    $title = $OUTPUT->page_title();
+    $description = $SITE->summary;
+}
+
 $left = (!right_to_left());  // To know if to add 'pull-right' and 'desktop-first-column' classes in the layout for LTR.
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
-    <title><?php echo $OUTPUT->page_title(); ?></title>
+    <title><?php echo $title ?></title>
     <link rel="shortcut icon" href="<?php echo $OUTPUT->favicon(); ?>" />
+    <meta name="description" content="<?php p(strip_tags(format_text($description, FORMAT_HTML))) ?>" />
     <?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <noscript>
@@ -179,11 +189,12 @@ echo $OUTPUT->doctype() ?>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
+            <span class="navbar-text pull-right"><?php echo $OUTPUT->login_info() ?></span>
             <div class="nav-collapse collapse">
                 <?php echo $OUTPUT->custom_menu(); ?>
                 <ul class="nav pull-right">
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                    <li class="navbar-text"><?php echo $OUTPUT->login_info() ?></li>
+                    <!-- <li class="navbar-text"><?php echo $OUTPUT->login_info() ?></li> -->
                 </ul>
             </div>
         </div>

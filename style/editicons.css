@@ -39,6 +39,11 @@
     cursor:move;
 }
 
+.block .moodle-actionmenu ul.menubar li img::before {
+    display:block;
+    font-family: 'FontAwesome';
+    content: "\f047 ";
+}
 .editing_move::before {
     font-family: 'FontAwesome';
     content: "\f047 ";
@@ -189,4 +194,11 @@
     display: none;
 }
 
+.block-control-actions .moodle-core-dragdrop-draghandle img {
+    font-family: 'FontAwesome';
+    content: "\f047 " !important;
+    margin-right:10px;
+    display:block;
+    color: #0070a8;
+}
 /* @end */

@@ -29,7 +29,7 @@ body{
 }*/
 
 a:hover{
-    color:[[setting:themehovercolor]];
+    /*color:[[setting:themehovercolor]];*/
 }
 
 .color{
@@ -466,7 +466,11 @@ a#button:hover {
 }
 
 .nav-tabs>li>a:hover {
-    background-color: [[setting:themehovercolor]];
+    /*background-color: [[setting:themehovercolor]];*/
+    background-color: #fff;
+    cursor: pointer;
+    color: #555;
+    border-color: #ddd;
 }
 
 .nav-collapse{
