@@ -688,7 +688,7 @@ sub{
 }
 
 /* -- 02.03.2015 Pika testküsimuse override */
-select {
+.formulation select {
     height:auto;
     white-space: normal;
     width: 100% !important;
