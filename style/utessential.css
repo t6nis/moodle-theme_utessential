@@ -686,3 +686,10 @@ sup{
 sub{
     bottom: 0em;
 }
+
+/* -- 02.03.2015 Pika testküsimuse override */
+select {
+    height:auto;
+    white-space: normal;
+    width: 100% !important;
+}
