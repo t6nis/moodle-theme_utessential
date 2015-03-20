@@ -677,3 +677,19 @@ th, td {
     font-family: "Oswald",sans-serif;
     font-size: 16px;
 }
+/* -- 11.02.2015 Sub and Superscript override */
+/* Override for sub and sub characters */
+sup{
+    top: 0em;
+}
+
+sub{
+    bottom: 0em;
+}
+
+/* -- 02.03.2015 Pika testküsimuse override */
+.formulation select {
+    height:auto;
+    white-space: normal;
+    width: 100% !important;
+}
