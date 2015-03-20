@@ -11,7 +11,7 @@ table#user-grades {
 .path-grade-report-grader div.right_scroller th,
 .ie.path-grade-report-grader table#fixed_column th,
 .ie.path-grade-report-grader div.left_scroller td {
-    height: 2.5em;
+    height: 3.5em;
     font-size: 12px;
 }
 .path-grade-report-grader div.gradeparent.editing div.left_scroller tr,
