@@ -58,10 +58,10 @@
         global $COURSE;
         $items = $this->page->navbar->get_items();
         $breadcrumbs = array();
+        //22.10.2012 - changing logic of navbar
+        $titles_arr = array('Osalemiskontroll', 'General', 'Kursuse üldosa');
+        $keys_arr = array('mycourses', 'courses');
         foreach ($items as $item) {
-            //22.10.2012 - changing logic of navbar
-            $titles_arr = array('Osalemiskontroll', 'General', 'Kursuse üldosa');
-            $keys_arr = array('mycourses', 'courses');
 
             if ($item->action === null) {
                 continue;
@@ -72,7 +72,7 @@
             if (in_array($item->title, $titles_arr)) {
                 continue;
             }
-            if (in_array($item->key, $keys_arr)) {
+            if (in_array((string)$item->key, $keys_arr)) {
                 continue;
             }
             $item->hideicon = true;
