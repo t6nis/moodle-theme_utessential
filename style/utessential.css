@@ -556,7 +556,7 @@ img.userpicture {
     min-height:20px;
 }
 .moodle-actionmenu[data-enhanced].show .menu a {
-    padding:2px 1em 2px 14px;
+    padding:2px 1em 2px 28px;
 }
 .path-mod-choice .expired {
     font-weight:bold;
