@@ -171,6 +171,14 @@
     header .container-fluid .row-fluid .span3 {
         padding-right: 80px;
     }
+    body {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    #page {
+        padding-left:10px;
+        padding-right:10px;
+    }
 }
 @media (max-width: 660px) {
     header .container-fluid .row-fluid .span3 {
