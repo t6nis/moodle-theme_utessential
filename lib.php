@@ -844,7 +844,7 @@ function theme_utessential_page_init(moodle_page $page) {
     $page->requires->jquery_plugin('custom', 'theme_utessential'); 
     $page->requires->jquery_plugin('alert', 'theme_utessential');
     $page->requires->jquery_plugin('carousel', 'theme_utessential');
-    $page->requires->jquery_plugin('collapse', 'theme_utessential');
+    //$page->requires->jquery_plugin('collapse', 'theme_utessential');
     $page->requires->jquery_plugin('modal', 'theme_utessential');
     $page->requires->jquery_plugin('scrollspy', 'theme_utessential');
     $page->requires->jquery_plugin('tab', 'theme_utessential');
