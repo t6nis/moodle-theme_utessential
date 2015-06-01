@@ -177,6 +177,12 @@
         display:none;
     }
 }
+@media (max-width: 440px) {
+    #page-header a.logo {
+        height: 50px !important;
+        margin-top: 25px !important;
+    }
+}
 body {
     background:none !important;
     background-color:#fefefe !important;
