@@ -96,6 +96,9 @@
     #page-header #profilepic ul {
         text-align:center;
     }
+    ul.socials {
+        display:inline-flex;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
@@ -139,6 +142,12 @@
     .navbar ul.nav li ul.dropdown-menu li:hover [class^="fa fa-"]  {
         color: #033E83 !important;
     }
+    #profilepic {
+        margin-right:35px;
+    }
+    ul.socials {
+        display:inline-flex;
+    }
 }
 @media (max-width: 767px) {
     nav .nav-collapse .nav > li > a, nav .nav-collapse .dropdown-menu a {
@@ -149,6 +158,23 @@
     }
     .navbar ul.nav li ul.dropdown-menu li:hover [class^="fa fa-"]  {
         color: #033E83 !important;
+    }
+    header .container-fluid .row-fluid {
+        position: relative;
+    }
+    header .container-fluid .row-fluid div {
+        position: absolute;
+    }
+    header .container-fluid .row-fluid .span1 {
+        padding-right: 10px;
+    }
+    header .container-fluid .row-fluid .span3 {
+        padding-right: 80px;
+    }
+}
+@media (max-width: 660px) {
+    header .container-fluid .row-fluid .span3 {
+        display:none;
     }
 }
 body {
