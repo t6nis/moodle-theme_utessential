@@ -287,8 +287,8 @@
  
             $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
  			$branch->add('<em><i class="fa fa-user"></i>'.get_string('profile').'</em>',new moodle_url('/user/profile.php?id='.$USER->id),get_string('profile'));
-                        $branch->add('<em><i class="fa fa-wrench"></i>'.get_string('preferences').'</em>',new moodle_url('/user/preferences.php'),get_string('preferences'));
-                        $branch->add('<em><i class="fa fa-certificate"></i>'.get_string('pluginname', 'gradereport_overview').'</em>',new moodle_url('/grade/report/overview/index.php'),get_string('pluginname', 'gradereport_overview'));
+                        //$branch->add('<em><i class="fa fa-wrench"></i>'.get_string('preferences').'</em>',new moodle_url('/user/preferences.php'),get_string('preferences'));
+                        //$branch->add('<em><i class="fa fa-certificate"></i>'.get_string('pluginname', 'gradereport_overview').'</em>',new moodle_url('/grade/report/overview/index.php'),get_string('pluginname', 'gradereport_overview'));
  			$branch->add('<em><i class="fa fa-calendar"></i>'.get_string('pluginname', 'block_calendar_month').'</em>',new moodle_url('/calendar/view.php'),get_string('pluginname', 'block_calendar_month'));
  			$branch->add('<em><i class="fa fa-envelope"></i>'.get_string('pluginname', 'block_messages').'</em>',new moodle_url('/message/index.php'),get_string('pluginname', 'block_messages'));
  			$branch->add('<em><i class="fa fa-asterisk"></i>'.get_string('badges').'</em>',new moodle_url('/badges/mybadges.php'),get_string('badges'));

@@ -171,6 +171,14 @@
     header .container-fluid .row-fluid .span3 {
         padding-right: 80px;
     }
+    body {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    #page {
+        padding-left:10px;
+        padding-right:10px;
+    }
 }
 @media (max-width: 660px) {
     header .container-fluid .row-fluid .span3 {
@@ -724,4 +732,9 @@ sub{
     height:auto;
     white-space: normal;
     width: 100% !important;
+}
+
+/* 11.08.2015 - Override bootstraps .row class. */
+.row {
+    background-color: transparent !important;
 }
