@@ -733,3 +733,8 @@ sub{
     white-space: normal;
     width: 100% !important;
 }
+
+/* 11.08.2015 - Override bootstraps .row class. */
+.row {
+    background-color: transparent !important;
+}
