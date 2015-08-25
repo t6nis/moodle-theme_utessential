@@ -46,7 +46,12 @@ $(function() {
     // Floating quiz notice
     function showNotice() {       
         if ($('#mod_quiz_navblock .othernav #quiz-timer #quiz-time-left').html().length > 0) {
-            $('#mod_quiz_navblock .othernav').append("<span style=\"font-weight:bold; color:#CC0033;\">NB! Esita enne aja lõppemist!</span>");
+            console.log($('html').attr('lang'));
+            var lang_string = 'NB! Esita enne aja lõppemist!';
+            if ($('html').attr('lang') !== 'et') {
+                lang_string = 'NB! Submit before the time goes out!';
+            }
+            $('#mod_quiz_navblock .othernav').append("<span style=\"font-weight:bold; color:#CC0033;\">"+lang_string+"</span>");
         }        
     }
     
