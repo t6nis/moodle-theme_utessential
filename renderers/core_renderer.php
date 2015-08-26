@@ -1065,7 +1065,65 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         $output .= html_writer::end_tag('div');
         return $output;
     }
-
+    
+    /**
+     * Renders HTML to show course module availability information (for someone who isn't allowed
+     * to see the activity itself, or for staff)
+     *
+     * @param cm_info $mod
+     * @param array $displayoptions
+     * @return string
+     */
+    public function course_section_cm_availability(cm_info $mod, $displayoptions = array()) {
+        global $CFG;
+        if (!$mod->uservisible) {
+            // this is a student who is not allowed to see the module but might be allowed
+            // to see availability info (i.e. "Available from ...")
+            if (!empty($mod->availableinfo)) {
+                $formattedinfo = \core_availability\info::format_info(
+                        $mod->availableinfo, $mod->get_course());
+                $output = html_writer::tag('div', $formattedinfo, array('class' => 'availabilityinfo'));
+            }
+            return $output;
+        }
+        // this is a teacher who is allowed to see module but still should see the
+        // information that module is not available to all/some students
+        $modcontext = context_module::instance($mod->id);
+        $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
+        if ($canviewhidden && !empty($CFG->enableavailability)) {
+            // Don't add availability information if user is not editing and activity is hidden.
+            if ($mod->visible || $this->page->user_is_editing()) {
+                $hidinfoclass = '';
+                if (!$mod->visible) {
+                    $hidinfoclass = 'hide';
+                }
+                $ci = new \core_availability\info_module($mod);
+                $fullinfo = $ci->get_full_information();
+                if ($fullinfo) {
+                    $formattedinfo = \core_availability\info::format_info(
+                            $fullinfo, $mod->get_course());
+                    return html_writer::div($formattedinfo, 'availabilityinfo ' . $hidinfoclass);
+                }
+            }
+        }
+        // 26.08.2015 - If theres is an until option available then show it.
+        if ($mod->visible && !empty($CFG->enableavailability)) {
+            $ci = new \core_availability\info_module($mod);
+            $availability = json_decode($mod->availability);
+            if (isset($availability->c) && count($availability->c) > 1) {
+                foreach ($availability->c as $key => $value) {
+                    if ($value->type == 'date' && $value->d == '<') {
+                        $time = strftime('%d %B %Y, %H:%M', $value->t);
+                        $formattedinfo = get_string('availableuntil', 'theme_utessential').' <strong>'.$time.'</strong>';
+                        return html_writer::div($formattedinfo, 'availabilityinfo ');
+                        
+                    }
+                }
+            }
+        }
+        return '';
+    }
+    
     /**
      * Renders html to display a name with the link to the course module on a course page
      *
