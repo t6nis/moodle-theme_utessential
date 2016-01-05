@@ -243,3 +243,6 @@
 .coursebox>.info>.coursename a {
     background-position: left;
 }
+.subcategories .category h3.categoryname {
+    font-size: 1.3em !important;
+}
