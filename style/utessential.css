@@ -664,6 +664,7 @@ ul.socials a.twitter:hover {
 }
 .loginbox .potentialidps .potentialidplist div {   
     text-align:center;
+    display: inline;
 }
 .loginbox h3, .loginbox .subcontent {
     text-align:center;

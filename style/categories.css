@@ -18,12 +18,12 @@
 /* Create box for each category */ 
 .course_category_tree .category { 
 	position: relative; 
-	float: left; 
+	/*float: left; 
 	width: 180px; 
-	height: 180px; 
-	margin: 5px;
+	height: 180px; */
+	/*margin: 5px;
 	margin-right: 10px;
-	padding: 0px 0px 0px 0px; 
+	padding: 0px 0px 0px 0px; */
 } 
  
 /* Adjust color for disabled categories */ 
@@ -70,19 +70,19 @@
 .course_category_tree .category>.info>.categoryname {
 	background: transparent;
 	border: 0px none;
-	text-align: center;
+	/*text-align: center;*/
 	box-shadow: none;
 }
 
 .course_category_tree .category.with_children>.info>.categoryname a,
 .course_category_tree .category>.info>.categoryname a {
-	color: #000;
-	padding-top: 155px;
-	display: block;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space: nowrap;  
-	width: 176px;
+	/*color: #000;*/
+	/*padding-top: 155px;*/
+	/*display: block;*/
+	/*overflow:hidden;*/
+	/*text-overflow:ellipsis;
+	white-space: nowrap;  */
+	/*width: 176px;*/
 }
 
 .dir-rtl .course_category_tree .category > .info .name {
@@ -103,16 +103,17 @@
 
 /* Place image in each category */ 
 .course_category_tree .category[data-categoryid] { 
-	background: #fff;
+	/*background: #fff;
 	padding: 0px !important;
 	border: 1px solid #e7e7e7;
 	margin-bottom: 10px;
 	border-radius: 5px;
-	border-bottom: 3px solid #eee;
+	border-bottom: 3px solid #eee;*/
+        margin-bottom: 10px;
 }
 
 .course_category_tree .category[data-categoryid]:hover {
-	background: [[setting:themecolor]];
+	/*background: [[setting:themecolor]];*/
 	-webkit-transition: all 0.3s ease;
 	-moz-transition:all 0.3s ease;  
 	-o-transition:all 0.3s ease;  
@@ -121,10 +122,10 @@
 
 .course_category_tree .category[data-categoryid]>.info>.categoryname a:hover {
 	text-decoration: none;
-	color: #fff !important;
+	/*color: #fff !important;*/
 }
 
-.course_category_tree .category[data-categoryid]>.info>.categoryname a:before {
+/*.course_category_tree .category[data-categoryid]>.info>.categoryname a:before {
 	font-family: FontAwesome;
 	font-style: normal;
 	font-weight: normal;
@@ -138,7 +139,7 @@
 	height: 85px;
 	content: "\[[setting:defaultcategoryicon]]";
 	
-}
+}*/
 
 .course_category_tree .category[data-categoryid] > .info > .categoryname a:hover:before {
 	color: #fff !important;
@@ -234,4 +235,7 @@
 /* Hide buttons to expand and collapse */ 
 .jsenabled .course_category_tree .controls {
 	display: none;
+}
+.coursebox>.info>h3.coursename {
+    float:left;
 }
