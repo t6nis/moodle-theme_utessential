@@ -236,6 +236,10 @@
 .jsenabled .course_category_tree .controls {
 	display: none;
 }
-.coursebox>.info>h3.coursename {
+.coursebox>.info>h3.coursename,
+.coursebox>.info>.coursename a {
     float:left;
+}
+.coursebox>.info>.coursename a {
+    background-position: left;
 }
