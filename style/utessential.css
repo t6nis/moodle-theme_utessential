@@ -739,3 +739,8 @@ sub{
 .row {
     background-color: transparent !important;
 }
+
+/* 11.07.2016 - Hide lightboxgallery download link in a course */
+.course-427 #bottomNavDownload {
+    display: none;
+}
