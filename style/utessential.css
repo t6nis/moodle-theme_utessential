@@ -744,3 +744,8 @@ sub{
 .course-427 #bottomNavDownload {
     display: none;
 }
+
+/* 12.07.2016 - Add space after lists */
+.no-overflow ol, .no-overflow ul{
+    margin-bottom: 10px;
+}
