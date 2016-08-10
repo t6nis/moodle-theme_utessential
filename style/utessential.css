@@ -749,3 +749,14 @@ sub{
 .no-overflow ol, .no-overflow ul{
     margin-bottom: 10px;
 }
+
+/* MOODLE-479 10.08.2016 - Grading table width for Feedback */
+#page-mod-assign-view .gradingtable .c6 textarea,
+#page-mod-assign-view .gradingtable .c7 textarea {
+    width: 110px;
+}
+/* MOODLE-479 10.08.2016 - Grading table width for Online text */
+#page-mod-assign-view .gradingtable .c11 p,
+#page-mod-assign-view .gradingtable .c12 p {
+    width: 260px;
+}
