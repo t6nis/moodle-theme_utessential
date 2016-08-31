@@ -760,3 +760,11 @@ sub{
 #page-mod-assign-view .gradingtable .c12 p {
     width: 260px;
 }
+/* MOODLE-479 30.08.2016 - Hide portfolio link from Grading table */
+#page-mod-assign-view .portfolio-add-link {
+    display: none;
+}
+/* 31.08.2016 - Hide Tuhjenda kursus button from enrol/users table */
+#page-enrol-users input#id_resetbutton {
+    display:none;
+}
