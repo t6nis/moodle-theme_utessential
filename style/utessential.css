@@ -773,3 +773,11 @@ sub{
 #page-mod-feedback-edit .editing_update::before {
     display:none;
 }
+
+/* 05.01.2016 - Text aligment in groupselect view */
+#page-mod-groupselect-view .c1 {
+    text-align: left!important;
+}
+#page-mod-groupselect-view .c2 {
+    text-align: center!important;
+}
