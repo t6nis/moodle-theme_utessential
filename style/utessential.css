@@ -768,3 +768,8 @@ sub{
 #page-enrol-users input#id_resetbutton {
     display:none;
 }
+
+/* 05.01.2016 - Hide broken box icon from Feedback */
+#page-mod-feedback-edit .editing_update::before {
+    display:none;
+}
