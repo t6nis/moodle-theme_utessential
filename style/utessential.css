@@ -781,3 +781,8 @@ sub{
 #page-mod-groupselect-view .c2 {
     text-align: center!important;
 }
+
+/* 12.09.2016 - Fix save button being cut off */
+#page-mod-quiz-edit form.quizsavegradesform {
+    margin-left: -6px;
+}
