@@ -786,3 +786,13 @@ sub{
 #page-mod-quiz-edit form.quizsavegradesform {
     margin-left: -6px;
 }
+
+/* 21.09.2016 Hide Tab Display Embed webpage option */
+#page-mod-tab-mod [id^=fitem_id_externalurl_] {
+    display:none;
+}
+
+/* Hide Tab Display Vertical menu option */
+#page-mod-tab-mod #id_menu {
+    display: none;
+}
