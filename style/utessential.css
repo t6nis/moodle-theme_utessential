@@ -796,3 +796,10 @@ sub{
 #page-mod-tab-mod #id_menu {
     display: none;
 }
+
+/* Multianswer quiz select boxes */
+.path-mod-quiz .que.multianswer .formulation select {
+    padding: 0px;
+    margin: 0px;
+    height: 22px;
+}
