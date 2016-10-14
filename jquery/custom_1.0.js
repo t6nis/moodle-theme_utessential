@@ -68,4 +68,7 @@ $(function() {
             $(this).addClass('editing_groupsnone');
         }
     });
+    
+    // -- 14.10.2016 Call out selectmenu() on Multianswer question 
+    $('#page-question-preview.course-4293 .multianswer select, #page-mod-quiz-attempt.course-4293 .multianswer select, #page-mod-quiz-review.course-4293 .multianswer select').selectmenu({});
 });

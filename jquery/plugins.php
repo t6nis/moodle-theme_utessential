@@ -47,5 +47,7 @@ $plugins = array(
     'tooltip'     => array('files' => array('bootstrap_plugins/tooltip_2.3.2.js')),
     'transition'     => array('files' => array('bootstrap_plugins/transition_2.3.2.js')),
     'cslider'     => array('files' => array('cslider_1.0.js')),
-    'custom'   => array('files' => array('custom_1.0.js'))
+    'custom'   => array('files' => array('custom_1.0.js')),
+    'selectmenu' => array('files' => array('ui/jquery.ui.selectmenu.js')),
+    'selectmenu_css' => array('files' => array('ui/jquery.ui.selectmenu.css'))
 );

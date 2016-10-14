@@ -841,7 +841,7 @@ function theme_utessential_set_categoryicon($css, $categoryicon, $categorynumber
 function theme_utessential_page_init(moodle_page $page) {
     $page->requires->jquery();
     $page->requires->jquery_plugin('cslider', 'theme_utessential');
-    $page->requires->jquery_plugin('custom', 'theme_utessential'); 
+    //$page->requires->jquery_plugin('custom', 'theme_utessential'); 
     $page->requires->jquery_plugin('alert', 'theme_utessential');
     $page->requires->jquery_plugin('carousel', 'theme_utessential');
     //$page->requires->jquery_plugin('collapse', 'theme_utessential');
@@ -850,5 +850,11 @@ function theme_utessential_page_init(moodle_page $page) {
     $page->requires->jquery_plugin('tab', 'theme_utessential');
     $page->requires->jquery_plugin('tooltip', 'theme_utessential');
     $page->requires->jquery_plugin('transition', 'theme_utessential');
-    $page->requires->jquery_plugin('modernizr', 'theme_utessential');  
+    $page->requires->jquery_plugin('modernizr', 'theme_utessential');
+    
+    $page->requires->jquery_plugin('ui', 'core');
+    $page->requires->jquery_plugin('ui-css', 'core');
+    $page->requires->jquery_plugin('selectmenu_css', 'theme_utessential');
+    $page->requires->jquery_plugin('selectmenu', 'theme_utessential');
+    $page->requires->jquery_plugin('custom', 'theme_utessential');  
 }
