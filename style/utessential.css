@@ -803,3 +803,12 @@ sub{
     margin: 0px;
     height: 22px;
 }
+
+/* Course 4065 sectionnames */
+.course-4065 h3.sectionname {
+    font-size: 1.4em;
+    line-height: 20px;
+    color: #46112b;
+    font-weight: 600!important;
+    padding: 10px 25px;
+}
