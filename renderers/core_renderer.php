@@ -107,7 +107,10 @@
                 error_log("PERF: " . $perf['txt']);
             }
             if (defined('MDL_PERFTOFOOT') || debugging() || $CFG->perfdebug > 7) {
-                $performanceinfo = utessential_performance_output($perf);
+                if ($USER->id == 2) {                    
+                    $performanceinfo = utessential_performance_output($perf);
+                    print_r($perf);
+                }
             }
         }
 
@@ -777,6 +780,20 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                     $all_items = $DB->get_record('itemslist', array('id' => $key), 'id, items');
                     if (!empty($all_items->items)) {
                         $items = explode(',', $all_items->items);
+                        /* 28.10.2016 - Remove notice. For missing/deleted items.*/
+                        foreach($items as $key3 => $value3) {
+                            if (!$this->check_course_module_exists($value3)) {
+                                unset($items[$key3]);
+                            }
+                        }
+                        // 28.10.2016 - Keep the list always update.
+                        $itemobject = new object();
+                        $itemobject->id = $key;
+                        $itemobject->course = $course->id;
+                        $itemobject->listsection = $section->section;
+                        $itemobject->items = implode(',', $items);
+                        $DB->update_record('itemslist', $itemobject);
+                        //
                         $all_lists[$modsection->section][$all_items->id] = $items;
                         foreach ($items as $key1 => $value1) {
                             if ($this->check_course_module_exists($value1)) {
@@ -847,7 +864,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 //21.11.2012 - itemslist improvement
                 if ($mod->modname == 'itemslist') {
                     $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id); 
-                    if (!empty($all_lists)) {
+                    if (!empty($all_lists) && $itemslistmod->visible) {
                         $critems = $all_lists[$section->section][$itemslistmod->instance];
                     }
                 }
@@ -910,7 +927,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                     }
                 }
 
-                if ((!$ismoving && !empty($items) && end($items) == $mod->id)) {   
+                if ((!$ismoving && !empty($items) && end($items) == $mod->id)) {
                     $output .= html_writer::end_tag('ul');
                 }
 
