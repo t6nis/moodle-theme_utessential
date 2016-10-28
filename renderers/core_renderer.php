@@ -863,8 +863,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
                 //21.11.2012 - itemslist improvement
                 if ($mod->modname == 'itemslist') {
-                    $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id); 
-                    if (!empty($all_lists) && $itemslistmod->visible) {
+                    $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id);
+                    if (!empty($all_lists) && $itemslistmod->visible && in_array($itemslistmod->instance, $all_lists[$section->section])) {
                         $critems = $all_lists[$section->section][$itemslistmod->instance];
                     }
                 }
