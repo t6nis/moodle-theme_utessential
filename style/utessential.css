@@ -812,3 +812,7 @@ sub{
     font-weight: 600!important;
     padding: 10px 25px;
 }
+
+.path-mod-page pre {
+    word-break: normal;
+}
