@@ -794,8 +794,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                         $itemobject->items = implode(',', $items);
                         $DB->update_record('itemslist', $itemobject);
                         //
-                        $all_lists[$modsection->section][$all_items->id] = $items;
-                        foreach ($items as $key1 => $value1) {
+                        $all_lists[$modsection->section][$all_items->id] = $items;           
+                        foreach ($items as $key1 => $value1) {                            
                             if ($this->check_course_module_exists($value1)) {
                                 $key2 = array_search($value1, $cmarr);
                                 $temp_vals[$cm->id][$key2] = $value1;
@@ -903,9 +903,9 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 //Code start
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
-                
-                if (!$canviewhidden && !empty($itemslistmod)) {
-                    if (!$itemslistmod->visible && in_array($mod->id, $critems)) {
+                // modified 09.12.2016
+                if (!$canviewhidden) {
+                    if (in_array($mod->id, $critems)) {
                         $output .= html_writer::end_tag('li');
                         continue;
                     }
@@ -926,7 +926,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                         continue;
                     }
                 }
-
+                
                 if ((!$ismoving && !empty($items) && end($items) == $mod->id)) {
                     $output .= html_writer::end_tag('ul');
                 }
@@ -989,11 +989,12 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
         if (!$mod->uservisible && (empty($mod->availableinfo))) {
             //21.11.2012 - custom code
-            if (!$canviewhidden && !empty($cmod)) {                          
-                if (isset($critems) && in_array($mod->id, $critems) && end($critems) == $mod->id) {
+            if (!$canviewhidden && !empty($cmod)) {  
+                // modified 09.12.2016 
+                /*if (isset($critems) && in_array($mod->id, $critems) && end($critems) == $mod->id) {
                     $output = html_writer::end_tag('li');
-                    return $output;
-                }
+                }*/
+                $output = html_writer::end_tag('li');
             }
             //code end
             return $output;
