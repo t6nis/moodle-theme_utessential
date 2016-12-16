@@ -1,4 +1,4 @@
-$(function() {
+jQuery(document).ready(function($) {
     $("h2.pagetitle span").html(function(i, text) {
         return text.replace(/[a-zàâîïôèéêëèùûü]+/i, function(match) {
             return '<span class="firstword">' + match + '</span>';
@@ -71,4 +71,6 @@ $(function() {
     
     // -- 14.10.2016 Call out selectmenu() on Multianswer question 
     $('#page-question-preview.course-4293 .multianswer select, #page-mod-quiz-attempt.course-4293 .multianswer select, #page-mod-quiz-review.course-4293 .multianswer select').selectmenu({});
+    // -- 16.12.2016 Call out selectmenu() on Multianswer question 
+    $('#page-question-preview.course-4494 .multianswer select, #page-mod-quiz-attempt.course-4494 .multianswer select, #page-mod-quiz-review.course-4494 .multianswer select').selectmenu({});
 });
