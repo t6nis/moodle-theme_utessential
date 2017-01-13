@@ -73,4 +73,29 @@ jQuery(document).ready(function($) {
     $('#page-question-preview.course-4293 .multianswer select, #page-mod-quiz-attempt.course-4293 .multianswer select, #page-mod-quiz-review.course-4293 .multianswer select').selectmenu({});
     // -- 16.12.2016 Call out selectmenu() on Multianswer question 
     $('#page-question-preview.course-4494 .multianswer select, #page-mod-quiz-attempt.course-4494 .multianswer select, #page-mod-quiz-review.course-4494 .multianswer select').selectmenu({});
+    
+    // -- UTTV responsive fix sitewide 13.01.2017
+    // Find all UTTV videos and check if we have any
+    var $uttv_iframe = $("iframe[src*='uttv.ee/embed']");
+    if ($uttv_iframe.length) {
+        // The parent of iframe, usually a paragraph
+        var $video_container = $("iframe[src*='uttv.ee/embed']").parent();
+
+        // Save aspect ratio for each video and add maxwidth/maxheight
+        $uttv_iframe.each(function() {
+          $(this)
+                .data('aspectRatio', this.height / this.width)
+                .css({'maxWidth':this.width+'px','maxHeight':this.height+'px'});
+        });
+
+        // When the window is resized
+        $(window).resize(function() {
+          var newWidth = $video_container.width();
+          // Resize all videos according to their own aspect ratio
+          $uttv_iframe.each(function() {
+                var $el = $(this);
+                $el.width(newWidth).height(newWidth * $el.data('aspectRatio'));
+          });
+        }).resize();
+    }
 });
