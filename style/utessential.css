@@ -813,6 +813,10 @@ sub{
     padding: 10px 25px;
 }
 
+.course-4592 h3.sectionname {
+    color: #0070a8;
+}
+
 .path-mod-page pre {
     word-break: normal;
 }
