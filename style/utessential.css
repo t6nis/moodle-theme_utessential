@@ -817,6 +817,14 @@ sub{
     color: #0070a8;
 }
 
+/* Course 3338 sectionnames 17.02.17*/
+.course-3338 h3.sectionname {
+    font-size: 1.4em;
+    color: #917b5e;
+    line-height: 20px;
+    text-align: center;
+}
+
 .path-mod-page pre {
     word-break: normal;
 }
