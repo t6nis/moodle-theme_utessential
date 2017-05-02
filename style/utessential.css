@@ -832,3 +832,11 @@ sub{
 .tree_item.branch {
     padding-left: 0px !important;
 }
+.block_settings .block_tree
+p.hasicon {
+    text-indent: 0px;
+}
+.block_settings .block_tree
+ul {
+    margin-left: 10px;
+}
