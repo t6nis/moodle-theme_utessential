@@ -812,6 +812,10 @@ table#greyboxleft h2 {
     margin-left: -20px;
 }
 */
+.block_navigation .block_tree
+.tree_item.branch {
+    padding-left:0px !important;
+}
 .collapsed .tree_item.branch:before {
     font-family: FontAwesome;
     content: "\f07b ";
