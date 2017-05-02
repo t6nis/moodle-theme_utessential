@@ -787,7 +787,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                             }
                         }
                         // 28.10.2016 - Keep the list always update.
-                        $itemobject = new object();
+                        $itemobject = new stdClass();
                         $itemobject->id = $key;
                         $itemobject->course = $course->id;
                         $itemobject->listsection = $section->section;
@@ -829,7 +829,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                         $farr[] = $value2;
                     }
         
-                    $itemobject = new object();
+                    $itemobject = new stdClass();
                     $itemobject->id = $listmap[$value1];
                     $itemobject->course = $course->id;
                     $itemobject->listsection = $section->section;
