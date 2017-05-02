@@ -1974,8 +1974,7 @@ table.calendarmonth.calendartable {
 	}
 
 }
-.block_navigation .block_tree
-.tree_item.branch {
+.block_navigation .block_tree.tree_item.branch {
     padding-left:0px !important;
 }
 /* @end */
