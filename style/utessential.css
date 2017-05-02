@@ -828,6 +828,7 @@ sub{
 .path-mod-page pre {
     word-break: normal;
 }
-.block_navigation .block_tree.tree_item.branch {
+.block_settings .block_tree
+.tree_item.branch {
     padding-left: 0px !important;
 }
