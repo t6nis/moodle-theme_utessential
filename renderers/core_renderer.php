@@ -1030,9 +1030,9 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
             $output .= $cmname;
 
 
-            if ($this->page->user_is_editing()) {
+            /*if ($this->page->user_is_editing()) {
                 $output .= ' ' . course_get_cm_rename_action($mod, $sectionreturn);
-            }
+            }*/
 
             // Module can put text after the link (e.g. forum unread)
             $output .= $mod->afterlink;
