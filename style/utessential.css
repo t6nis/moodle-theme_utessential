@@ -912,3 +912,7 @@ body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-me
     margin-bottom: 20px;
     background-color: #fff;
 }
+#toggle-all .content .toggle-arrow h4 span.on,
+#toggle-all .content .toggle-arrow h4 span.off {
+    padding-left:20px;
+}
