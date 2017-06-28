@@ -61,4 +61,6 @@
 <?php } else if($PAGE->theme->settings->fontselect==21) { ?>
 	<link href="//fonts.googleapis.com/css?family=Rancho" rel="stylesheet" type="text/css">
 	<link href="//fonts.googleapis.com/css?family=Gudea" rel="stylesheet" type="text/css">
+<?php } else if($PAGE->theme->settings->fontselect==22) { ?>
+        <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <?php } ?>

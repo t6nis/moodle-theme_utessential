@@ -782,11 +782,11 @@ table#greyboxleft h2 {
     color: #999;
 }
 
-.tree_item {
+/*.tree_item {
     background-image: none !important;
-}
+}*/
 
-.tree_item.branch:before {
+/*.tree_item.branch:before {
     font-family: FontAwesome;
     content: "\f07c ";
     color: #999;
@@ -798,7 +798,7 @@ table#greyboxleft h2 {
     content: "\f114 ";
     color: #d3d3d3;
     margin-right: 5px;
-}
+}*/
 /*
 .block_navigation.block li.depth_1 .tree_item.branch:before {
     content: "\f015 ";
@@ -812,12 +812,12 @@ table#greyboxleft h2 {
     margin-left: -20px;
 }
 */
-.collapsed .tree_item.branch:before {
+/*.collapsed .tree_item.branch:before {
     font-family: FontAwesome;
     content: "\f07b ";
     color: #999;
     margin-right: 5px;
-}
+}*/
 
     .hidden-blocks {
     background: #ffe1e1;

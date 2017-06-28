@@ -127,6 +127,59 @@
         return $output . $footer;
     }
 
+    
+/**
+ * Get a list of essential user navigation items.
+ *
+ * @param stdclass $user user object.
+ * @param moodle_page $page page object.
+ * @param array $options associative array.
+ *     options are:
+ *     - avatarsize=35 (size of avatar image)
+ * @return stdClass $returnobj navigation information object, where:
+ *
+ *      $returnobj->navitems    array    array of links where each link is a
+ *                                       stdClass with fields url, title, and
+ *                                       pix
+ *      $returnobj->metadata    array    array of useful user metadata to be
+ *                                       used when constructing navigation;
+ *                                       fields include:
+ *
+ *          ROLE FIELDS
+ *          asotherrole    bool    whether viewing as another role
+ *          rolename       string  name of the role
+ *
+ *          USER FIELDS
+ *          These fields are for the currently-logged in user, or for
+ *          the user that the real user is currently logged in as.
+ *
+ *          userid         int        the id of the user in question
+ *          userfullname   string     the user's full name
+ *          userprofileurl moodle_url the url of the user's profile
+ *          useravatar     string     a HTML fragment - the rendered
+ *                                    user_picture for this user
+ *          userloginfail  string     an error string denoting the number
+ *                                    of login failures since last login
+ *
+ *          "REAL USER" FIELDS
+ *          These fields are for when asotheruser is true, and
+ *          correspond to the underlying "real user".
+ *
+ *          asotheruser        bool    whether viewing as another user
+ *          realuserid         int        the id of the user in question
+ *          realuserfullname   string     the user's full name
+ *          realuserprofileurl moodle_url the url of the user's profile
+ *          realuseravatar     string     a HTML fragment - the rendered
+ *                                        user_picture for this user
+ *
+ *          MNET PROVIDER FIELDS
+ *          asmnetuser            bool   whether viewing as a user from an
+ *                                       MNet provider
+ *          mnetidprovidername    string name of the MNet provider
+ *          mnetidproviderwwwroot string URL of the MNet provider
+ */
+
+    
      /**
       * Return the standard string that says whether you are logged in (and switched
       * roles/logged in as another user).
@@ -136,109 +189,272 @@
       * @return string HTML fragment.
       */
      public function login_info($withlinks = null) {
-         global $USER, $CFG, $DB, $SESSION;
+        global $USER, $CFG, $DB, $SESSION;
+        $user = $USER;
+        require_once($CFG->dirroot . '/user/lib.php');
 
-         if (during_initial_install()) {
-             return '';
-         }
+        if (is_null($user)) {
+            $user = $USER;
+        }
+        // Note: this behaviour is intended to match that of core_renderer::login_info,
+        // but should not be considered to be good practice; layout options are
+        // intended to be theme-specific. Please don't copy this snippet anywhere else.
+        if (is_null($withlinks)) {
+            $withlinks = empty($this->page->layout_options['nologinlinks']);
+        }
 
-         if (is_null($withlinks)) {
-             $withlinks = empty($this->page->layout_options['nologinlinks']);
-         }
+        // Add a class for when $withlinks is false.
+        $usermenuclasses = 'usermenu';
+        if (!$withlinks) {
+            $usermenuclasses .= ' withoutlinks';
+        }
+        $returnstr = "";
 
-         $loginpage = ((string)$this->page->url === get_login_url());
-         $course = $this->page->course;
-         if (\core\session\manager::is_loggedinas()) {
-             $realuser = \core\session\manager::get_realuser();
-             $fullname = fullname($realuser, true);
-             if ($withlinks) {
-                 $loginastitle = get_string('loginas');
-                 $realuserinfo = " [<a href=\"$CFG->wwwroot/course/loginas.php?id=$course->id&amp;sesskey=".sesskey()."\"";
-                 $realuserinfo .= "title =\"".$loginastitle."\">$fullname</a>] ";
-             } else {
-                 $realuserinfo = " [$fullname] ";
-             }
-         } else {
-             $realuserinfo = '';
-         }
+        // If during initial install, return the empty return string.
+        if (during_initial_install()) {
+            return $returnstr;
+        }
 
-         $loginurl = get_login_url();
+        $loginpage = $this->is_login_page();
+        $loginurl = get_login_url();
+        // If not logged in, show the typical not-logged-in string.
+        if (!isloggedin()) {
+            $returnstr = get_string('loggedinnot', 'moodle');
+            if (!$loginpage) {
+                $returnstr .= " <a href=\"$loginurl\" class=\"login-button\">" . get_string('login') . '</a>';
+            }
+            return html_writer::div(
+                html_writer::span(
+                    $returnstr,
+                    'logininfo'
+                ),
+                $usermenuclasses
+            );
 
-         if (empty($course->id)) {
-             // $course->id is not defined during installation
-             return '';
-         } else if (isloggedin()) {
-             $context = context_course::instance($course->id);
+        }
 
-             $fullname = fullname($USER, true);
-             // Since Moodle 2.0 this link always goes to the public profile page (not the course profile page)
-             if ($withlinks) {
-                 $linktitle = get_string('viewprofile');
-                 $username = "<a href=\"$CFG->wwwroot/user/profile.php?id=$USER->id\" title=\"$linktitle\">$fullname</a>";
-             } else {
-                 $username = $fullname;
-             }
-             if (is_mnet_remote_user($USER) and $idprovider = $DB->get_record('mnet_host', array('id'=>$USER->mnethostid))) {
-                 if ($withlinks) {
-                     $username .= " from <a href=\"{$idprovider->wwwroot}\">{$idprovider->name}</a>";
-                 } else {
-                     $username .= " from {$idprovider->name}";
-                 }
-             }
-             if (isguestuser()) {
-                 $loggedinas = $realuserinfo.get_string('loggedinasguest');
-                 if (!$loginpage && $withlinks) {
-                     $loggedinas .= " <a href=\"$loginurl\" class=\"login-button\">".get_string('login').'</a>';
-                 }
-             } else if (is_role_switched($course->id)) { // Has switched roles
-                 $rolename = '';
-                 if ($role = $DB->get_record('role', array('id'=>$USER->access['rsw'][$context->path]))) {
-                     $rolename = ': '.role_get_name($role, $context);
-                 }
-                 $loggedinas = get_string('loggedinas', 'moodle', $username).$rolename;
-                 if ($withlinks) {
-                     $url = new moodle_url('/course/switchrole.php', array('id'=>$course->id,'sesskey'=>sesskey(), 'switchrole'=>0, 'returnurl'=>$this->page->url->out_as_local_url(false)));
-                     $loggedinas .= ' ('.html_writer::tag('a', get_string('switchrolereturn'), array('href' => $url)).')';
-                 }
-             } else {
-                 $loggedinas = $realuserinfo.get_string('loggedinas', 'moodle', $username);
-                 if ($withlinks) {
-                     $loggedinas .= " (<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)';
-                 }
-             }
-         } else {
-             $loggedinas = get_string('loggedinnot', 'moodle');
-             if (!$loginpage && $withlinks) {
-                 $loggedinas .= " <a href=\"$loginurl\" class=\"login-button\">".get_string('login').'</a>';
-             }
-         }
+        // If logged in as a guest user, show a string to that effect.
+        if (isguestuser()) {
+            $returnstr = get_string('loggedinasguest');
+            if (!$loginpage && $withlinks) {
+                $returnstr .= " <a href=\"$loginurl\">".get_string('login').'</a>';
+            }
 
-         $loggedinas = '<div class="logininfo">'.$loggedinas.'</div>';
+            return html_writer::div(
+                html_writer::span(
+                    $returnstr,
+                    'logininfo'
+                ),
+                $usermenuclasses
+            );
+        }
 
-         if (isset($SESSION->justloggedin)) {
-             unset($SESSION->justloggedin);
-             if (!empty($CFG->displayloginfailures)) {
-                 if (!isguestuser()) {
-                     // Include this file only when required.
-                     require_once($CFG->dirroot . '/user/lib.php');
-                     if ($count = user_count_login_failures($USER)) {
-                         $loggedinas .= '<div class="loginfailures">';
-                         $a = new stdClass();
-                         $a->attempts = $count;
-                         $loggedinas .= get_string('failedloginattempts', '', $a);
-                         if (file_exists("$CFG->dirroot/report/log/index.php") and has_capability('report/log:view', context_system::instance())) {
-                             $loggedinas .= ' ('.html_writer::link(new moodle_url('/report/log/index.php', array('chooselog' => 1,
-                                     'id' => 0 , 'modid' => 'site_errors')), get_string('logs')).')';
-                         }
-                         $loggedinas .= '</div>';
-                     }
-                 }
-             }
-         }
+        // Get some navigation opts.
+        $opts = user_get_user_navigation_info($user, $this->page);
+        $usertextcontents = $opts->metadata['userfullname'];
 
-         return $loggedinas;
+        // Other user.
+        if (!empty($opts->metadata['asotheruser'])) {
+            $usertextcontents = $opts->metadata['realuserfullname'];
+            $usertextcontents .= html_writer::tag(
+                'span',
+                get_string(
+                    'loggedinas',
+                    'moodle',
+                    html_writer::span(
+                        $opts->metadata['userfullname'],
+                        'value'
+                    )
+                ),
+                array('class' => 'meta viewingas')
+            );
+        }
+
+        // Role.
+        if (!empty($opts->metadata['asotherrole'])) {
+            $role = core_text::strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['rolename'])));
+            $usertextcontents .= html_writer::span(
+                $opts->metadata['rolename'],
+                'meta role role-' . $role
+            );
+        }
+
+        // User login failures.
+        /* if (!empty($opts->metadata['userloginfail'])) {
+            $usertextcontents .= html_writer::span(
+                $opts->metadata['userloginfail'],
+                'meta loginfailures'
+            );
+        }*/
+
+        // MNet.
+        if (!empty($opts->metadata['asmnetuser'])) {
+            $mnet = strtolower(preg_replace('#[ ]+#', '-', trim($opts->metadata['mnetidprovidername'])));
+            $usertextcontents .= html_writer::span(
+                $opts->metadata['mnetidprovidername'],
+                'meta mnet mnet-' . $mnet
+            );
+        }
+
+        $arr = '';
+        foreach ($opts->navitems as $key => $value) {
+            switch ($value->itemtype) {
+                case 'divider':
+                    // If the nav item is a divider, add one and skip link processing.
+                    //$am->add($divider);
+                    break;
+                case 'invalid':
+                    // Silently skip invalid entries (should we post a notification?).
+                    break;
+                case 'link':
+                    // Process this as a link item.
+                    $pix = null;
+                    if (isset($value->pix) && !empty($value->pix)) {
+                        $pix = new pix_icon($value->pix, $value->title, null, array('class' => 'iconsmall'));
+                    } else if (isset($value->imgsrc) && !empty($value->imgsrc)) {
+                        $value->title = html_writer::img(
+                            $value->imgsrc,
+                            $value->title,
+                            array('class' => 'iconsmall')
+                        ) . $value->title;
+                    }
+                    $attrs = array();
+                    $attrs['class'] = 'icon';
+                    if (!empty($value->titleidentifier)) {
+                        $attrs['data-title'] = $value->titleidentifier;
+                    }
+                    $arr .= '<li>'.html_writer::link(
+                        $value->url,
+                        $this->render($pix).$value->title,
+                        $attrs
+                    ).'</li>';
+                    break;
+            }
+        }
+        
+        return html_writer::link(new moodle_url('index.php'), $opts->metadata['userfullname'].'<b class="caret"></b>', 
+            array(
+                'class' => 'toggle-display dropdown-toggle',
+                'data-toggle' => 'dropdown',
+                'title' => $opts->metadata['userfullname']
+            )
+        ).html_writer::tag('ul', $arr, array('class' => 'dropdown-menu'));
      }
 
+    /**
+     * THIS SHOULDNT BE HERE BUT FOR NOW ITS ALRGIHT!!
+     * 
+     * Returns list of courses current $USER is enrolled in and can access
+     *
+     * - $fields is an array of field names to ADD
+     *   so name the fields you really need, which will
+     *   be added and uniq'd
+     *
+     * @param string|array $fields
+     * @param string $sort
+     * @param int $limit max number of courses
+     * @return array
+     */
+    function utessential_enrol_get_my_courses($fields = NULL, $sort = 'visible DESC,sortorder ASC', $limit = 0) {
+        global $DB, $USER;
+
+        // Guest account does not have any courses
+        if (isguestuser() or !isloggedin()) {
+            return(array());
+        }
+
+        $basefields = array('id', 'category', 'sortorder',
+                            'shortname', 'fullname', 'idnumber',
+                            'startdate', 'visible',
+                            'groupmode', 'groupmodeforce', 'cacherev');
+
+        if (empty($fields)) {
+            $fields = $basefields;
+        } else if (is_string($fields)) {
+            // turn the fields from a string to an array
+            $fields = explode(',', $fields);
+            $fields = array_map('trim', $fields);
+            $fields = array_unique(array_merge($basefields, $fields));
+        } else if (is_array($fields)) {
+            $fields = array_unique(array_merge($basefields, $fields));
+        } else {
+            throw new coding_exception('Invalid $fileds parameter in enrol_get_my_courses()');
+        }
+        if (in_array('*', $fields)) {
+            $fields = array('*');
+        }
+
+        $orderby = "";
+        $sort    = trim($sort);
+        if (!empty($sort)) {
+            $rawsorts = explode(',', $sort);
+            $sorts = array();
+            foreach ($rawsorts as $rawsort) {
+                $rawsort = trim($rawsort);
+                if (strpos($rawsort, 'c.') === 0) {
+                    $rawsort = substr($rawsort, 2);
+                }
+                $sorts[] = trim($rawsort);
+            }
+            $sort = 'c.'.implode(',c.', $sorts);
+            $orderby = "ORDER BY ua.timeaccess DESC, $sort";
+        }
+
+        $wheres = array("c.id <> :siteid");
+        $params = array('siteid'=>SITEID);
+
+        if (isset($USER->loginascontext) and $USER->loginascontext->contextlevel == CONTEXT_COURSE) {
+            // list _only_ this course - anything else is asking for trouble...
+            $wheres[] = "courseid = :loginas";
+            $params['loginas'] = $USER->loginascontext->instanceid;
+        }
+
+        $coursefields = 'c.' .join(',c.', $fields);
+        $ccselect = ', ' . context_helper::get_preload_record_columns_sql('ctx');
+        $ccjoin = "LEFT JOIN {context} ctx ON (ctx.instanceid = c.id AND ctx.contextlevel = :contextlevel)";
+        $params['contextlevel'] = CONTEXT_COURSE;
+        $wheres = implode(" AND ", $wheres);
+
+        //note: we can not use DISTINCT + text fields due to Oracle and MS limitations, that is why we have the subselect there
+        $sql = "SELECT $coursefields $ccselect
+                  FROM {course} c
+                  JOIN (SELECT DISTINCT e.courseid
+                          FROM {enrol} e
+                          JOIN {user_enrolments} ue ON (ue.enrolid = e.id AND ue.userid = :userid)                          
+                         WHERE ue.status = :active AND e.status = :enabled AND ue.timestart < :now1 AND (ue.timeend = 0 OR ue.timeend > :now2)
+                       ) en ON (en.courseid = c.id)
+                $ccjoin
+                JOIN {user_lastaccess} ua ON (ua.courseid = c.id AND ua.userid = :userid1)
+                WHERE $wheres
+              $orderby";
+        $params['userid']  = $USER->id;
+        $params['userid1']  = $USER->id;
+        $params['active']  = ENROL_USER_ACTIVE;
+        $params['enabled'] = ENROL_INSTANCE_ENABLED;
+        $params['now1']    = round(time(), -2); // improves db caching
+        $params['now2']    = $params['now1'];
+        $courses = $DB->get_records_sql($sql, $params, 0, $limit);
+
+        // preload contexts and check visibility
+        foreach ($courses as $id=>$course) {
+            context_helper::preload_from_record($course);
+            if (!$course->visible) {
+                if (!$context = context_course::instance($id, IGNORE_MISSING)) {
+                    unset($courses[$id]);
+                    continue;
+                }
+                if (!has_capability('moodle/course:viewhiddencourses', $context)) {
+                    unset($courses[$id]);
+                    continue;
+                }
+            }
+            $courses[$id] = $course;
+        }
+
+        //wow! Is that really all? :-D
+
+        return $courses;
+    }
 
     protected function render_custom_menu(custom_menu $menu) {
         global $USER, $CFG, $PAGE, $OUTPUT;
@@ -264,25 +480,25 @@
             $branchsort  = 10000;
  
             $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
- 			if ($courses = enrol_get_my_courses(NULL, 'fullname ASC')) {
- 				foreach ($courses as $course) {
- 					if ($course->visible){
- 						$branch->add(format_string($course->fullname), new moodle_url('/course/view.php?id='.$course->id), format_string($course->shortname));
- 					}
- 				}
- 			} else {
-                $noenrolments = get_string('noenrolments', 'theme_utessential');
- 				$branch->add('<em>'.$noenrolments.'</em>', new moodle_url('/'), $noenrolments);
- 			}
-            
+                if ($courses = $this->utessential_enrol_get_my_courses(NULL, 'fullname ASC', 21)) {
+                    foreach ($courses as $course) {
+                        if ($course->visible){
+                            $branch->add(format_string($course->fullname), new moodle_url('/course/view.php?id='.$course->id), format_string($course->shortname));
+                        }
+                    }
+                    $branch->add('<em>'.ucfirst(get_string('more')).'..</em>', new moodle_url('/user/profile.php?id='.$USER->id.'&showallcourses=1'));
+                } else {
+                    $noenrolments = get_string('noenrolments', 'theme_utessential');
+                    $branch->add('<em>'.$noenrolments.'</em>', new moodle_url('/'), $noenrolments);
+                }
         }
         
         /*
     	* This code replaces adds the My Dashboard
     	* functionality to the custommenu.
     	*/
-        $hasdisplaymydashboard = (empty($this->page->theme->settings->displaymydashboard)) ? false : $this->page->theme->settings->displaymydashboard;
-        if (isloggedin() && !isguestuser() && $hasdisplaymydashboard) {
+        //$hasdisplaymydashboard = (empty($this->page->theme->settings->displaymydashboard)) ? false : $this->page->theme->settings->displaymydashboard;
+        /*if (isloggedin() && !isguestuser() && $hasdisplaymydashboard) {
             $branchlabel = '<i class="fa fa-dashboard"></i>'.get_string('mydashboard', 'theme_utessential');
             $branchurl   = new moodle_url('/my/index.php');
             $branchtitle = get_string('mydashboard', 'theme_utessential');
@@ -297,7 +513,7 @@
  			$branch->add('<em><i class="fa fa-asterisk"></i>'.get_string('badges').'</em>',new moodle_url('/badges/mybadges.php'),get_string('badges'));
  			$branch->add('<em><i class="fa fa-file"></i>'.get_string('privatefiles', 'block_private_files').'</em>',new moodle_url('/user/files.php'),get_string('privatefiles', 'block_private_files'));
  			$branch->add('<em><i class="fa fa-sign-out"></i>'.get_string('logout').'</em>',new moodle_url('/login/logout.php'),get_string('logout'));    
-        }
+        }*/
         
         /*
          * This code adds the Theme colors selector to the custommenu.
@@ -860,14 +1076,6 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                     // do not display moving mod
                     continue;
                 }
-
-                //21.11.2012 - itemslist improvement
-                if ($mod->modname == 'itemslist') {
-                    $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id);
-                    if (!empty($all_lists) && $itemslistmod->visible && in_array($itemslistmod->instance, $all_lists[$section->section])) {
-                        $critems = $all_lists[$section->section][$itemslistmod->instance];
-                    }
-                }
                 
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
@@ -878,6 +1086,15 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                         continue;
                     }
                 }
+                
+                //21.11.2012 - itemslist improvement
+                if ($mod->modname == 'itemslist') {
+                    $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id);
+                    if (!empty($all_lists) && $itemslistmod->visible && in_array($itemslistmod->instance, $all_lists[$section->section])) {
+                        $critems = $all_lists[$section->section][$itemslistmod->instance];
+                    }
+                }
+                
                 //Code end
 
                 if ($modulehtml = $this->course_section_cm($course,

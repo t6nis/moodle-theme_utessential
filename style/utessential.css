@@ -100,7 +100,11 @@
         display:inline-flex;
     }
 }
-
+@media (max-width: 979px) {
+    .navbar-fixed-top {
+        margin-bottom: 0px;
+    }
+}
 @media (min-width: 768px) and (max-width: 979px) {
     .row-fluid [class*="span"] {
         margin-left:1.064103%;
@@ -226,8 +230,11 @@ code, pre {
 .block .header .block_action {
     padding:1px 0px;
 }
-.block .header .commands {
+.editing .block .header .commands {
     padding:3px 0px;
+}
+.editing .block .header .commands img.iconsmall {
+    padding: 0px;
 }
 .comment-list .comment-message {
     font-size:12px;
@@ -596,7 +603,15 @@ img.userpicture {
     min-height:20px;
 }
 .moodle-actionmenu[data-enhanced].show .menu a {
-    padding:2px 1em 2px 28px;
+    padding:2px 1em 2px 14px;
+}
+.moodle-actionmenu[data-enhanced].show .menu a .fa {
+    display:inline;
+    margin-right:5px;
+}
+.moodle-actionmenu[data-enhanced].show .menu .iconsmall, .moodle-actionmenu[data-enhanced].show .menu
+.smallicon {
+    margin: 0px;
 }
 .path-mod-choice .expired {
     font-weight:bold;
@@ -830,7 +845,7 @@ sub{
 }
 .block_settings .block_tree
 .tree_item.branch {
-    padding-left: 0px !important;
+    padding-left: 20px !important;
 }
 .block_settings .block_tree
 p.hasicon {
@@ -840,4 +855,60 @@ p.hasicon {
 .block_settings .block_tree
 ul {
     margin-left: 10px;
+}
+.block_navigation .block_tree
+.tree_item.branch {
+    padding-left: 0px;
+}
+
+.block_navigation .block_tree
+ul {
+    margin-left: 21px;
+}
+.usermenu .moodle-actionmenu .toggle-display a,
+.usermenu .moodle-actionmenu .toggle-display .userbutton
+.usertext, .jsenabled .usermenu .moodle-actionmenu .toggle-display.textmenu {
+    color: #fff !important;
+}
+.usermenu .moodle-actionmenu ul.menubar {
+    background-color: #033E83 !important;
+}
+.usermenu .moodle-actionmenu ul.menubar a {
+    text-decoration: none;
+}
+.usermenu .moodle-actionmenu ul.menu li i.fa-user {
+    margin-left: -20px;
+    margin-right: 10px;
+}
+.jsenabled .usermenu .moodle-actionmenu .toggle-display
+.caret { 
+    top: 13px;
+    left: 5px;
+}
+.jsenabled .usermenu .moodle-actionmenu.show .menu a:hover {    
+    background-color: #033E83 !important;
+    background-image: none;
+}
+.section .activity .mod-indent-outer {
+    padding-left: 32px;
+}
+body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-menu {
+    max-height: 250px;
+}
+#page-user-preferences .preferences-group .fa-circle:before {
+    content: "";
+}
+.moodle-actionmenu[data-enhanced].show
+.menu {
+    width: 150px;
+}
+.setup-grades tr.item:hover {
+    background: #f9f9f9;
+}
+.preferences-group {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
