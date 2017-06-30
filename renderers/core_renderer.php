@@ -26,43 +26,22 @@
  include_once($CFG->libdir . '/coursecatlib.php');
  
  class theme_utessential_core_renderer extends theme_bootstrapbase_core_renderer {
- 	
- 	/*
-     * This renders a notification message.
-     * Uses bootstrap compatible html.
-     */
-    public function notification($message, $classes = 'notifyproblem') {
-        $message = clean_text($message);
-        $type = '';
-
-        if ($classes == 'notifyproblem') {
-            $type = 'alert alert-error';
-        }
-        if ($classes == 'notifysuccess') {
-            $type = 'alert alert-success';
-        }
-        if ($classes == 'notifymessage') {
-            $type = 'alert alert-info';
-        }
-        if ($classes == 'redirectmessage') {
-            $type = 'alert alert-block alert-info';
-        }
-        return "<div class=\"$type\">$message</div>";
-    } 
-    
+ 	   
     /*
      * This renders the navbar.
      * Uses bootstrap compatible html.
      */
     public function navbar() {
-        global $COURSE;
         $items = $this->page->navbar->get_items();
+        if (empty($items)) {
+            return '';
+        }
+
         $breadcrumbs = array();
         //22.10.2012 - changing logic of navbar
         $titles_arr = array('Osalemiskontroll', 'General', 'Kursuse üldosa');
         $keys_arr = array('mycourses', 'courses');
         foreach ($items as $item) {
-
             if ($item->action === null) {
                 continue;
             }            
@@ -80,8 +59,9 @@
         }
         $divider = '<span class="divider">'.get_separator().'</span>';
         $list_items = '<li>'.join(" $divider</li><li>", $breadcrumbs).'</li>';
-        $title = '<span class="accesshide">'.get_string('pagepath').'</span>';
-        return $title . "<ul class=\"breadcrumb\">$list_items</ul>";
+        $title = '<span class="accesshide" id="navbar-label">'.get_string('pagepath').'</span>';
+        return $title . '<nav aria-labelledby="navbar-label"><ul class="breadcrumb">' .
+                $list_items . '</ul></nav>';
     }
     
     /**
@@ -89,7 +69,7 @@
      * @return string HTML fragment
      */
     public function footer() {
-        global $CFG, $DB, $USER;
+        global $CFG, $DB, $PAGE;
 
         $output = $this->container_end_all(true);
 
@@ -103,8 +83,8 @@
         $performanceinfo = '';
         if (defined('MDL_PERF') || (!empty($CFG->perfdebug) and $CFG->perfdebug > 7)) {
             $perf = get_performance_info();
-            if (defined('MDL_PERFTOLOG') && !function_exists('register_shutdown_function')) {
-                error_log("PERF: " . $perf['txt']);
+            if (defined('MDL_PERFTOFOOT') || debugging() || $CFG->perfdebug > 7) {
+                $performanceinfo = $perf['html'];
             }
             if (defined('MDL_PERFTOFOOT') || debugging() || $CFG->perfdebug > 7) {
                 if ($USER->id == 2) {                    
@@ -114,15 +94,22 @@
             }
         }
 
+        // We always want performance data when running a performance test, even if the user is redirected to another page.
+        if (MDL_PERF_TEST && strpos($footer, $this->unique_performance_info_token) === false) {
+            $footer = $this->unique_performance_info_token . $footer;
+        }
         $footer = str_replace($this->unique_performance_info_token, $performanceinfo, $footer);
 
+        // Only show notifications when we have a $PAGE context id.
+        if (!empty($PAGE->context->id)) {
+            $this->page->requires->js_call_amd('core/notification', 'init', array(
+                $PAGE->context->id,
+                \core\notification::fetch_as_array($this)
+            ));
+        }
         $footer = str_replace($this->unique_end_html_token, $this->page->requires->get_end_code(), $footer);
 
         $this->page->set_state(moodle_page::STATE_DONE);
-
-        if(!empty($this->page->theme->settings->persistentedit) && property_exists($USER, 'editing') && $USER->editing && !$this->really_editing) {
-            $USER->editing = false;
-        }
 
         return $output . $footer;
     }
@@ -494,28 +481,6 @@
         }
         
         /*
-    	* This code replaces adds the My Dashboard
-    	* functionality to the custommenu.
-    	*/
-        //$hasdisplaymydashboard = (empty($this->page->theme->settings->displaymydashboard)) ? false : $this->page->theme->settings->displaymydashboard;
-        /*if (isloggedin() && !isguestuser() && $hasdisplaymydashboard) {
-            $branchlabel = '<i class="fa fa-dashboard"></i>'.get_string('mydashboard', 'theme_utessential');
-            $branchurl   = new moodle_url('/my/index.php');
-            $branchtitle = get_string('mydashboard', 'theme_utessential');
-            $branchsort  = 10000;
- 
-            $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
- 			$branch->add('<em><i class="fa fa-user"></i>'.get_string('profile').'</em>',new moodle_url('/user/profile.php?id='.$USER->id),get_string('profile'));
-                        //$branch->add('<em><i class="fa fa-wrench"></i>'.get_string('preferences').'</em>',new moodle_url('/user/preferences.php'),get_string('preferences'));
-                        //$branch->add('<em><i class="fa fa-certificate"></i>'.get_string('pluginname', 'gradereport_overview').'</em>',new moodle_url('/grade/report/overview/index.php'),get_string('pluginname', 'gradereport_overview'));
- 			$branch->add('<em><i class="fa fa-calendar"></i>'.get_string('pluginname', 'block_calendar_month').'</em>',new moodle_url('/calendar/view.php'),get_string('pluginname', 'block_calendar_month'));
- 			$branch->add('<em><i class="fa fa-envelope"></i>'.get_string('pluginname', 'block_messages').'</em>',new moodle_url('/message/index.php'),get_string('pluginname', 'block_messages'));
- 			$branch->add('<em><i class="fa fa-asterisk"></i>'.get_string('badges').'</em>',new moodle_url('/badges/mybadges.php'),get_string('badges'));
- 			$branch->add('<em><i class="fa fa-file"></i>'.get_string('privatefiles', 'block_private_files').'</em>',new moodle_url('/user/files.php'),get_string('privatefiles', 'block_private_files'));
- 			$branch->add('<em><i class="fa fa-sign-out"></i>'.get_string('logout').'</em>',new moodle_url('/login/logout.php'),get_string('logout'));    
-        }*/
-        
-        /*
          * This code adds the Theme colors selector to the custommenu.
          */
         if (isloggedin() && !isguestuser()) {
@@ -614,18 +579,20 @@
         return $content.'</ul>';
     }
     
- 	/*
+    /*
     * This code replaces the icons in the Admin block with
     * FontAwesome variants where available.
     */
     
-	protected function render_pix_icon(pix_icon $icon) {
-		if (self::replace_moodle_icon($icon->pix) !== false && $icon->attributes['alt'] === '') {
-			return self::replace_moodle_icon($icon->pix);
-		} else {
-			return parent::render_pix_icon($icon);
-		}
-	}
+    protected function render_pix_icon(pix_icon $icon) {
+        $data = $icon->export_for_template($this);
+        return $this->render_from_template('core/pix_icon', $data);
+        /*if (self::replace_moodle_icon($icon->pix) !== false && $icon->attributes['alt'] === '') {
+            return self::replace_moodle_icon($icon->pix);
+        } else {
+            return parent::render_pix_icon($icon);
+        }*/
+    }
      
     private static function replace_moodle_icon($name) {
         $icons = array(

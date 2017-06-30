@@ -890,7 +890,7 @@ ul {
     background-image: none;
 }
 .section .activity .mod-indent-outer {
-    padding-left: 32px;
+    padding-left: 0px;
 }
 body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-menu {
     max-height: 250px;
@@ -915,4 +915,15 @@ body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-me
 #toggle-all .content .toggle-arrow h4 span.on,
 #toggle-all .content .toggle-arrow h4 span.off {
     padding-left:20px;
+}
+.section_action_menu .moodle-actionmenu ul.menubar,
+.section_action_menu .moodle-actionmenu[data-enhanced] .menu-action-text {
+    display: none;
+}
+.section_action_menu .moodle-actionmenu[data-enhance] .menu,
+.section_action_menu .moodle-actionmenu>ul>li {
+    display:block;
+}
+.course-content ul.topics li.section .summary {
+    margin-left:2px;
 }
