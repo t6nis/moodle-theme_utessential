@@ -927,3 +927,6 @@ body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-me
 .course-content ul.topics li.section .summary {
     margin-left:2px;
 }
+.dir-ltr .usermenu {
+    line-height: 40px;
+}

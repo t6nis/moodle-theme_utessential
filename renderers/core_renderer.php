@@ -224,7 +224,7 @@
         if (isguestuser()) {
             $returnstr = get_string('loggedinasguest');
             if (!$loginpage && $withlinks) {
-                $returnstr .= " <a href=\"$loginurl\">".get_string('login').'</a>';
+                $returnstr .= " <a href=\"$loginurl\" class=\"login-button\">".get_string('login').'</a>';
             }
 
             return html_writer::div(
