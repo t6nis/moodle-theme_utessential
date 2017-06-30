@@ -104,6 +104,11 @@
     .navbar-fixed-top {
         margin-bottom: 0px;
     }
+    .navbar .nav-collapse.in>.nav .dropdown-menu li>a:hover,
+    .navbar .nav-collapse.in>.nav li>a {
+        background-color: #033E83 !important;
+        color: #fff;
+    }
 }
 @media (min-width: 768px) and (max-width: 979px) {
     .row-fluid [class*="span"] {
