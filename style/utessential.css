@@ -935,3 +935,6 @@ body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-me
 .dir-ltr .usermenu {
     line-height: 40px;
 }
+.moodle-actionmenu[data-enhanced].show .menu {
+    width: auto;
+}
