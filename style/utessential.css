@@ -921,6 +921,10 @@ body:not(.jsenabled) .langmenu:hover>.dropdown-menu, .langmenu.open>.dropdown-me
 #toggle-all .content .toggle-arrow h4 span.off {
     padding-left:20px;
 }
+body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-actionmenu[data-enhance] ul.menubar,
+.format-topcoll .right.side a.tceditsection {
+    display: none !important;
+}
 .section_action_menu .moodle-actionmenu ul.menubar,
 .section_action_menu .moodle-actionmenu[data-enhanced] .menu-action-text {
     display: none;
