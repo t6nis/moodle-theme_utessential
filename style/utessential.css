@@ -942,3 +942,32 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
 .moodle-actionmenu[data-enhanced].show .menu {
     width: auto;
 }
+/* -- 03.07.17 Override visited btn color */
+.btn:visited {
+    color:#333;
+}
+.btn-primary:visited{
+    color:#fff;
+}
+/* -- 03.07.17 Grader area to 55-45 */
+.path-mod-assign [data-region="review-panel"] {
+    right:45%;
+}
+.path-mod-assign [data-region="grade-panel"] {
+    left:55%;
+    width:45%;
+}
+/* -- Fix grading-panel for smaller screens */
+@media (max-width:768px){
+    .path-mod-assign [data-region="grade-panel"] {
+         width:100%;
+    }
+}
+/* -- Hold TinyMCE in container */
+#page-mod-assign-grader .felement.feditor {
+    overflow-x: scroll;
+}
+/* -- TinyMCE as wide as container */
+.felement.feditor table.mceLayout {
+    width:99%;
+}
