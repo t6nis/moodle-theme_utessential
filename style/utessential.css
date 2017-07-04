@@ -971,3 +971,7 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
 .felement.feditor table.mceLayout {
     width:99%;
 }
+.section .moodle-actionmenu .menu img {
+    width: 12px;
+    height: 12px;
+}
