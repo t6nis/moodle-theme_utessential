@@ -1339,7 +1339,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
      * @param array $displayoptions
      * @return string
      */
-    public function course_section_cm_name(cm_info $mod, $displayoptions = array()) {
+    public function course_section_cm_name_title(cm_info $mod, $displayoptions = array()) {
         global $CFG;
         $output = '';
         if (!$mod->uservisible && empty($mod->availableinfo)) {
