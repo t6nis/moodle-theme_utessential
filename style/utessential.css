@@ -975,3 +975,17 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
     width: 12px;
     height: 12px;
 }
+
+/* --Hide red fa icon box from quiz edit */
+#page-mod-quiz-edit .editing_delete::before {
+    content:"";
+}
+/* --Fix positioning of number */
+#page-mod-quiz-edit ul.slots li.section li.activity .mod-indent-outer {
+    margin-top:-20px;
+}
+
+/* --Fix font-family of add question menu */
+#page-mod-quiz-edit span.add-menu, #page-mod-quiz-edit span.menu-action-text {
+    font-family: "OpenSans",Arial,Helvetica,sans-serif;
+}
