@@ -980,10 +980,6 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
 #page-mod-quiz-edit .editing_delete::before {
     content:"";
 }
-/* --Fix positioning of number */
-#page-mod-quiz-edit ul.slots li.section li.activity .mod-indent-outer {
-    margin-top:-20px;
-}
 
 /* --Fix font-family of add question menu */
 #page-mod-quiz-edit span.add-menu, #page-mod-quiz-edit span.menu-action-text {
