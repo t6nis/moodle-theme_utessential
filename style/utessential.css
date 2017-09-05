@@ -984,7 +984,3 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
 #page-mod-quiz-edit span.add-menu, #page-mod-quiz-edit span.menu-action-text {
     font-family: "OpenSans",Arial,Helvetica,sans-serif;
 }
-/* 05.09.2017 - Disable itemslist movement. */
-.modtype_itemslist span.editing_move {
-    display:none;
-}
