@@ -1046,10 +1046,10 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
-                
+
                 if (!$canviewhidden && !empty($itemslistmod) && $mod->modname == 'itemslist') {
                     // 25.03.2013 if itemslist is totally hidden skip continuing processes.
-                    if (!$itemslistmod->visible) {
+                    if (!$mod->visible) {
                         continue;
                     }
                 }
