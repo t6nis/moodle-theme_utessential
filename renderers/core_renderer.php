@@ -1049,6 +1049,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
 
                 if (!$canviewhidden && !empty($itemslistmod) && $mod->modname == 'itemslist') {
                     // 25.03.2013 if itemslist is totally hidden skip continuing processes.
+                    // 08.09.2017 $itemslistmod->visible to $mod->visible MOODLE-532
                     if (!$mod->visible) {
                         continue;
                     }
