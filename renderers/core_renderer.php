@@ -1032,13 +1032,12 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         
         // Custom vars
         $critems = array();
-        $itemslistmod = '';
         
         if (!empty($modinfo->sections[$section->section])) {
             
             foreach ($sectionmods as $modnumber) {
                 $mod = $modinfo->cms[$modnumber];
-
+                $itemslistmod = '';
                 if ($ismoving and $mod->id == $USER->activitycopy) {
                     // do not display moving mod
                     continue;
