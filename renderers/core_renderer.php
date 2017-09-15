@@ -1134,6 +1134,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions, $canviewhidden, $itemslistmod)) {
             $modclasses = 'activity ' . $mod->modname . ' modtype_' . $mod->modname . ' ' . $mod->extraclasses;
             if (!$canviewhidden && !$mod->visible) {
+                // 15.09.2017 - Inline style is not cool.. but for now..
                 $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id, 'style' => 'padding:0px;'));
             } else {
                 $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
