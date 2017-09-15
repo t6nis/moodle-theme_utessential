@@ -1032,12 +1032,13 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         
         // Custom vars
         $critems = array();
+        $itemslistmod = '';
         
         if (!empty($modinfo->sections[$section->section])) {
-            
+
             foreach ($sectionmods as $modnumber) {
                 $mod = $modinfo->cms[$modnumber];
-                $itemslistmod = '';
+
                 if ($ismoving and $mod->id == $USER->activitycopy) {
                     // do not display moving mod
                     continue;
@@ -1045,96 +1046,101 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
-
-                if (!$canviewhidden && !empty($itemslistmod) && $mod->modname == 'itemslist') {
-                    // 25.03.2013 if itemslist is totally hidden skip continuing processes.
-                    // 08.09.2017 $itemslistmod->visible to $mod->visible MOODLE-532
-                    if (!$mod->visible) {
-                        continue;
-                    }
-                }
                 
-                //21.11.2012 - itemslist improvement
                 if ($mod->modname == 'itemslist') {
                     $itemslistmod = get_coursemodule_from_id('itemslist', $mod->id, $course->id);
-                    if (!empty($all_lists) && $itemslistmod->visible && in_array($itemslistmod->instance, $all_lists[$section->section])) {
-                        $critems = $all_lists[$section->section][$itemslistmod->instance];
-                    }
                 }
                 
-                //Code end
-
-                if ($modulehtml = $this->course_section_cm($course,
-                        $completioninfo, $mod, $sectionreturn, $displayoptions, $modcontext, $canviewhidden, $itemslistmod, $critems)) {
+                if ($modulehtml = $this->course_section_cm_list_item($course,
+                        $completioninfo, $mod, $sectionreturn, $displayoptions, $canviewhidden, $itemslistmod)) {
                     $moduleshtml[$modnumber] = $modulehtml;
                 }
             }
         }
-
+        
+        $sectionoutput = '';
         if (!empty($moduleshtml) || $ismoving) {
-
-            $output .= html_writer::start_tag('ul', array('class' => 'section img-text'));
-
             foreach ($moduleshtml as $modnumber => $modulehtml) {
                 if ($ismoving) {
                     $movingurl = new moodle_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
-                    $output .= html_writer::tag('li', html_writer::link($movingurl, $this->output->render($movingpix)),
-                            array('class' => 'movehere', 'title' => $strmovefull));
+                    $sectionoutput .= html_writer::tag('li',
+                            html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
+                            array('class' => 'movehere'));
                 }
-
-                $mod = $modinfo->cms[$modnumber];
                 
-                //Code start
+                $mod = $modinfo->cms[$modnumber];
                 $modcontext = context_module::instance($mod->id);
                 $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
-                // modified 09.12.2016
-                if (!$canviewhidden) {
-                    if (in_array($mod->id, $critems)) {
-                        $output .= html_writer::end_tag('li');
-                        continue;
-                    }
-                }
-                //Code end
                 
-                $modclasses = 'activity '. $mod->modname. ' modtype_'.$mod->modname. ' '. $mod->extraclasses;
-                $output .= html_writer::start_tag('li', array('class' => $modclasses, 'id' => 'module-'. $mod->id));
-                $output .= $modulehtml;
-                
-                //* Code Start 13.03.2012 *//           
                 if ($mod->modname == 'itemslist') {
-                    $cm = get_coursemodule_from_id('itemslist', $mod->id);
-                    $asd = $DB->get_record('itemslist', array('id' => $cm->instance));
-                    if (!empty($asd->items)) {
-                        $items = explode(',', $asd->items);
-                    } else {
-                        continue;
+                    $cm = get_coursemodule_from_id('itemslist', $mod->id, $course->id);
+                    $itemlist = $DB->get_record('itemslist', array('id' => $cm->instance));
+                    if (!empty($itemlist->items)) {
+                        $itemslist_array = explode(',', $itemlist->items);
+                        // 15.09.2017 - Improvement
+                        if (!$canviewhidden) {
+                            $vis_itemslist_array = array();
+                            foreach ($itemslist_array as $key => $value) {
+                                if ($modinfo->cms[$value]->visible) {
+                                    $vis_itemslist_array[] = $value;
+                                }
+                            }
+                            $itemslist_array = $vis_itemslist_array;
+                        }
+                        $itemlist_items = $itemslist_array;
                     }
-                }
-                
-                if ((!$ismoving && !empty($items) && end($items) == $mod->id)) {
-                    $output .= html_writer::end_tag('ul');
                 }
 
-                if (!$ismoving && !empty($items) && $mod->modname == 'itemslist') {
-                    $output .= html_writer::start_tag('ul', array('class' => 'itemlistcount', 'id' => 'itemlist-'.$mod->id));
+                $sectionoutput .= $modulehtml;
+                                
+                if ((!$ismoving && !empty($itemlist_items) && end($itemlist_items) == $mod->id)) {
+                    $sectionoutput .= html_writer::end_tag('ul');
+                }
+                
+                if (!$ismoving && !empty($itemlist_items) && $mod->modname == 'itemslist') {
+                    $sectionoutput .= html_writer::start_tag('ul', array('class' => 'itemlistcount', 'id' => 'itemlist-'.$mod->id));
                     continue;
                 }
-                //* Code End *//
-                $output .= html_writer::end_tag('li');
-            }
+            }            
 
             if ($ismoving) {
                 $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
-                $output .= html_writer::tag('li', html_writer::link($movingurl, $this->output->render($movingpix)),
-                        array('class' => 'movehere', 'title' => $strmovefull));
+                $sectionoutput .= html_writer::tag('li',
+                        html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
+                        array('class' => 'movehere'));
             }
-
-            $output .= html_writer::end_tag('ul'); // .section
         }
+
+        // Always output the section module list.
+        $output .= html_writer::tag('ul', $sectionoutput, array('class' => 'section img-text'));
 
         return $output;
     }
-
+    /**
+     * Renders HTML to display one course module for display within a section.
+     *
+     * This function calls:
+     * {@link core_course_renderer::course_section_cm()}
+     *
+     * @param stdClass $course
+     * @param completion_info $completioninfo
+     * @param cm_info $mod
+     * @param int|null $sectionreturn
+     * @param array $displayoptions
+     * @return String
+     */
+    public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array(), $canviewhidden = '', $itemslistmod = '') {
+        $output = '';
+        if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions, $canviewhidden, $itemslistmod)) {
+            $modclasses = 'activity ' . $mod->modname . ' modtype_' . $mod->modname . ' ' . $mod->extraclasses;
+            if (!$canviewhidden && !$mod->visible) {
+                return '';
+            }
+            $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
+        }
+        return $output;
+    }
+    
     /**
      * Renders HTML to display one course module in a course section
      *
@@ -1157,7 +1163,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
      * @param array $displayoptions
      * @return string
      */
-    public function course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array(), $modcontext = '', $canviewhidden = '', $cmod = '', $critems = '') {
+    public function course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array(), $canviewhidden = '', $cmod = '') {
         $output = '';
         // We return empty string (because course module will not be displayed at all)
         // if:
@@ -1174,10 +1180,6 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         if (!$mod->uservisible && (empty($mod->availableinfo))) {
             //21.11.2012 - custom code
             if (!$canviewhidden && !empty($cmod)) {  
-                // modified 09.12.2016 
-                /*if (isset($critems) && in_array($mod->id, $critems) && end($critems) == $mod->id) {
-                    $output = html_writer::end_tag('li');
-                }*/
                 $output = html_writer::end_tag('li');
             }
             //code end
@@ -1213,10 +1215,6 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
             $output .= html_writer::start_tag('div', array('class' => 'activityinstance'));
             $output .= $cmname;
 
-
-            /*if ($this->page->user_is_editing()) {
-                $output .= ' ' . course_get_cm_rename_action($mod, $sectionreturn);
-            }*/
 
             // Module can put text after the link (e.g. forum unread)
             $output .= $mod->afterlink;
