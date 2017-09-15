@@ -1078,8 +1078,8 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                     if (!empty($itemlist->items)) {
                         $itemslist_array = explode(',', $itemlist->items);
                         // 15.09.2017 - Improvement
-                        if (!$canviewhidden) {
-                            $vis_itemslist_array = array();
+                        if (!$canviewhidden) {                             
+                            $vis_itemslist_array = array();                           
                             foreach ($itemslist_array as $key => $value) {
                                 if ($modinfo->cms[$value]->visible) {
                                     $vis_itemslist_array[] = $value;
@@ -1134,9 +1134,10 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
         if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions, $canviewhidden, $itemslistmod)) {
             $modclasses = 'activity ' . $mod->modname . ' modtype_' . $mod->modname . ' ' . $mod->extraclasses;
             if (!$canviewhidden && !$mod->visible) {
-                return '';
+                $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id, 'style' => 'padding:0px;'));
+            } else {
+                $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
             }
-            $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
         }
         return $output;
     }
