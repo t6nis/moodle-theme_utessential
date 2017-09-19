@@ -1075,6 +1075,7 @@ class theme_utessential_core_course_renderer extends core_course_renderer {
                 if ($mod->modname == 'itemslist') {
                     $cm = get_coursemodule_from_id('itemslist', $mod->id, $course->id);
                     $itemlist = $DB->get_record('itemslist', array('id' => $cm->instance));
+                    $itemlist_items = array();
                     if (!empty($itemlist->items)) {
                         $itemslist_array = explode(',', $itemlist->items);
                         // 15.09.2017 - Improvement
