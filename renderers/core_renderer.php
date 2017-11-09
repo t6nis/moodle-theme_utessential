@@ -482,6 +482,7 @@
             }
         }
         if (isloggedin() && !isguestuser() && user_has_role_assignment($USER->id, 22)) {
+            $branchtitle = get_string('programmanager', 'theme_utessential');
             $branchlabel = '<i class="fa fa-briefcase"></i> '.get_string('programmanager', 'theme_utessential');
             $branchurl   = new moodle_url('/course/index.php');
             $branchsort  = 10002;
