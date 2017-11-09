@@ -444,7 +444,7 @@
     }
 
     protected function render_custom_menu(custom_menu $menu) {
-        global $USER, $CFG, $PAGE, $OUTPUT;
+        global $USER, $CFG, $PAGE, $OUTPUT, $DB;
     	/*
     	* This code replaces adds the current enrolled
     	* courses to the custommenu.
@@ -452,21 +452,22 @@
     
     	$hasdisplaymycourses = (empty($this->page->theme->settings->displaymycourses)) ? false : $this->page->theme->settings->displaymycourses;
         if (isloggedin() && !isguestuser() && $hasdisplaymycourses) {
+            if (!user_has_role_assignment($USER->id, 11)) {
         	$mycoursetitle = $this->page->theme->settings->mycoursetitle;
-            if ($mycoursetitle == 'module') {
-				$branchtitle = get_string('mymodules', 'theme_utessential');
-			} else if ($mycoursetitle == 'unit') {
-				$branchtitle = get_string('myunits', 'theme_utessential');
-			} else if ($mycoursetitle == 'class') {
-				$branchtitle = get_string('myclasses', 'theme_utessential');
-			} else {
-				$branchtitle = get_string('mycourses', 'theme_utessential');
-			}
-			$branchlabel = '<i class="fa fa-briefcase"></i>'.$branchtitle;
-            $branchurl   = new moodle_url('/my/index.php');
-            $branchsort  = 10000;
+                if ($mycoursetitle == 'module') {
+                    $branchtitle = get_string('mymodules', 'theme_utessential');
+                } else if ($mycoursetitle == 'unit') {
+                    $branchtitle = get_string('myunits', 'theme_utessential');
+                } else if ($mycoursetitle == 'class') {
+                    $branchtitle = get_string('myclasses', 'theme_utessential');
+                } else {
+                    $branchtitle = get_string('mycourses', 'theme_utessential');
+                }
+                $branchlabel = '<i class="fa fa-briefcase"></i>'.$branchtitle;
+                $branchurl   = new moodle_url('/my/index.php');
+                $branchsort  = 10001;
  
-            $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
+                $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);            
                 if ($courses = $this->utessential_enrol_get_my_courses(NULL, 'fullname ASC', 21)) {
                     foreach ($courses as $course) {
                         if ($course->visible){
@@ -477,9 +478,33 @@
                 } else {
                     $noenrolments = get_string('noenrolments', 'theme_utessential');
                     $branch->add('<em>'.$noenrolments.'</em>', new moodle_url('/'), $noenrolments);
-                }
+                }   
+            }
         }
-        
+        if (isloggedin() && !isguestuser() && user_has_role_assignment($USER->id, 22)) {
+            $branchlabel = '<i class="fa fa-briefcase"></i> '.get_string('programmanager', 'theme_utessential');
+            $branchurl   = new moodle_url('/course/index.php');
+            $branchsort  = 10002;
+            $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
+            
+            $ras = $DB->get_records('role_assignments', array('roleid' => 22, 'userid' => $USER->id), '', 'contextid');
+            $contextids = array_keys($ras);
+            $sql = 'SELECT ctx.instanceid, ca.name '
+                    . 'FROM {context} as ctx '
+                    . 'LEFT JOIN {role_assignments} as ra ON ra.contextid = ctx.id '
+                    . 'LEFT JOIN {course_categories} as ca ON ca.id = ctx.instanceid '
+                    . 'WHERE ra.roleid = :program_manager_rid '
+                    . 'AND ra.userid = :userid '
+                    . 'AND ctx.contextlevel = :contextlevel';
+            $params['userid'] = $USER->id;
+            $params['program_manager_rid'] = 22;
+            $params['contextlevel'] = CONTEXT_COURSECAT;
+            $instid = $DB->get_records_sql($sql, $params);
+            
+            foreach ($instid as $key => $value) {
+                $branch->add($value->name, new moodle_url('/course/index.php', array('categoryid' => $value->instanceid)));
+            }
+        }
         /*
          * This code adds the Theme colors selector to the custommenu.
          */
