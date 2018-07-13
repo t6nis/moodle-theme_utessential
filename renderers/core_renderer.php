@@ -69,7 +69,7 @@
      * @return string HTML fragment
      */
     public function footer() {
-        global $CFG, $DB, $PAGE;
+        global $CFG, $DB, $PAGE, $USER;
 
         $output = $this->container_end_all(true);
 
