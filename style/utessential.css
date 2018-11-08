@@ -987,7 +987,7 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
 
 /* -- MOODLE-602. Fix descriptions margins in course sections */
 .section .activity .contentafterlink {
-    margin-top: -8px;
+    margin-top: -3px;
     margin-left: 23px;
     margin-bottom: -5px;
 }
