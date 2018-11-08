@@ -984,3 +984,10 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
 #page-mod-quiz-edit span.add-menu, #page-mod-quiz-edit span.menu-action-text {
     font-family: "OpenSans",Arial,Helvetica,sans-serif;
 }
+
+/* -- MOODLE-602. Fix descriptions margins in course sections */
+.section .activity .contentafterlink {
+    margin-top: -8px;
+    margin-left: 23px;
+    margin-bottom: -5px;
+}
