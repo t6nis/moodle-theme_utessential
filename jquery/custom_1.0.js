@@ -73,6 +73,8 @@ jQuery(document).ready(function($) {
     $('#page-question-preview.course-4293 .multianswer select, #page-mod-quiz-attempt.course-4293 .multianswer select, #page-mod-quiz-review.course-4293 .multianswer select').selectmenu({});
     // -- 16.12.2016 Call out selectmenu() on Multianswer question 
     $('#page-question-preview.course-4494 .multianswer select, #page-mod-quiz-attempt.course-4494 .multianswer select, #page-mod-quiz-review.course-4494 .multianswer select').selectmenu({});
+    // -- 08.11.2018 Call out selectmenu() on Multianswer question 
+    $('#page-question-preview.course-7177 .multianswer select, #page-mod-quiz-attempt.course-7177 .multianswer select, #page-mod-quiz-review.course-7177 .multianswer select').selectmenu({});
     
     // -- UTTV responsive fix sitewide 13.01.2017
     // Find all UTTV videos and check if we have any

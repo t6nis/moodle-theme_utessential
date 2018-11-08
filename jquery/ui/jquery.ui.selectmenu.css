@@ -7,7 +7,7 @@
 .ui-selectmenu-open { display: block; }
 ul.ui-selectmenu-menu-popup { margin-top: -1px; }
 .ui-selectmenu-menu li { padding:0; margin:0; display: block; border-top: 1px dotted transparent; border-bottom: 1px dotted transparent; border-right-width: 0 !important; border-left-width: 0 !important; }
-.ui-selectmenu-menu li a,.ui-selectmenu-status { line-height: 1.4em; display: block; padding: .405em 2.1em .405em 1em; outline:none; text-decoration:none!important; color: #333!important;font-size: 11px;}
+.ui-selectmenu-menu li a,.ui-selectmenu-status { line-height: 1.4em; display: block; padding: .405em 2.1em .405em 1em; outline:none; text-decoration:none!important; color: #333!important;font-size: 12px;}
 .ui-selectmenu-menu li.ui-state-disabled a, .ui-state-disabled { cursor: default; }
 .ui-selectmenu-menu li.ui-selectmenu-hasIcon a,
 .ui-selectmenu-hasIcon .ui-selectmenu-status { padding-left: 20px; position: relative; margin-left: 5px; }
@@ -31,7 +31,11 @@ ul.ui-selectmenu-menu-popup { margin-top: -1px; }
 #page-mod-quiz-review.course-4293 .multianswer select,
 #page-question-preview.course-4494 .multianswer select,
 #page-mod-quiz-attempt.course-4494 .multianswer select,
-#page-mod-quiz-review.course-4494 .multianswer select { 
+#page-mod-quiz-review.course-4494 .multianswer select,
+#page-question-preview.course-7177 .multianswer select,
+#page-mod-quiz-attempt.course-7177 .multianswer select,
+#page-mod-quiz-review.course-7177 .multianswer select,
+.ui-selectmenu.ui-widget.ui-state-default.ui-corner-all.ui-selectmenu-dropdown.ui-selectmenu-disabled.ui-state-disabled { 
 	max-width: 200px!important; 
 } 
    
@@ -40,5 +44,5 @@ ul.ui-selectmenu-menu-popup { margin-top: -1px; }
 #page-mod-quiz-review .ui-selectmenu {
   	height:auto!important;
 	text-decoration: none!important;
-	font-size:11px;
+	font-size:12px;
 }
