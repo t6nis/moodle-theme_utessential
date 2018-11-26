@@ -991,3 +991,35 @@ body.format-topcoll.editing.jsenabled #region-main .section_action_menu .moodle-
     margin-left: 23px;
     margin-bottom: -5px;
 }
+
+/* -- MOODLE-584. GDPR IFRAME STYLES -- */
+#page-user-policy .noticebox #resourceobject {
+    height: 450px !important;
+    border-width: 1px;
+    border-color: #ddd;
+    border-style: solid;
+}
+#page-user-policy #notice {
+    margin-top: 30px;
+    text-align: center;
+}
+#page-user-policy #notice p {
+    font-weight: bold;
+    font-size: 16px;
+}
+#page-user-policy #notice .buttons .singlebutton:first-child input[type="submit"] {
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #388E3C;
+    color: rgba(255,255,255,.87);
+    background-image: none;
+    text-shadow: none;
+}
+#page-user-policy #notice .buttons .singlebutton:nth-child(2) input[type="submit"] {
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #E64A19;
+    color: rgba(255,255,255,.87);
+    background-image: none;
+    text-shadow: none;
+}
